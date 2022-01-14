@@ -17,7 +17,7 @@ pipelines:
             - pass=$(aws ecr get-login-password --region us-east-1)
             - docker login --username AWS --password $pass $API_TEST_ECR
             - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME JFROG_BOT_PASS=$JFROG_BOT_PASS DIR=$DIR docker-compose build
-            - docker tag splight-api:latest $API_TEST_ECR/splight-grid-sim:$DIR
+            - docker tag splight-grid-sim:latest $API_TEST_ECR/splight-grid-sim:$DIR
             - docker push $API_TEST_ECR/splight-grid-sim:$DIR
           services:
             - docker
