@@ -8,6 +8,7 @@ pipelines:
           caches:
             - pip
           script:
+            - DIR="dnp3"
             - pip install awscli
             - aws configure set region us-east-1
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
