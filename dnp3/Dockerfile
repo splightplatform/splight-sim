@@ -29,7 +29,7 @@ RUN pip install /vendor/python_custom/*
 
 # Install binaries (python)
 WORKDIR /code
-COPY $DIR/bin /usr/bin
+COPY $DIR/bin/* /usr/bin
 
 # Copy management code
 COPY management /code/management
