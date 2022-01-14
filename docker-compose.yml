@@ -1,10 +1,9 @@
-version: "3.9"
+version: "3.3"
 services:
   simulator:
-    platform: linux/x86_64
     image: splight-grid-sim:$DIR
     command: bash
-    entrypoint: python3 ./network.py
+    # entrypoint: python3 ./network.py
     build:
       context: .
       dockerfile: $DIR/Dockerfile
@@ -12,10 +11,7 @@ services:
         - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
         - JFROG_BOT_PASS=$JFROG_BOT_PASS
         - DIR=$DIR
-        - DEBUG=$DEBUG
     volumes:
-      - $DATA_DIR:/root/data/
-    # ports:
-      # - "4444:4444"
+      - ./data:/root/data/
     tty: true
     network_mode: "host"

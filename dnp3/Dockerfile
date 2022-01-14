@@ -36,5 +36,3 @@ COPY management /code/management
 COPY management/openvpn-ns /usr/bin
 # COPY runner.py  /code
 WORKDIR /code/management
-
-ENTRYPOINT ["python3", "network.py"]
