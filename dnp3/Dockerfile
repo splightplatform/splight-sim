@@ -33,6 +33,7 @@ COPY $DIR/bin /usr/bin
 
 # Copy management code
 COPY management /code/management
+COPY management/openvpn-ns /usr/bin
 # COPY runner.py  /code
 WORKDIR /code/management
 

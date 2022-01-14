@@ -42,7 +42,11 @@ class CommandHandler(opendnp3.ICommandHandler):
                 value = command.functionCode in [opendnp3.ControlCode.LATCH_ON, opendnp3.ControlCode.PULSE_ON]
                 group = 1
             else:
-                value = ramdom() * 100
+                if command.functionCode in [opendnp3.ControlCode.LATCH_ON, opendnp3.ControlCode.PULSE_ON]:
+                    value = random() * 100
+                else:
+                    value = 0
+
                 group = 30
         else:
             value = command.value

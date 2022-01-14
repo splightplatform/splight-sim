@@ -2,7 +2,7 @@
   "ieds": [
     {
       "protocol": "dnp3",
-      "port": 4000
+      "port": 4444
     }
   ]
 }
