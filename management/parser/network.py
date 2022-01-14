@@ -29,6 +29,7 @@ def create_network(net: Dict) -> Union[Vpn, None]:
         logger.error(f"Not 'ns' in: {net}")
         return None
 
+    net['file'] = "/root/data/" + net['file']
     if not os.path.isfile(net['file']):
         logger.error(f"Vpn file not exists in {net}")
         return None

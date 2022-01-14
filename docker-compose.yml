@@ -12,6 +12,7 @@ services:
         - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
         - JFROG_BOT_PASS=$JFROG_BOT_PASS
         - DIR=$DIR
+        - DEBUG=$DEBUG
     volumes:
       - $DATA_DIR:/root/data/
     # ports:

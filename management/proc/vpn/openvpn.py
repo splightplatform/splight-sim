@@ -10,7 +10,8 @@ class OvpnVpn(Vpn):
 
         if self._user and self._pass:
             extra_auth_args = f"--auth-user-pass <(echo -e '{self._user}\\n{self._pass}')"
-        cmd = "sh -c \"../vpn-manager " + \
+
+        cmd = "bash -c \"openvpn-ns " + \
               f"--namespace {self._ns} " + \
               f"--config {self._file} " + \
               f"{extra_auth_args}\""
