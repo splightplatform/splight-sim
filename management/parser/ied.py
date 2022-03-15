@@ -1,6 +1,7 @@
 from typing import Dict, Union
+
+from proc.ied import C37118Ied, DNP3Ied, Ied
 from utils import Logger
-from proc.ied import Ied, DNP3Ied
 
 
 def create_ied(ied: Dict) -> Union[Ied, None]:
@@ -19,11 +20,11 @@ def create_ied(ied: Dict) -> Union[Ied, None]:
 
     logger = Logger("Ied")
 
-    if not 'protocol' in ied:
+    if 'protocol' not in ied:
         logger.error(f"'protocol' is required on ied: {ied}")
         return None
 
-    if not 'port' in ied:
+    if 'port' not in ied:
         logger.error(f"'port' is required on ied: {ied}")
         return None
 
@@ -32,6 +33,8 @@ def create_ied(ied: Dict) -> Union[Ied, None]:
 
     if ied['protocol'] == 'dnp3':
         IedClass = DNP3Ied
+    elif ied['protocol'] == 'c37118':
+        IedClass = C37118Ied
     else:
         logger.error(f"Bad ied protocol '{ied['protocol']} in {ied}'")
 

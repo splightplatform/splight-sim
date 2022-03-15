@@ -1,10 +1,11 @@
 #!/bin/python3
 
-import sys
 import signal
-from parser import parse_file, create
+import sys
+from parser import create, parse_file
+
 from utils import Logger
-from utils.constants import USAGE, HEADER
+from utils.constants import HEADER, USAGE
 
 
 def clean_exit(exit_code: int = 0) -> None:

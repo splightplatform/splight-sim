@@ -6,12 +6,19 @@ services:
       context: .
       dockerfile: ./dnp3/Dockerfile
 
+  c37118-stage:
+    image: c37118-stage
+    build:
+      context: .
+      dockerfile: ./c37118/Dockerfile
+
   simulator:
     image: splight-grid-sim
     command: bash
     entrypoint: python3 ./network.py
     depends_on:
       - dnp3-stage
+      - c37118-stage
     build:
       context: .
       dockerfile: ./Dockerfile

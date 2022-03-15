@@ -24,8 +24,8 @@ COPY --from=dnp3-stage /opt/dnp3 /opt/dnp3
 RUN /opt/dnp3/install.sh
 
 # C37118
-# COPY --from=c37118-stage /opt/c37118 /opt/c37118
-# RUN /opt/c37118/install.sh
+COPY --from=c37118-stage /opt/c37118 /opt/c37118
+RUN /opt/c37118/install.sh
 
 # COPY runner.py  /code
 WORKDIR /opt/management

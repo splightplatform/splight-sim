@@ -1,7 +1,8 @@
-import time
 import os
 import subprocess
+import time
 from typing import Union
+
 
 class Proc():
     """Simple abstract class for a process."""
@@ -18,7 +19,7 @@ class Proc():
             return (Union[int, None]): Return None on success or exit code on fail.
         """
 
-        if "DEBUG" in os.environ:
+        if False:
             self._popen = subprocess.Popen(cmd, shell=True)
         else:
             self._popen = subprocess.Popen(cmd, shell=True,

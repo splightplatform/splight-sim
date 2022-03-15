@@ -3,6 +3,10 @@
     {
       "protocol": "dnp3",
       "port": 4444
+    },
+    {
+      "protocol": "c37118",
+      "port": 4445
     }
   ]
 }
