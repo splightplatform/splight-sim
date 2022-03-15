@@ -1,16 +1,20 @@
-version: "3.3"
+version: "3.9"
 services:
-  simulator:
-    image: splight-grid-sim:$DIR
-    command: bash
-    # entrypoint: python3 ./network.py
+  dnp3-stage:
+    image: dnp3-stage
     build:
       context: .
-      dockerfile: $DIR/Dockerfile
-      args:
-        - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
-        - JFROG_BOT_PASS=$JFROG_BOT_PASS
-        - DIR=$DIR
+      dockerfile: ./dnp3/Dockerfile
+
+  simulator:
+    image: splight-grid-sim
+    command: bash
+    entrypoint: python3 ./network.py
+    depends_on:
+      - dnp3-stage
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     volumes:
       - ./data:/root/data/
     tty: true
