@@ -27,5 +27,9 @@ RUN /opt/dnp3/install.sh
 COPY --from=c37118-stage /opt/c37118 /opt/c37118
 RUN /opt/c37118/install.sh
 
+# IEC60870
+COPY --from=iec60870-stage /opt/iec60870 /opt/iec60870
+RUN /opt/iec60870/install.sh
+
 # COPY runner.py  /code
 WORKDIR /opt/management

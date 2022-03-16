@@ -1,6 +1,6 @@
 from typing import Dict, Union
 
-from proc.ied import C37118Ied, DNP3Ied, Ied
+from proc.ied import C37118Ied, DNP3Ied, IEC60870Ied, Ied
 from utils import Logger
 
 
@@ -35,6 +35,8 @@ def create_ied(ied: Dict) -> Union[Ied, None]:
         IedClass = DNP3Ied
     elif ied['protocol'] == 'c37118':
         IedClass = C37118Ied
+    elif ied['protocol'] == 'iec60870':
+        IedClass = IEC60870Ied
     else:
         logger.error(f"Bad ied protocol '{ied['protocol']} in {ied}'")
 

@@ -7,6 +7,10 @@
     {
       "protocol": "c37118",
       "port": 4445
+    },
+    {
+      "protocol": "iec60870",
+      "port": 4446
     }
   ]
 }

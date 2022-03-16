@@ -12,6 +12,12 @@ services:
       context: .
       dockerfile: ./c37118/Dockerfile
 
+  iec60870-stage:
+    image: iec60870-stage
+    build:
+      context: .
+      dockerfile: ./iec60870/Dockerfile
+
   simulator:
     image: splight-grid-sim
     command: bash
@@ -19,6 +25,7 @@ services:
     depends_on:
       - dnp3-stage
       - c37118-stage
+      - iec60870-stage
     build:
       context: .
       dockerfile: ./Dockerfile
