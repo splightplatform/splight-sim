@@ -4,6 +4,7 @@ pipelines:
   branches:
     master: &shared
       - step:
+          size: 2x
           name: build tag and push image
           caches:
             - pip
