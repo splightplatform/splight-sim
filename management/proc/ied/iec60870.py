@@ -8,7 +8,7 @@ class IEC60870Ied(Ied):
     def start(self) -> None:
         """Start the simulation."""
 
-        cmd = f"iec60870 -p {self._port}"
+        cmd = f"iec60870 {self._port}"
 
         if self._ns is not None:
             cmd = f"ip netns exec {self._ns} {cmd}"
