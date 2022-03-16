@@ -31,5 +31,9 @@ RUN /opt/c37118/install.sh
 COPY --from=iec60870-stage /opt/iec60870 /opt/iec60870
 RUN /opt/iec60870/install.sh
 
+# IEC61850
+COPY --from=iec61850-stage /opt/iec61850 /opt/iec61850
+RUN /opt/iec61850/install.sh
+
 # COPY runner.py  /code
 WORKDIR /opt/management
