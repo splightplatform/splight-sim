@@ -1,0 +1,20 @@
+{
+  "ieds": [
+    {
+      "protocol": "dnp3",
+      "port": 4001
+    },
+    {
+      "protocol": "c37118",
+      "port": 4002
+    },
+    {
+      "protocol": "iec60870",
+      "port": 4003
+    },
+    {
+      "protocol": "iec61850",
+      "port": 4004
+    }
+  ]
+}
