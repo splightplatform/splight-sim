@@ -9,7 +9,6 @@ pipelines:
           caches:
             - pip
           script:
-            - DIR="dnp3"
             - pip install awscli
             - aws configure set region us-east-1
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
@@ -17,7 +16,7 @@ pipelines:
             - pip install docker-compose
             - pass=$(aws ecr get-login-password --region us-east-1)
             - docker login --username AWS --password $pass $API_TEST_ECR
-            - docker-compose build
+            - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME JFROG_BOT_PASS=$JFROG_BOT_PASS DIR=$DIR docker-compose build
             - docker tag splight-grid-sim $API_TEST_ECR/splight-grid-sim
             - docker push $API_TEST_ECR/splight-grid-sim
           services:
