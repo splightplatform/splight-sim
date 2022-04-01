@@ -40,18 +40,14 @@ services:
       - ./data:/root/data/
     tty: true
     network_mode: "host"
+
   ftp-simulator:
+    image: fauria/vsftpd
     volumes: 
       -'/ftp/admin:/home/vsftpd'
-    ports:
-      - '20:20'
-      - '21:21'
-      - '47400-47440:47400-47440'
+    network_mode: "host"
     environment:
       - FTP_USER=admin
       - FTP_PASS=admin
       - PASV_ADDRESS=192.168.50.201
-    container_name: ftp-simulator
     restart: always
-    image: fauria/vsftpd
-
