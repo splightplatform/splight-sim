@@ -24,7 +24,7 @@ services:
       context: .
       dockerfile: ./iec61850/Dockerfile
 
-  simulator:
+  electrical-simulator:
     image: splight-grid-sim
     command: bash
     entrypoint: python3 ./network.py
@@ -40,3 +40,18 @@ services:
       - ./data:/root/data/
     tty: true
     network_mode: "host"
+  ftp-simulator:
+    volumes: 
+      -'/ftp/admin:/home/vsftpd'
+    ports:
+      - '20:20'
+      - '21:21'
+      - '47400-47440:47400-47440'
+    environment:
+      - FTP_USER=admin
+      - FTP_PASS=admin
+      - PASV_ADDRESS=192.168.50.201
+    container_name: ftp-simulator
+    restart: always
+    image: fauria/vsftpd
+
