@@ -44,7 +44,7 @@ services:
   ftp-simulator:
     image: fauria/vsftpd
     volumes: 
-      -'/ftp/admin:/home/vsftpd'
+      - '/ftp-data/:/home/vsftpd'
     network_mode: "host"
     environment:
       - FTP_USER=admin
