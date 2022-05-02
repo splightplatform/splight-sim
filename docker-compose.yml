@@ -61,5 +61,6 @@ services:
         - ./mqtt/mosquitto:/mosquitto/config
         
   mqtt-publisher:
-    build: ./mqtt
+    build:
+      context: ./mqtt
     network_mode: host
