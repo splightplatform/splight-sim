@@ -2,7 +2,7 @@
     "ieds": [
       {
         "protocol": "iec60870",
-        "port": 4003
+        "port": 5001
       }
     ]
   }
