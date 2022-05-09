@@ -7,6 +7,10 @@
 node_modules/
 dist/
 
+dnp3/src/splight_dnp3.egg-info/
+dnp3/pydnp3/
+dnp3/src/build
+
 # Compiled Java class files
 *.class
 
