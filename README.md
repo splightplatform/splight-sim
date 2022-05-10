@@ -1,4 +1,4 @@
-# Grid Simulator #
+# Splight Simulator #
 A container to emulate a grid with Ieds from different protocols in one or multiple networks or VPNs.
 
 Available protocols:
@@ -7,6 +7,8 @@ Available protocols:
 * __C37.118__
 * __IEC61850__
 * __IEC60870-5__
+* __FTP__
+* __MQTT__
 
 Available VPNs:
 * __OpenVpn__
@@ -46,7 +48,7 @@ The configuration file format is the following:
 
 ### Build ###
 ```bash
-docker-compose build
+JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME JFROG_BOT_PASS=$JFROG_BOT_PASS docker-compose build
 ```
 
 ### Run ###

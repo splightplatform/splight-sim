@@ -4,6 +4,9 @@ services:
     image: dnp3
     build:
       context: .
+      args:
+        - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
+        - JFROG_BOT_PASS=$JFROG_BOT_PASS
       dockerfile: ./dnp3/Dockerfile
     command: bash
     entrypoint: python3 ./network.py

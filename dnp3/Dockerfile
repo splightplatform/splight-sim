@@ -3,6 +3,10 @@
 FROM python:3.8-slim as dnp3-stage
 RUN apt-get update && apt-get -y install cmake make gcc g++ python2.7-dev
 
+ARG JFROG_BOT_USERNAME
+ARG JFROG_BOT_PASS
+RUN pip config set global.extra-index-url https://$JFROG_BOT_USERNAME:$JFROG_BOT_PASS@splight.jfrog.io/artifactory/api/pypi/splight/simple
+
 # Custom package
 COPY dnp3 /opt/dnp3
 WORKDIR /opt/dnp3/src
