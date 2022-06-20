@@ -39,11 +39,12 @@ class MQTTPublisher(Client):
 
 
 class CSVIngestor():
-    def __init__(self, file: str, client: Client, tz='UTC', asset_id=12345) -> None:
+    def __init__(self, file: str, client: Client, tz='UTC', asset_id=12345, delay=None) -> None:
         # Params
         self.file = file
         self.tz = tz
         self.asset_id = asset_id
+        self.delay = delay
 
         # Comm Client
         self.client = client
@@ -73,9 +74,9 @@ class CSVIngestor():
         delay = 0
         for index, row in self.df.iterrows():
             if index > 0:
-                delay = (row['timestamp'] - prev_timestamp).total_seconds()
+                delay = (row['timestamp'] - prev_timestamp).total_seconds() if not self.delay else self.delay
                 logger.info(f"Delaying {delay} seconds. Next value at {datetime.now() + timedelta(seconds=delay)}")
-                time.sleep(10)
+                time.sleep(delay)
             prev_timestamp = row['timestamp']
             data = {
                 "timestamp": row.timestamp,
@@ -104,6 +105,9 @@ if __name__ == '__main__':
     parser.add_argument('--port', dest='port', type=int, nargs=1,
                         default=[1883],
                         help='MQTT port')
+    parser.add_argument('--delay', dest='delay', type=int, nargs=1,
+                        default=[None],
+                        help='fixed delay in secs')
 
     args = parser.parse_args()
     file = args.file[0]
@@ -113,8 +117,8 @@ if __name__ == '__main__':
     )
     csv_ingestor = CSVIngestor(
         client=client,
-        file=file
-        
+        file=file,
+        delay=args.delay[0]
     )
     while True:
         csv_ingestor.ingest()
