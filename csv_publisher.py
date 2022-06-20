@@ -5,41 +5,14 @@ import argparse
 from datetime import datetime, timedelta
 from splight_models import *
 from splight_lib import logging
-from paho.mqtt.client import Client as MQTTClient
+from mqtt.publisher import MQTTPublisher
 
 
 logger = logging.getLogger()
 
 
-class Client():
-    def send():
-        raise NotImplementedError
-
-
-class MQTTPublisher(Client):
-    def __init__(self, host, port) -> None:
-        self.client = MQTTClient()
-        self.client.on_message = self.on_message
-        self.client.on_connect = self.on_connect
-        # attempt connection multiple times
-        self.client.connect(host, port)
-        self.client.loop_start()
-
-    def send(self, data):
-        self.client.publish('/data', data)
-        logger.info('Published data')
-
-    @staticmethod
-    def on_message(client, userdata, message):
-        pass
-
-    @staticmethod
-    def on_connect(client, userdata, flags, rc):
-        logger.info(f"Connected to client with resulted code {str(rc)}")
-
-
 class CSVIngestor():
-    def __init__(self, file: str, client: Client, tz='UTC', asset_id=12345, delay=None) -> None:
+    def __init__(self, file, client, tz='UTC', asset_id=12345, delay=None) -> None:
         # Params
         self.file = file
         self.tz = tz
@@ -51,23 +24,9 @@ class CSVIngestor():
 
         # Data
         self.df = self.read(file)
-        self.df = self.filter(self.df)
-        self.df = self.prepare(self.df)
 
     def read(self, file):
         df = pd.read_csv(file, parse_dates=['timestamp'])
-        return df
-
-    def filter(self, df):
-        # TODO Avail filters for segmentation        
-        # df = df[df.embalse == "Rapel"]
-        # df = df.drop('embalse', axis=1)
-        return df
-
-    def prepare(self, df):
-        df.timestamp = pd.to_datetime(df['timestamp']).dt.tz_localize(self.tz)
-        df = df.set_index('timestamp')
-        df = VariableDataFrame.unfold(df, asset_id=self.asset_id)
         return df
 
     def ingest(self):
@@ -120,5 +79,6 @@ if __name__ == '__main__':
         file=file,
         delay=args.delay[0]
     )
+    
     while True:
         csv_ingestor.ingest()
