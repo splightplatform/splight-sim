@@ -19,9 +19,9 @@ class MQTTPublisher:
         self.client.connect(host, port)
         self.client.loop_start()
 
-    def send(self, data):
-        self.client.publish('/data', data)
-        logger.info('Published data')
+    def send(self, data, topic):
+        self.client.publish(topic, data)
+        logger.info(f'Published data in {topic}')
 
     @staticmethod
     def on_message(client, userdata, message):

@@ -12,12 +12,12 @@ logger = logging.getLogger()
 
 
 class CSVIngestor():
-    def __init__(self, file, client, tz='UTC', asset_id=12345, delay=None) -> None:
+    def __init__(self, file, client, topic, tz='UTC', delay=None) -> None:
         # Params
         self.file = file
         self.tz = tz
-        self.asset_id = asset_id
         self.delay = delay
+        self.topic = topic
 
         # Comm Client
         self.client = client
@@ -41,8 +41,8 @@ class CSVIngestor():
                 "timestamp": row.timestamp,
                 "metrics": [
                     {
-                        
-                        "name": row.attribute_id,
+                        "asset_id": row.asset_id,
+                        "attribute_id": row.attribute_id,
                         "timestamp": row.timestamp,
                         "dataType": "Float",
                         "value": row.value
@@ -51,7 +51,7 @@ class CSVIngestor():
             }
             data = json.dumps(data, default=str)
             logger.info(f"Ingesting {data}")
-            self.client.send(data=data)
+            self.client.send(data=data, topic=self.topic)
 
 
 if __name__ == '__main__':
@@ -67,6 +67,9 @@ if __name__ == '__main__':
     parser.add_argument('--delay', dest='delay', type=int, nargs=1,
                         default=[None],
                         help='fixed delay in secs')
+    parser.add_argument('--topic', dest='topic', type=str, nargs=1,
+                        default=['/data'],
+                        help='topic to send info')
 
     args = parser.parse_args()
     file = args.file[0]
@@ -77,7 +80,8 @@ if __name__ == '__main__':
     csv_ingestor = CSVIngestor(
         client=client,
         file=file,
-        delay=args.delay[0]
+        delay=args.delay[0],
+        topic=args.topic[0]
     )
     
     while True:
