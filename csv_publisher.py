@@ -22,16 +22,15 @@ class CSVIngestor():
         # Comm Client
         self.client = client
 
-        # Data
-        self.df = self.read(file)
-
-    def read(self, file):
+    @staticmethod
+    def read(file):
         df = pd.read_csv(file, parse_dates=['timestamp'])
         return df
 
     def ingest(self):
+        self._df = self.read(self.file)
         delay = 0
-        for index, row in self.df.iterrows():
+        for index, row in self._df.iterrows():
             if index > 0:
                 delay = (row['timestamp'] - prev_timestamp).total_seconds() if not self.delay else self.delay
                 logger.info(f"Delaying {delay} seconds. Next value at {datetime.now() + timedelta(seconds=delay)}")
