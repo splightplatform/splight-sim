@@ -7,7 +7,3 @@ services:
         - "1883:1883"
       volumes: 
         - ./mosquitto:/mosquitto/config
-
-  mqtt-publisher:
-    build: .
-    network_mode: host
