@@ -5,7 +5,7 @@ import argparse
 from datetime import datetime, timedelta
 from splight_models import *
 from splight_lib import logging
-from mqtt.publisher import MQTTPublisher
+from clients.mqtt import MQTTPublisher
 
 
 logger = logging.getLogger()

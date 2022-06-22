@@ -72,5 +72,19 @@ services:
         
   mqtt-publisher:
     build:
-      context: ./mqtt
+      context: ./publisher
     network_mode: host
+    command:
+      - python
+      - /src/random_publisher.py
+
+  mqtt-publisher-csv:
+    build:
+      context: ./publisher
+    network_mode: host
+    volumes:
+      - data.csv:data.csv:ro
+    command: 
+      - python
+      - /src/csv_publisher.py
+      - data.csv
