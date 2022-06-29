@@ -88,3 +88,13 @@ services:
       - python
       - /src/csv_publisher.py
       - data.csv
+
+  modbus:
+      container_name: modbus
+      image: oitc/modbus-server
+      restart: always
+      command: -f /server_config.json
+      ports:
+        - 5020:5020
+      volumes:
+        - ./modbus/server.json:/server_config.json:ro
