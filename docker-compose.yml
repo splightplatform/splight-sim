@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: ./c37118/Dockerfile
     command: bash
-    entrypoint: python3 ./network.py
+    entrypoint: python3 /usr/bin/c37118
     volumes:
       - ./c37118/data:/root/data/
     tty: true
