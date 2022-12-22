@@ -1,2 +1,2 @@
-pydnp3=0.1.0
+pydnp3=0.1.0 # this should be pydnp3@git+https://github.com/splightplatform/pydnp3.git@master But no token in builder
 pybind11=2.9.1
