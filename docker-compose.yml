@@ -1,100 +1,15 @@
 version: "3.9"
 services:
-  dnp3:
-    image: dnp3
-    build:
-      context: .
-      args:
-        - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
-        - JFROG_BOT_PASS=$JFROG_BOT_PASS
-      dockerfile: ./dnp3/Dockerfile
-    command: bash
-    entrypoint: python3 ./network.py
-    volumes:
-      - ./dnp3/data:/root/data/
-    tty: true
-    network_mode: "host"
-
   c37118:
     image: c37118
     build:
       context: .
       dockerfile: ./c37118/Dockerfile
     command: bash
-    entrypoint: python3 ./network.py
+    entrypoint: python3 /usr/bin/c37118
     volumes:
       - ./c37118/data:/root/data/
     tty: true
     network_mode: "host"
 
-  iec60870:
-    image: iec60870
-    build:
-      context: .
-      dockerfile: ./iec60870/Dockerfile
-    command: bash
-    entrypoint: python3 ./network.py
-    volumes:
-      - ./iec60870/data:/root/data/
-    tty: true
-    network_mode: "host"
-
-  iec61850:
-    image: iec61850
-    build:
-      context: .
-      dockerfile: ./iec61850/Dockerfile
-    command: bash
-    entrypoint: python3 ./network.py
-    volumes:
-      - ./iec61850/data:/root/data/
-    tty: true
-    network_mode: "host"
-
-  ftp:
-    image: fauria/vsftpd
-    volumes: 
-      - '/ftp/data:/home/vsftpd'
-    network_mode: "host"
-    environment:
-      - FTP_USER=admin
-      - FTP_PASS=admin
-      - PASV_ADDRESS=192.168.50.201
-    restart: always
-
-  mqtt:
-      image: eclipse-mosquitto
-      hostname: mosquitto
-      ports:
-        - "1883:1883"
-      volumes: 
-        - ./mqtt/data:/mosquitto/config
-        
-  mqtt-publisher:
-    build:
-      context: ./publisher
-    network_mode: host
-    command:
-      - python
-      - /src/random_publisher.py
-
-  mqtt-publisher-csv:
-    build:
-      context: ./publisher
-    network_mode: host
-    volumes:
-      - data.csv:data.csv:ro
-    command: 
-      - python
-      - /src/csv_publisher.py
-      - data.csv
-
-  modbus:
-      container_name: modbus
-      image: oitc/modbus-server
-      restart: always
-      command: -f /server_config.json
-      ports:
-        - 5020:5020
-      volumes:
-        - ./modbus/server.json:/server_config.json:ro
+  
