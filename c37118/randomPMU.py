@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from synchrophasor.frame import ConfigFrame2
 from synchrophasor.pmu import Pmu
 import random
