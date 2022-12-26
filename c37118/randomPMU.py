@@ -44,5 +44,5 @@ if __name__ == "__main__":
                                    (random.uniform(215.0, 240.0), random.uniform(3.0, 3.14))],
                           analog=[9.91],
                           digital=[0x0001])
-            time.sleep(1 / 50)
+        time.sleep(1 / 50)
     pmu.join()
