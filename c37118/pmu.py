@@ -191,11 +191,13 @@ class Pmu(object):
 
             self.logger.info("[%d] - Waiting for connection on %s:%d", self.cfg2.get_id_code(), self.ip, self.port)
 
-            # Clean clients and buffers before accept another one
-            self.clients = [c for _, c in enumerate(self.clients) if c.is_alive()]
-            self.client_buffers = [self.client_buffers[i] for i, c in enumerate(self.clients) if c.is_alive()]
             # Accept a connection on the bound socket and fork a child process to handle it.
             conn, address = self.socket.accept()
+            # Clean clients and buffers after accept another one
+            indexes_to_pop = sorted([i for i, c in enumerate(self.clients) if not c.is_alive()], reverse=True)
+            for index in indexes_to_pop:
+                self.clients.pop(index)
+                self.client_buffers.pop(index)
             # Create Queue which will represent buffer for specific client and add it o list of all client buffers
             buffer = Queue()
             self.client_buffers.append(buffer)
