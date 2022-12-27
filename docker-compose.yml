@@ -98,3 +98,11 @@ services:
         - 5020:5020
       volumes:
         - ./modbus/server.json:/server_config.json:ro
+
+  opcua:
+    build:
+      context: .
+    network_mode: host
+    command:
+      - python
+      - /src/opcua_server.py
