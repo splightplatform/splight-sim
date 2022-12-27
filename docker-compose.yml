@@ -20,12 +20,12 @@ services:
     build:
       context: .
       dockerfile: ./c37118/Dockerfile
-    entrypoint: python3 /usr/bin/c37118
+    entrypoint: python3 /opt/c37118/randomPMU.py
     volumes:
       - ./c37118/data:/root/data/
     tty: true
     ports:
-      - "37118:4001"
+      - "37118:37118"
 
   iec60870:
     image: iec60870

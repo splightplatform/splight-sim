@@ -7,7 +7,7 @@ import time
 
 if __name__ == "__main__":
 
-    pmu = Pmu(ip="0.0.0.0", port=4001)
+    pmu = Pmu(ip="0.0.0.0", port=37118)
     pmu.logger.setLevel("DEBUG")
 
     cfg = ConfigFrame2(1410,  # PMU_ID
