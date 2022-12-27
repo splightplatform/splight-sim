@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from synchrophasor.frame import ConfigFrame2
-from synchrophasor.pmu import Pmu
+from pmu import Pmu
 import random
 import time
 

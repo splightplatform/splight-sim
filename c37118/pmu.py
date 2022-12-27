@@ -191,9 +191,11 @@ class Pmu(object):
 
             self.logger.info("[%d] - Waiting for connection on %s:%d", self.cfg2.get_id_code(), self.ip, self.port)
 
+            # Clean clients and buffers before accept another one
+            self.clients = [c for _, c in enumerate(self.clients) if c.is_alive()]
+            self.client_buffers = [self.client_buffers[i] for i, c in enumerate(self.clients) if c.is_alive()]
             # Accept a connection on the bound socket and fork a child process to handle it.
             conn, address = self.socket.accept()
-
             # Create Queue which will represent buffer for specific client and add it o list of all client buffers
             buffer = Queue()
             self.client_buffers.append(buffer)
@@ -229,14 +231,7 @@ class Pmu(object):
         # Wait for start command from connected PDC/PMU to start sending
         sending_measurements_enabled = False
 
-        # Calculate delay between data frames
-        if data_rate > 0:
-            delay = 1000.0 / data_rate
-        else:
-            delay = -data_rate
-
         try:
-            last_time = time()
             while True:
 
                 command = None
@@ -250,7 +245,10 @@ class Pmu(object):
                     has been received.
                     """
                     while len(received_data) < 4:
-                        received_data += connection.recv(buffer_size)
+                        data = connection.recv(buffer_size)
+                        if not data:
+                            raise Exception("Broken pipe. Empty recv")
+                        received_data += data
 
                     bytes_received = len(received_data)
                     total_frame_size = int.from_bytes(received_data[2:4], byteorder="big", signed=False)
@@ -322,7 +320,6 @@ class Pmu(object):
                                     pmu_id, address[0], address[1])
 
                 if sending_measurements_enabled and not buffer.empty():
-
                     data = buffer.get()
                     if isinstance(data, CommonFrame):  # If not raw bytes convert to bytes
                         if set_timestamp:
