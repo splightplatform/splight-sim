@@ -3,7 +3,7 @@ import posixpath
 import argparse
 import asyncio
 from datetime import datetime
-from splight_lib import logging
+import logging
 
 from asyncua import ua, uamethod, Server
 from random import random
@@ -122,5 +122,4 @@ if __name__ == '__main__':
                         help='The server endpoint')
 
     args = parser.parse_args()
-    file = args.file[0]
     asyncio.run(main(host=args.host[0], port=args.port[0], path=args.path[0]))
