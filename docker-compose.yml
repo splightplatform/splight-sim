@@ -101,7 +101,8 @@ services:
 
   opcua:
     build:
-      context: .
+      context: ./opcua
+      dockerfile: ./Dockerfile
     network_mode: host
     command:
       - python
