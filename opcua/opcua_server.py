@@ -110,16 +110,13 @@ async def main(host="0.0.0.0", port="4840", path="freeopcua/server/"):
             await server.write_attribute_value(myvar.nodeid, ua.DataValue(random()))
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Ingest a csv with same distribution in MQTT broker.')
-    parser.add_argument('--host', dest='host', type=str, nargs=1,
-                        default=['localhost'],
+    parser = argparse.ArgumentParser(description='Generate a simulated server with OPCUA protocol.')
+    parser.add_argument('--host', dest='host', type=str, default='localhost',
                         help='OPCUA host')
-    parser.add_argument('--port', dest='port', type=int, nargs=1,
-                        default=[4840],
+    parser.add_argument('--port', dest='port', type=int, default=4840,
                         help='OPCUA port')
-    parser.add_argument('--path', dest='path', type=str, nargs=1,
-                        default=["freeopcua/server/"],
+    parser.add_argument('--path', dest='path', type=str, default="freeopcua/server/",
                         help='The server endpoint')
 
     args = parser.parse_args()
-    asyncio.run(main(host=args.host[0], port=args.port[0], path=args.path[0]))
+    asyncio.run(main(host=args.host, port=args.port, path=args.path))
