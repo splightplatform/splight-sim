@@ -111,7 +111,7 @@ async def main(host="0.0.0.0", port="4840", path="freeopcua/server/"):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate a simulated server with OPCUA protocol.')
-    parser.add_argument('--host', dest='host', type=str, default='localhost',
+    parser.add_argument('--host', dest='host', type=str, default='0.0.0.0',
                         help='OPCUA host')
     parser.add_argument('--port', dest='port', type=int, default=4840,
                         help='OPCUA port')
