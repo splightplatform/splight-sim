@@ -103,7 +103,8 @@ services:
     build:
       context: ./opcua
       dockerfile: ./Dockerfile
-    network_mode: host
     command:
       - python
       - /src/opcua_server.py
+    ports:
+      - "4840:4840"
