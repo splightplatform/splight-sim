@@ -360,6 +360,7 @@ class Pmu(object):
             print(e)
         finally:
             connection.close()
+            buffer.cancel_join_thread()
             logger.info("[%d] - Connection from %s:%d has been closed.", pmu_id, address[0], address[1])
 
 
