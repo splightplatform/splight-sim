@@ -4,8 +4,9 @@ import time
 from typing import Union
 
 
-class Proc():
+class Proc:
     """Simple abstract class for a process."""
+
     def __init__(self):
         self._popen = None
 
@@ -22,10 +23,13 @@ class Proc():
         if False:
             self._popen = subprocess.Popen(cmd, shell=True)
         else:
-            self._popen = subprocess.Popen(cmd, shell=True,
-                                           stdin=subprocess.DEVNULL,
-                                           stdout=subprocess.DEVNULL,
-                                           stderr=subprocess.DEVNULL)
+            self._popen = subprocess.Popen(
+                cmd,
+                shell=True,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
 
         # TODO: wait until "nitialization Sequence Completed\n" and alarm
         time.sleep(timeout)

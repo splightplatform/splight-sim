@@ -1,0 +1,11 @@
+{
+    "traces": [
+        {
+            "name": "Trace1",
+            "topic": "Topic1",
+            "filename": "minute_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute"
+        }
+    ]
+}

@@ -1,15 +1,14 @@
 import sys
 from parser.ied import create_ied
 from parser.network import create_network
+
 from utils import Logger
 
-METHODS = {
-    'vpns': create_network,
-    'ieds': create_ied
-}
+METHODS = {"vpns": create_network, "ieds": create_ied}
+
 
 def create(args: dict, key: str):
-    """ Create instances """
+    """Create instances"""
 
     logger = Logger(f"Create {key}")
     logger.log("Creating instances")

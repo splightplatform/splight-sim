@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from utils import Logger
+
 from proc import Proc
+from utils import Logger
 
 
 class Ied(Proc, ABC):
