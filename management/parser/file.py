@@ -1,7 +1,8 @@
-import sys
-import os
 import json
-from typing import Union, Dict
+import os
+import sys
+from typing import Dict, Union
+
 from utils import Logger
 
 
@@ -21,7 +22,7 @@ def parse_file(filename: str) -> Union[Dict, None]:
         sys.exit(1)
 
     try:
-        with open(filename, 'r', encoding='ascii') as json_file:
+        with open(filename, "r", encoding="ascii") as json_file:
             return json.load(json_file)
 
     except ValueError as error:

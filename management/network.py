@@ -17,10 +17,10 @@ def clean_exit(exit_code: int = 0) -> None:
     """
 
     #  for ied in ieds:
-        #  del ied
-#
+    #  del ied
+    #
     #  for vpn in vpns:
-        #  del vpn
+    #  del vpn
 
     sys.exit(exit_code)
 
@@ -53,7 +53,7 @@ def exit_handler(sig, frame):
 
 
 def main():
-    """ Main """
+    """Main"""
     logger = Logger("Main")
     logger.title(HEADER)
 
@@ -61,8 +61,8 @@ def main():
 
     args = parse_file("/root/data/network.json")
 
-    ieds = create(args, 'vpns')
-    vpns = create(args, 'ieds')
+    ieds = create(args, "vpns")
+    vpns = create(args, "ieds")
 
     logger.info("Waiting subprocess\n\tPress 'ctr + c' to exit")
 

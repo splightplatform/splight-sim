@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from proc import Proc
 from utils import Logger
 
@@ -17,10 +18,10 @@ class Vpn(Proc, ABC):
     def __init__(self, **kwargs) -> None:
         super().__init__()
 
-        self._ns = kwargs['ns']
-        self._file = kwargs['file']
-        self._user = kwargs['user']
-        self._pass = kwargs['pass']
+        self._ns = kwargs["ns"]
+        self._file = kwargs["file"]
+        self._user = kwargs["user"]
+        self._pass = kwargs["pass"]
         self._popen = None
 
         self._logger = Logger("Vpn " + self._ns)

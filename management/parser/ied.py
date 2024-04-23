@@ -20,29 +20,29 @@ def create_ied(ied: Dict) -> Union[Ied, None]:
 
     logger = Logger("Ied")
 
-    if 'protocol' not in ied:
+    if "protocol" not in ied:
         logger.error(f"'protocol' is required on ied: {ied}")
         return None
 
-    if 'port' not in ied:
+    if "port" not in ied:
         logger.error(f"'port' is required on ied: {ied}")
         return None
 
-    if 'ns' not in ied:
-        ied['ns'] = None
+    if "ns" not in ied:
+        ied["ns"] = None
 
-    if ied['protocol'] == 'dnp3':
+    if ied["protocol"] == "dnp3":
         IedClass = DNP3Ied
-    elif ied['protocol'] == 'c37118':
+    elif ied["protocol"] == "c37118":
         IedClass = C37118Ied
-    elif ied['protocol'] == 'iec60870':
+    elif ied["protocol"] == "iec60870":
         IedClass = IEC60870Ied
-    elif ied['protocol'] == 'iec61850':
+    elif ied["protocol"] == "iec61850":
         IedClass = IEC61850Ied
     else:
         logger.error(f"Bad ied protocol '{ied['protocol']} in {ied}'")
 
-    new_ied = IedClass(ied['port'], ied['ns'])
+    new_ied = IedClass(ied["port"], ied["ns"])
     new_ied.start()
 
     return new_ied

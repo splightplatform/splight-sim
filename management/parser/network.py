@@ -1,12 +1,14 @@
-from utils import Logger
-from proc.vpn import OvpnVpn, Vpn
-from typing import Union, Dict
 import os
+from typing import Dict, Union
+
+from proc.vpn import OvpnVpn, Vpn
+from utils import Logger
+
 
 def create_network(net: Dict) -> Union[Vpn, None]:
     """
     Create a vpn connection in a namespace.
-    
+
     Args:
         net (Dict):
             {
@@ -21,16 +23,16 @@ def create_network(net: Dict) -> Union[Vpn, None]:
 
     logger = Logger("Network")
 
-    if not 'file' in net:
+    if not "file" in net:
         logger.error(f"Not 'file' in: {net}")
         return None
 
-    if not 'ns' in net:
+    if not "ns" in net:
         logger.error(f"Not 'ns' in: {net}")
         return None
 
-    net['file'] = "/root/data/" + net['file']
-    if not os.path.isfile(net['file']):
+    net["file"] = "/root/data/" + net["file"]
+    if not os.path.isfile(net["file"]):
         logger.error(f"Vpn file not exists in {net}")
         return None
 
@@ -38,8 +40,8 @@ def create_network(net: Dict) -> Union[Vpn, None]:
         if key not in obj:
             obj[key] = None
 
-    set_def(net, 'user')
-    set_def(net, 'pass')
+    set_def(net, "user")
+    set_def(net, "pass")
 
     # By now only Openvpn
     VpnClass = OvpnVpn
