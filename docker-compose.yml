@@ -19,75 +19,101 @@ services:
       - python
       - /src/main.py
     environment:
-      - LOG_LEVEL=ERROR
-# dnp3:
-#   image: dnp3
-#   build:
-#     context: .
-#     args:
-#       - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
-#       - JFROG_BOT_PASS=$JFROG_BOT_PASS
-#     dockerfile: ./dnp3/Dockerfile
-#   command: bash
-#   entrypoint: python3 ./network.py
-#   volumes:
-#     - ./dnp3/data:/root/data/
-#   tty: true
-#   network_mode: "host"
+      - LOG_LEVEL=INFO
 
-# c37118:
-#   image: c37118
-#   build:
-#     context: .
-#     dockerfile: ./c37118/Dockerfile
-#   entrypoint: python3 /opt/c37118/randomPMU.py
-#   volumes:
-#     - ./c37118/data:/root/data/
-#   tty: true
-#   ports:
-#     - "37118:37118"
+  # dnp3:
+  #   image: dnp3
+  #   build:
+  #     context: .
+  #     args:
+  #       - JFROG_BOT_USERNAME=$JFROG_BOT_USERNAME
+  #       - JFROG_BOT_PASS=$JFROG_BOT_PASS
+  #     dockerfile: ./dnp3/Dockerfile
+  #   command: bash
+  #   entrypoint: python3 ./network.py
+  #   volumes:
+  #     - ./dnp3/data:/root/data/
+  #   tty: true
+  #   network_mode: "host"
 
-# iec60870:
-#   image: iec60870
-#   build:
-#     context: .
-#     dockerfile: ./iec60870/Dockerfile
-#   command: bash
-#   entrypoint: python3 ./network.py
-#   volumes:
-#     - ./iec60870/data:/root/data/
-#   tty: true
-#   network_mode: "host"
+  # c37118:
+  #   image: c37118
+  #   build:
+  #     context: .
+  #     dockerfile: ./c37118/Dockerfile
+  #   entrypoint: python3 /opt/c37118/randomPMU.py
+  #   volumes:
+  #     - ./c37118/data:/root/data/
+  #   tty: true
+  #   ports:
+  #     - "37118:37118"
 
-# iec61850:
-#   image: iec61850
-#   build:
-#     context: .
-#     dockerfile: ./iec61850/Dockerfile
-#   command: bash
-#   entrypoint: python3 ./network.py
-#   volumes:
-#     - ./iec61850/data:/root/data/
-#   tty: true
-#   network_mode: "host"
+  # iec60870:
+  #   image: iec60870
+  #   build:
+  #     context: .
+  #     dockerfile: ./iec60870/Dockerfile
+  #   command: bash
+  #   entrypoint: python3 ./network.py
+  #   volumes:
+  #     - ./iec60870/data:/root/data/
+  #   tty: true
+  #   network_mode: "host"
 
-# ftp:
-#   image: fauria/vsftpd
-#   volumes:
-#     - '/ftp/data:/home/vsftpd'
-#   network_mode: "host"
-#   environment:
-#     - FTP_USER=admin
-#     - FTP_PASS=admin
-#     - PASV_ADDRESS=192.168.50.201
-#   restart: always
+  # iec61850:
+  #   image: iec61850
+  #   build:
+  #     context: .
+  #     dockerfile: ./iec61850/Dockerfile
+  #   command: bash
+  #   entrypoint: python3 ./network.py
+  #   volumes:
+  #     - ./iec61850/data:/root/data/
+  #   tty: true
+  #   network_mode: "host"
 
-# modbus:
-#     container_name: modbus
-#     image: oitc/modbus-server
-#     restart: always
-#     command: -f /server_config.json
-#     ports:
-#       - 5020:5020
-#     volumes:
-#       - ./modbus/server.json:/server_config.json:ro
+  # ftp:
+  #   image: fauria/vsftpd
+  #   volumes:
+  #     - '/ftp/data:/home/vsftpd'
+  #   network_mode: "host"
+  #   environment:
+  #     - FTP_USER=admin
+  #     - FTP_PASS=admin
+  #     - PASV_ADDRESS=192.168.50.201
+  #   restart: always
+
+  # modbus:
+  #     container_name: modbus
+  #     image: oitc/modbus-server
+  #     restart: always
+  #     command: -f /server_config.json
+  #     ports:
+  #       - 5020:5020
+  #     volumes:
+  #       - ./modbus/server.json:/server_config.json:ro
+  #       - ./data.csv:data.csv:ro
+  #     command:
+  #       - python
+  #       - /src/csv_publisher.py
+  #       - data.csv
+
+  # modbus:
+  #     container_name: modbus
+  #     image: oitc/modbus-server
+  #     restart: always
+  #     command: -f /server_config.json
+  #     ports:
+  #       - 5020:5020
+  #     volumes:
+  #       - ./modbus2/server.json:/server_config.json:ro
+
+  # opcua:
+  #   build:
+  #     context: ./opcua
+  #     dockerfile: ./Dockerfile
+  #   command:
+  #     - python
+  #     - /src/opcua_server.py
+  #   ports:
+  #     - "4840:4840"
