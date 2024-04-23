@@ -538,6 +538,7 @@ class Pmu(object):
             print(e)
         finally:
             connection.close()
+<<<<<<< HEAD:servers/c37118/pmu.py
             logger.info(
                 "[%d] - Connection from %s:%d has been closed.",
                 pmu_id,
@@ -545,6 +546,10 @@ class Pmu(object):
                 address[1],
             )
             buffer.cancel_join_thread()
+=======
+            buffer.cancel_join_thread()
+            logger.info("[%d] - Connection from %s:%d has been closed.", pmu_id, address[0], address[1])
+>>>>>>> 02c6c87bc1fa8c9a977ca6bedbc5a6d4ea6fa944:c37118/pmu.py
 
 
 class PmuError(BaseException):
