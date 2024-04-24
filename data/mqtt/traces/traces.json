@@ -6,6 +6,70 @@
             "filename": "minute_data.csv",
             "noise_factor": 0.1,
             "match_timestamp_by": "minute"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/ActivePower",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "active_power"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/ReactivePower",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "reactive_power"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentR",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_r"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentS",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_s"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentT",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_t"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageRS",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_rs"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageST",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_st"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageTR",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_tr"
         }
     ]
 }

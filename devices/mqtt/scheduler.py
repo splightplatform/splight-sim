@@ -45,12 +45,14 @@ class Trace:
         filename: str,
         noise_factor: float,
         match_timestamp_by: str = "minute",
+        target_value: str = "value",
     ) -> None:
         self.name = name
         self.topic = topic
         self.filename = filename
         self.noise_factor = noise_factor
         self.match_timestamp_by = TimeUnit(match_timestamp_by)
+        self.target_value = target_value
 
     def __str__(self) -> str:
         return self.name
@@ -70,6 +72,7 @@ class Parser:
         time_unit: TimeUnit,
         noise_factor: float,
         topic: str,
+        target_value: str = "value",
     ) -> pd.Series:
         logger.info(f"Parsing file {filename}")
         data = pd.read_csv(
@@ -85,7 +88,7 @@ class Parser:
         # Get only one read and add noise and topic
         if data:
             data = data[0]
-            data["value"] = random.gauss(data["value"], noise_factor)
+            data["value"] = random.gauss(data[target_value], noise_factor)
             data["topic"] = topic
             data["timestamp"] = datetime.isoformat()
         return data
@@ -100,7 +103,8 @@ class Parser:
                 df["timestamp"].dt.day_of_week == datetime.timetuple().tm_wday
             )
         if criteria == TimeUnit.DAY_OF_MONTH:
-            filters.append(df["timestamp"].dt.day == datetime.timetuple().tm_mday)
+            filters.append(df["timestamp"].dt.day ==
+                           datetime.timetuple().tm_mday)
         if criteria == TimeUnit.DAY_OF_YEAR:
             filters.append(
                 df["timestamp"].dt.day_of_year == datetime.timetuple().tm_yday
@@ -131,7 +135,8 @@ class Scheduler:
             with open(os.path.join(TRACES_PATH, "traces.json"), "r") as f:
                 traces = [Trace(**trace) for trace in json.load(f)["traces"]]
                 for trace in traces:
-                    t = threading.Thread(target=self.simulate_trace, args=(trace,))
+                    t = threading.Thread(
+                        target=self.simulate_trace, args=(trace,))
                     self.threads.append(t)
                     t.start()
         except FileNotFoundError:
@@ -147,6 +152,7 @@ class Scheduler:
                 time_unit=trace.match_timestamp_by,
                 noise_factor=trace.noise_factor,
                 topic=trace.topic,
+                target_value=trace.target_value,
             )
             if data:
                 data = json.dumps(data, default=str)
