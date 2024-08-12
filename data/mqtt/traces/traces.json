@@ -70,6 +70,70 @@
             "noise_factor": 0.1,
             "match_timestamp_by": "hour",
             "target_value": "voltage_tr"
+        },
+        {
+            "name": "DCM_Line_1",
+            "topic": "DCM_Line_1/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "line_1_active_power"
+        },
+        {
+            "name": "DCM_Line_2",
+            "topic": "DCM_Line_2/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "line_2_active_power"
+        },
+        {
+            "name": "DCM_Generator_1",
+            "topic": "DCM_Generator_1/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_1_active_power"
+        },
+        {
+            "name": "DCM_Generator_1",
+            "topic": "DCM_Generator_1/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_1_reactive_power"
+        },
+        {
+            "name": "DCM_Generator_2",
+            "topic": "DCM_Generator_2/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_2_active_power"
+        },
+        {
+            "name": "DCM_Generator_2",
+            "topic": "DCM_Generator_2/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_2_reactive_power"
+        },
+        {
+            "name": "DCM_Generator_3",
+            "topic": "DCM_Generator_3/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_3_active_power"
+        },
+        {
+            "name": "DCM_Generator_3",
+            "topic": "DCM_Generator_3/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_3_reactive_power"
         }
     ]
 }
