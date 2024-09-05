@@ -1,14 +1,7 @@
 name: Deploy master branch
 
-# on:
-#   push:
-#     branches:
-#       - master
-
 on:
-  pull_request:
-    types:
-      [opened, synchronize]
+  push:
     branches:
       - master
 
