@@ -1,0 +1,25 @@
+name: Deploy master branch
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+on:
+  pull_request:
+    types:
+      [opened, synchronize]
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: [self-hosted, SplightSIM]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run container
+        run: |
+          docker-compose build
+          docker-compose down
+          docker-compose up -d
