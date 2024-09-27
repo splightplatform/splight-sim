@@ -134,6 +134,81 @@
             "noise_factor": 0.1,
             "match_timestamp_by": "minute",
             "target_value": "generator_3_reactive_power"
+<<<<<<< Updated upstream
+=======
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_p"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_p"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_p"
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_temp"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_temp"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_temp"
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_daily"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_daily"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_daily"
+>>>>>>> Stashed changes
         }
     ]
 }
