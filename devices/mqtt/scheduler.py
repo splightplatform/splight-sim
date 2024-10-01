@@ -96,7 +96,7 @@ class Parser:
     @staticmethod
     def _get_filters_criteria(df: pd.DataFrame, datetime: datetime, criteria: str):
         filters = [df["timestamp"].dt.minute == datetime.time().minute]
-        if criteria > TimeUnit.HOUR:
+        if criteria >= TimeUnit.HOUR:
             filters.append(df["timestamp"].dt.hour == datetime.time().hour)
         if criteria == TimeUnit.DAY_OF_WEEK:
             filters.append(
