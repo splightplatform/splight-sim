@@ -1,211 +1,388 @@
 {
     "traces": [
         {
-            "name": "Trace1",
-            "topic": "Topic1",
-            "filename": "minute_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute"
-        },
-        {
-            "name": "Line1",
-            "topic": "Line1/ActivePower",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-1/active_power",
+            "topic": "Calama/PFVJama-1/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "active_power"
+            "target_value": "PFVJama-1"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/ReactivePower",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-1/reactive_power",
+            "topic": "Calama/PFVJama-1/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "reactive_power"
+            "target_value": "PFVJama-1"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/CurrentR",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-1/temperature",
+            "topic": "Calama/PFVJama-1/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "current_r"
+            "target_value": "PFVJama-1"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/CurrentS",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-2/active_power",
+            "topic": "Calama/PFVJama-2/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "current_s"
+            "target_value": "PFVJama-2"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/CurrentT",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-2/reactive_power",
+            "topic": "Calama/PFVJama-2/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "current_t"
+            "target_value": "PFVJama-2"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/VoltageRS",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama-2/temperature",
+            "topic": "Calama/PFVJama-2/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "voltage_rs"
+            "target_value": "PFVJama-2"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/VoltageST",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama/active_power",
+            "topic": "Calama/PFVJama/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "voltage_st"
+            "target_value": "PFVJama"
         },
         {
-            "name": "Line1",
-            "topic": "Line1/VoltageTR",
-            "filename": "daily_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama/reactive_power",
+            "topic": "Calama/PFVJama/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "voltage_tr"
+            "target_value": "PFVJama"
         },
         {
-            "name": "DCM_Line_1",
-            "topic": "DCM_Line_1/ActivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "line_1_active_power"
-        },
-        {
-            "name": "DCM_Line_2",
-            "topic": "DCM_Line_2/ActivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "line_2_active_power"
-        },
-        {
-            "name": "DCM_Generator_1",
-            "topic": "DCM_Generator_1/ActivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_1_active_power"
-        },
-        {
-            "name": "DCM_Generator_1",
-            "topic": "DCM_Generator_1/ReactivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_1_reactive_power"
-        },
-        {
-            "name": "DCM_Generator_2",
-            "topic": "DCM_Generator_2/ActivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_2_active_power"
-        },
-        {
-            "name": "DCM_Generator_2",
-            "topic": "DCM_Generator_2/ReactivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_2_reactive_power"
-        },
-        {
-            "name": "DCM_Generator_3",
-            "topic": "DCM_Generator_3/ActivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_3_active_power"
-        },
-        {
-            "name": "DCM_Generator_3",
-            "topic": "DCM_Generator_3/ReactivePower",
-            "filename": "dcm_data.csv",
-            "noise_factor": 0.1,
-            "match_timestamp_by": "minute",
-            "target_value": "generator_3_reactive_power"
-        },
-        {
-            "name": "DERMS_INV_1",
-            "topic": "DERMS_INV_1/active_power",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVJama/temperature",
+            "topic": "Calama/PFVJama/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_1_p"
+            "target_value": "PFVJama"
         },
         {
-            "name": "DERMS_INV_2",
-            "topic": "DERMS_INV_2/active_power",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVSanPedro/active_power",
+            "topic": "Calama/PFVSanPedro/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_2_p"
+            "target_value": "PFVSanPedro"
         },
         {
-            "name": "DERMS_INV_3",
-            "topic": "DERMS_INV_3/active_power",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVSanPedro/reactive_power",
+            "topic": "Calama/PFVSanPedro/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_3_p"
+            "target_value": "PFVSanPedro"
         },
         {
-            "name": "DERMS_INV_1",
-            "topic": "DERMS_INV_1/temperature",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVSanPedro/temperature",
+            "topic": "Calama/PFVSanPedro/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_1_temp"
+            "target_value": "PFVSanPedro"
         },
         {
-            "name": "DERMS_INV_2",
-            "topic": "DERMS_INV_2/temperature",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PEValleDelosVientos/active_power",
+            "topic": "Calama/PEValleDelosVientos/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_2_temp"
+            "target_value": "PEValleDelosVientos"
         },
         {
-            "name": "DERMS_INV_3",
-            "topic": "DERMS_INV_3/temperature",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PEValleDelosVientos/reactive_power",
+            "topic": "Calama/PEValleDelosVientos/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_3_temp"
+            "target_value": "PEValleDelosVientos"
         },
         {
-            "name": "DERMS_INV_1",
-            "topic": "DERMS_INV_1/daily_energy",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PEValleDelosVientos/temperature",
+            "topic": "Calama/PEValleDelosVientos/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_1_daily"
+            "target_value": "PEValleDelosVientos"
         },
         {
-            "name": "DERMS_INV_2",
-            "topic": "DERMS_INV_2/daily_energy",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVUsya/active_power",
+            "topic": "Calama/PFVUsya/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_2_daily"
+            "target_value": "PFVUsya"
         },
         {
-            "name": "DERMS_INV_3",
-            "topic": "DERMS_INV_3/daily_energy",
-            "filename": "derms_data.csv",
-            "noise_factor": 0.1,
+            "name": "Calama/PFVUsya/reactive_power",
+            "topic": "Calama/PFVUsya/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
             "match_timestamp_by": "hour",
-            "target_value": "inverter_3_daily"
+            "target_value": "PFVUsya"
+        },
+        {
+            "name": "Calama/PFVUsya/temperature",
+            "topic": "Calama/PFVUsya/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVUsya"
+        },
+        {
+            "name": "Calama/PFVCal/active_power",
+            "topic": "Calama/PFVCal/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVCal"
+        },
+        {
+            "name": "Calama/PFVCal/reactive_power",
+            "topic": "Calama/PFVCal/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVCal"
+        },
+        {
+            "name": "Calama/PFVCal/temperature",
+            "topic": "Calama/PFVCal/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVCal"
+        },
+        {
+            "name": "Calama/PFVAzabache/active_power",
+            "topic": "Calama/PFVAzabache/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVAzabache"
+        },
+        {
+            "name": "Calama/PFVAzabache/reactive_power",
+            "topic": "Calama/PFVAzabache/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVAzabache"
+        },
+        {
+            "name": "Calama/PFVAzabache/temperature",
+            "topic": "Calama/PFVAzabache/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVAzabache"
+        },
+        {
+            "name": "Calama/JAM-LAS/active_power",
+            "topic": "Calama/JAM-LAS/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "JAM-LAS"
+        },
+        {
+            "name": "Calama/JAM-LAS/reactive_power",
+            "topic": "Calama/JAM-LAS/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "JAM-LAS"
+        },
+        {
+            "name": "Calama/JAM-LAS/temperature",
+            "topic": "Calama/JAM-LAS/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "JAM-LAS"
+        },
+        {
+            "name": "Calama/LAS-CAL/active_power",
+            "topic": "Calama/LAS-CAL/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "LAS-CAL"
+        },
+        {
+            "name": "Calama/LAS-CAL/reactive_power",
+            "topic": "Calama/LAS-CAL/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "LAS-CAL"
+        },
+        {
+            "name": "Calama/LAS-CAL/temperature",
+            "topic": "Calama/LAS-CAL/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "LAS-CAL"
+        },
+        {
+            "name": "Calama/VLV-CAL/active_power",
+            "topic": "Calama/VLV-CAL/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "VLV-CAL"
+        },
+        {
+            "name": "Calama/VLV-CAL/reactive_power",
+            "topic": "Calama/VLV-CAL/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "VLV-CAL"
+        },
+        {
+            "name": "Calama/VLV-CAL/temperature",
+            "topic": "Calama/VLV-CAL/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "VLV-CAL"
+        },
+        {
+            "name": "Calama/CAL-CHU/active_power",
+            "topic": "Calama/CAL-CHU/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-CHU"
+        },
+        {
+            "name": "Calama/CAL-CHU/reactive_power",
+            "topic": "Calama/CAL-CHU/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-CHU"
+        },
+        {
+            "name": "Calama/CAL-CHU/temperature",
+            "topic": "Calama/CAL-CHU/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-CHU"
+        },
+        {
+            "name": "Calama/CAL-SAL/active_power",
+            "topic": "Calama/CAL-SAL/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-SAL"
+        },
+        {
+            "name": "Calama/CAL-SAL/reactive_power",
+            "topic": "Calama/CAL-SAL/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-SAL"
+        },
+        {
+            "name": "Calama/CAL-SAL/temperature",
+            "topic": "Calama/CAL-SAL/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-SAL"
+        },
+        {
+            "name": "Calama/SAL-CHU/active_power",
+            "topic": "Calama/SAL-CHU/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "SAL-CHU"
+        },
+        {
+            "name": "Calama/SAL-CHU/reactive_power",
+            "topic": "Calama/SAL-CHU/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "SAL-CHU"
+        },
+        {
+            "name": "Calama/SAL-CHU/temperature",
+            "topic": "Calama/SAL-CHU/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "SAL-CHU"
+        },
+        {
+            "name": "Calama/CAL-NCH/active_power",
+            "topic": "Calama/CAL-NCH/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-NCH"
+        },
+        {
+            "name": "Calama/CAL-NCH/reactive_power",
+            "topic": "Calama/CAL-NCH/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-NCH"
+        },
+        {
+            "name": "Calama/CAL-NCH/temperature",
+            "topic": "Calama/CAL-NCH/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-NCH"
+        },
+        {
+            "name": "Calama/NCH-CHU/active_power",
+            "topic": "Calama/NCH-CHU/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "NCH-CHU"
+        },
+        {
+            "name": "Calama/NCH-CHU/reactive_power",
+            "topic": "Calama/NCH-CHU/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "NCH-CHU"
+        },
+        {
+            "name": "Calama/NCH-CHU/temperature",
+            "topic": "Calama/NCH-CHU/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "NCH-CHU"
         }
     ]
 }
