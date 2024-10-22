@@ -1,0 +1,211 @@
+{
+    "traces": [
+        {
+            "name": "Trace1",
+            "topic": "Topic1",
+            "filename": "minute_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/ActivePower",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "active_power"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/ReactivePower",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "reactive_power"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentR",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_r"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentS",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_s"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/CurrentT",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "current_t"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageRS",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_rs"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageST",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_st"
+        },
+        {
+            "name": "Line1",
+            "topic": "Line1/VoltageTR",
+            "filename": "daily_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "voltage_tr"
+        },
+        {
+            "name": "DCM_Line_1",
+            "topic": "DCM_Line_1/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "line_1_active_power"
+        },
+        {
+            "name": "DCM_Line_2",
+            "topic": "DCM_Line_2/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "line_2_active_power"
+        },
+        {
+            "name": "DCM_Generator_1",
+            "topic": "DCM_Generator_1/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_1_active_power"
+        },
+        {
+            "name": "DCM_Generator_1",
+            "topic": "DCM_Generator_1/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_1_reactive_power"
+        },
+        {
+            "name": "DCM_Generator_2",
+            "topic": "DCM_Generator_2/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_2_active_power"
+        },
+        {
+            "name": "DCM_Generator_2",
+            "topic": "DCM_Generator_2/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_2_reactive_power"
+        },
+        {
+            "name": "DCM_Generator_3",
+            "topic": "DCM_Generator_3/ActivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_3_active_power"
+        },
+        {
+            "name": "DCM_Generator_3",
+            "topic": "DCM_Generator_3/ReactivePower",
+            "filename": "dcm_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "minute",
+            "target_value": "generator_3_reactive_power"
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_p"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_p"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/active_power",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_p"
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_temp"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_temp"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/temperature",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_temp"
+        },
+        {
+            "name": "DERMS_INV_1",
+            "topic": "DERMS_INV_1/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_1_daily"
+        },
+        {
+            "name": "DERMS_INV_2",
+            "topic": "DERMS_INV_2/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_2_daily"
+        },
+        {
+            "name": "DERMS_INV_3",
+            "topic": "DERMS_INV_3/daily_energy",
+            "filename": "derms_data.csv",
+            "noise_factor": 0.1,
+            "match_timestamp_by": "hour",
+            "target_value": "inverter_3_daily"
+        }
+    ]
+}
