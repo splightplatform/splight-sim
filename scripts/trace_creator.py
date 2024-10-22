@@ -28,8 +28,8 @@ def _get_noise(max_value: int = 1):
 def _get_order():
     return [
         "timestamp",
+        "jama0",
         "jama1",
-        "jama2",
         "jama",
         "sanpedro",
         "vlv",
@@ -49,12 +49,12 @@ def _get_order():
 
 def _get_power(time: datetime, peak_power_per_generator: int = 10):
     jama1 = _get_solar_gaussian_value(time, peak_power_per_generator * 2 / 3)
-    jama2 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
-    jama = jama1 + jama2
+    jama0 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
+    jama = jama1 + jama0
 
     sanpedro = peak_power_per_generator - \
         _get_noise(peak_power_per_generator * 0.1)
-    jamLas = jama1 + jama2 - _get_noise(peak_power_per_generator * 0.1)
+    jamLas = jama1 + jama0 - _get_noise(peak_power_per_generator * 0.1)
     lasCal = jamLas - _get_noise(peak_power_per_generator * 0.1)
 
     vlv = peak_power_per_generator - _get_noise(peak_power_per_generator * 0.1)
@@ -74,8 +74,8 @@ def _get_power(time: datetime, peak_power_per_generator: int = 10):
 
     values = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "jama0": str(round(max(jama0, 0), 3)),
         "jama1": str(round(max(jama1, 0), 3)),
-        "jama2": str(round(max(jama2, 0), 3)),
         "jama": str(round(max(jama, 0), 3)),
         "sanpedro": str(round(max(sanpedro, 0), 3)),
         "jamLas": str(round(max(jamLas, 0), 3)),
@@ -95,13 +95,13 @@ def _get_power(time: datetime, peak_power_per_generator: int = 10):
 
 
 def _get_temperature(time: datetime, peak_temperature_per_inverter: int = 10):
+    jama0 = _get_solar_gaussian_value(time, peak_temperature_per_inverter)
     jama1 = _get_solar_gaussian_value(time, peak_temperature_per_inverter)
-    jama2 = _get_solar_gaussian_value(time, peak_temperature_per_inverter)
 
     values = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "jama0": str(jama0),
         "jama1": str(jama1),
-        "jama2": str(jama2),
         "jama": str(0),
         "sanpedro": str(0),
         "jamLas": str(0),
@@ -123,8 +123,8 @@ def _get_temperature(time: datetime, peak_temperature_per_inverter: int = 10):
 def get_headers():
     values = {
         "timestamp": "timestamp",
+        "jama0": "PFVJama-0",
         "jama1": "PFVJama-1",
-        "jama2": "PFVJama-2",
         "jama": "PFVJama",
         "sanpedro": "PFVSanPedro",
         "vlv": "PEValleDelosVientos",
