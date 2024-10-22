@@ -1,30 +1,6 @@
 {
     "traces": [
         {
-            "name": "Calama/PFVJama-0/active_power",
-            "topic": "Calama/PFVJama-0/active_power",
-            "filename": "active_power.csv",
-            "noise_factor": 0.01,
-            "match_timestamp_by": "hour",
-            "target_value": "PFVJama-0"
-        },
-        {
-            "name": "Calama/PFVJama-0/reactive_power",
-            "topic": "Calama/PFVJama-0/reactive_power",
-            "filename": "reactive_power.csv",
-            "noise_factor": 0.01,
-            "match_timestamp_by": "hour",
-            "target_value": "PFVJama-0"
-        },
-        {
-            "name": "Calama/PFVJama-0/temperature",
-            "topic": "Calama/PFVJama-0/temperature",
-            "filename": "temperature.csv",
-            "noise_factor": 0.01,
-            "match_timestamp_by": "hour",
-            "target_value": "PFVJama-0"
-        },
-        {
             "name": "Calama/PFVJama-1/active_power",
             "topic": "Calama/PFVJama-1/active_power",
             "filename": "active_power.csv",
@@ -47,6 +23,30 @@
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "PFVJama-1"
+        },
+        {
+            "name": "Calama/PFVJama-2/active_power",
+            "topic": "Calama/PFVJama-2/active_power",
+            "filename": "active_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama-2"
+        },
+        {
+            "name": "Calama/PFVJama-2/reactive_power",
+            "topic": "Calama/PFVJama-2/reactive_power",
+            "filename": "reactive_power.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama-2"
+        },
+        {
+            "name": "Calama/PFVJama-2/temperature",
+            "topic": "Calama/PFVJama-2/temperature",
+            "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama-2"
         },
         {
             "name": "Calama/PFVJama/active_power",
