@@ -49,10 +49,10 @@ def _get_order():
 
 
 def _get_power(time: datetime, peak_power_per_generator: int = 10):
-    delta_vlv = -5
-    delta_aza = 1
-    delta_cal = 6
-    delta_usy = -2
+    delta_vlv = -1.4
+    delta_aza = 1.3
+    delta_cal = 1.7
+    delta_usy = -1.6
     jama1 = _get_solar_gaussian_value(time, peak_power_per_generator * 2 / 3)
     jama0 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
     jama = jama1 + jama0
