@@ -25,6 +25,14 @@
             "target_value": "PFVJama-0"
         },
         {
+            "name": "Calama/PFVJama-0/raw_daily_energy",
+            "topic": "Calama/PFVJama-0/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama-0"
+        },
+        {
             "name": "Calama/PFVJama-1/active_power",
             "topic": "Calama/PFVJama-1/active_power",
             "filename": "active_power.csv",
@@ -44,6 +52,14 @@
             "name": "Calama/PFVJama-1/temperature",
             "topic": "Calama/PFVJama-1/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama-1"
+        },
+        {
+            "name": "Calama/PFVJama-1/raw_daily_energy",
+            "topic": "Calama/PFVJama-1/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "PFVJama-1"
@@ -73,6 +89,14 @@
             "target_value": "PFVJama"
         },
         {
+            "name": "Calama/PFVJama/raw_daily_energy",
+            "topic": "Calama/PFVJama/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVJama"
+        },
+        {
             "name": "Calama/PFVSanPedro/active_power",
             "topic": "Calama/PFVSanPedro/active_power",
             "filename": "active_power.csv",
@@ -92,6 +116,14 @@
             "name": "Calama/PFVSanPedro/temperature",
             "topic": "Calama/PFVSanPedro/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVSanPedro"
+        },
+        {
+            "name": "Calama/PFVSanPedro/raw_daily_energy",
+            "topic": "Calama/PFVSanPedro/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "PFVSanPedro"
@@ -121,6 +153,14 @@
             "target_value": "PEValleDelosVientos"
         },
         {
+            "name": "Calama/PEValleDelosVientos/raw_daily_energy",
+            "topic": "Calama/PEValleDelosVientos/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PEValleDelosVientos"
+        },
+        {
             "name": "Calama/PFVUsya/active_power",
             "topic": "Calama/PFVUsya/active_power",
             "filename": "active_power.csv",
@@ -140,6 +180,14 @@
             "name": "Calama/PFVUsya/temperature",
             "topic": "Calama/PFVUsya/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVUsya"
+        },
+        {
+            "name": "Calama/PFVUsya/raw_daily_energy",
+            "topic": "Calama/PFVUsya/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "PFVUsya"
@@ -169,6 +217,14 @@
             "target_value": "PFVCal"
         },
         {
+            "name": "Calama/PFVCal/raw_daily_energy",
+            "topic": "Calama/PFVCal/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVCal"
+        },
+        {
             "name": "Calama/PFVAzabache/active_power",
             "topic": "Calama/PFVAzabache/active_power",
             "filename": "active_power.csv",
@@ -188,6 +244,14 @@
             "name": "Calama/PFVAzabache/temperature",
             "topic": "Calama/PFVAzabache/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "PFVAzabache"
+        },
+        {
+            "name": "Calama/PFVAzabache/raw_daily_energy",
+            "topic": "Calama/PFVAzabache/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "PFVAzabache"
@@ -217,6 +281,14 @@
             "target_value": "JAM-LAS"
         },
         {
+            "name": "Calama/JAM-LAS/raw_daily_energy",
+            "topic": "Calama/JAM-LAS/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "JAM-LAS"
+        },
+        {
             "name": "Calama/LAS-CAL/active_power",
             "topic": "Calama/LAS-CAL/active_power",
             "filename": "active_power.csv",
@@ -236,6 +308,14 @@
             "name": "Calama/LAS-CAL/temperature",
             "topic": "Calama/LAS-CAL/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "LAS-CAL"
+        },
+        {
+            "name": "Calama/LAS-CAL/raw_daily_energy",
+            "topic": "Calama/LAS-CAL/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "LAS-CAL"
@@ -265,6 +345,14 @@
             "target_value": "VLV-CAL"
         },
         {
+            "name": "Calama/VLV-CAL/raw_daily_energy",
+            "topic": "Calama/VLV-CAL/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "VLV-CAL"
+        },
+        {
             "name": "Calama/CAL-CHU/active_power",
             "topic": "Calama/CAL-CHU/active_power",
             "filename": "active_power.csv",
@@ -284,6 +372,14 @@
             "name": "Calama/CAL-CHU/temperature",
             "topic": "Calama/CAL-CHU/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-CHU"
+        },
+        {
+            "name": "Calama/CAL-CHU/raw_daily_energy",
+            "topic": "Calama/CAL-CHU/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "CAL-CHU"
@@ -313,6 +409,14 @@
             "target_value": "CAL-SAL"
         },
         {
+            "name": "Calama/CAL-SAL/raw_daily_energy",
+            "topic": "Calama/CAL-SAL/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-SAL"
+        },
+        {
             "name": "Calama/SAL-CHU/active_power",
             "topic": "Calama/SAL-CHU/active_power",
             "filename": "active_power.csv",
@@ -332,6 +436,14 @@
             "name": "Calama/SAL-CHU/temperature",
             "topic": "Calama/SAL-CHU/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "SAL-CHU"
+        },
+        {
+            "name": "Calama/SAL-CHU/raw_daily_energy",
+            "topic": "Calama/SAL-CHU/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "SAL-CHU"
@@ -361,6 +473,14 @@
             "target_value": "CAL-NCH"
         },
         {
+            "name": "Calama/CAL-NCH/raw_daily_energy",
+            "topic": "Calama/CAL-NCH/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "CAL-NCH"
+        },
+        {
             "name": "Calama/NCH-CHU/active_power",
             "topic": "Calama/NCH-CHU/active_power",
             "filename": "active_power.csv",
@@ -380,6 +500,14 @@
             "name": "Calama/NCH-CHU/temperature",
             "topic": "Calama/NCH-CHU/temperature",
             "filename": "temperature.csv",
+            "noise_factor": 0.01,
+            "match_timestamp_by": "hour",
+            "target_value": "NCH-CHU"
+        },
+        {
+            "name": "Calama/NCH-CHU/raw_daily_energy",
+            "topic": "Calama/NCH-CHU/raw_daily_energy",
+            "filename": "raw_daily_energy.csv",
             "noise_factor": 0.01,
             "match_timestamp_by": "hour",
             "target_value": "NCH-CHU"

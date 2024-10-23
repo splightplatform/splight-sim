@@ -3,6 +3,7 @@ import random
 from datetime import datetime, timedelta
 
 import numpy as np
+import pandas as pd
 
 
 def _get_solar_gaussian_value(time: datetime, max_value: int = 5):
@@ -151,22 +152,57 @@ def get_headers():
     return ",".join([values[order] for order in _get_order()])
 
 
-def get_active_power(time: datetime):
-    return _get_power(time, peak_power_per_generator=10)
+def get_active_power():
+    start_date = datetime(2024, 1, 1, 0, 0, 0)
+    with open("active_power.csv", "w") as f:
+        f.write(get_headers() + "\n")
+        for i in range(60 * 24):
+            f.write(_get_power(start_date, peak_power_per_generator=10) + "\n")
+            start_date = start_date + timedelta(minutes=1)
 
 
-def get_reactive_power(time: datetime):
-    return _get_power(time, peak_power_per_generator=2)
+def get_reactive_power():
+    start_date = datetime(2024, 1, 1, 0, 0, 0)
+    with open("reactive_power.csv", "w") as f:
+        f.write(get_headers() + "\n")
+        for i in range(60 * 24):
+            f.write(_get_power(start_date, peak_power_per_generator=2) + "\n")
+            start_date = start_date + timedelta(minutes=1)
 
 
-def get_temperature(time: datetime):
-    return _get_temperature(time, peak_temperature_per_inverter=37)
+def get_temperature():
+    start_date = datetime(2024, 1, 1, 0, 0, 0)
+    with open("temperature.csv", "w") as f:
+        f.write(get_headers() + "\n")
+        for i in range(60 * 24):
+            f.write(_get_temperature(
+                start_date, peak_temperature_per_inverter=37
+            ) + "\n")
+            start_date = start_date + timedelta(minutes=1)
+
+
+def get_raw_daily_energy():
+    df = pd.read_csv("active_power.csv")
+    timestamp = df["timestamp"]
+    df = df.drop(columns=["timestamp"], axis=1)
+    df = df.shift(-1) - df
+    df[df < 0] = 0
+    df = df * 60
+    df = df.cumsum()
+    df = df.round(2)
+    for col in df.columns:
+        if col not in ["PFVJama-0", "PFVJama-1", "PFVJama"]:
+            df[col] = 0
+    col_order = ["timestamp"] + list(df.columns)
+    df["timestamp"] = timestamp
+    df = df[col_order]
+    df.to_csv("raw_daily_energy.csv", index=False)
 
 
 def get_traces_json():
     traces = []
     for asset in get_headers().split(",")[1:]:
-        for power_type in ["active_power", "reactive_power", "temperature"]:
+        for power_type in ["active_power", "reactive_power", "temperature", "raw_daily_energy"]:
             traces.append(
                 {
                     "name": f"Calama/{asset}/{power_type}",
@@ -177,29 +213,17 @@ def get_traces_json():
                     "target_value": f"{asset}",
                 },
             )
-    return {"traces": traces}
+    traces_json = {"traces": traces}
+    with open("traces.json", "w") as f:
+        json.dump(
+            traces_json,
+            f,
+        )
 
 
-start_date = datetime(2024, 1, 1, 0, 0, 0)
-with open("active_power.csv", "w") as f:
-    f.write(get_headers() + "\n")
-    for i in range(60 * 24):
-        f.write(get_active_power(start_date) + "\n")
-        start_date = start_date + timedelta(minutes=1)
-start_date = datetime(2024, 1, 1, 0, 0, 0)
-with open("reactive_power.csv", "w") as f:
-    f.write(get_headers() + "\n")
-    for i in range(60 * 24):
-        f.write(get_reactive_power(start_date) + "\n")
-        start_date = start_date + timedelta(minutes=1)
-start_date = datetime(2024, 1, 1, 0, 0, 0)
-with open("temperature.csv", "w") as f:
-    f.write(get_headers() + "\n")
-    for i in range(60 * 24):
-        f.write(get_temperature(start_date) + "\n")
-        start_date = start_date + timedelta(minutes=1)
-with open("traces.json", "w") as f:
-    json.dump(
-        get_traces_json(),
-        f,
-    )
+if __name__ == "__main__":
+    get_active_power()
+    get_reactive_power()
+    get_temperature()
+    get_raw_daily_energy()
+    get_traces_json()
