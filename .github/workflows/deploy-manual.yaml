@@ -1,0 +1,16 @@
+name: Deploy manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+    deploy:
+        name: Deploy
+        runs-on: [self-hosted, SplightSIM]
+        steps:
+        - uses: actions/checkout@v3
+        - name: Run container
+          run: |
+            sudo docker-compose build
+            sudo docker-compose up -d
+    
