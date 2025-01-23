@@ -53,27 +53,25 @@ def _get_power(time: datetime, peak_power_per_generator: int = 10):
     delta_aza = 1.3
     delta_cal = 1.7
     delta_usy = -1.6
+    delta_sanpedro = 0
+    sanpedro = _get_solar_gaussian_value(
+        time, peak_power_per_generator + delta_sanpedro
+    )
+    aza = _get_solar_gaussian_value(time, peak_power_per_generator + delta_aza)
+    usy = _get_solar_gaussian_value(time, peak_power_per_generator + delta_usy)
     jama1 = _get_solar_gaussian_value(time, peak_power_per_generator * 2 / 3)
     jama0 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
     jama = jama1 + jama0
 
-    sanpedro = peak_power_per_generator - \
-        _get_noise(peak_power_per_generator * 0.1)
     jamLas = jama1 + jama0 - _get_noise(peak_power_per_generator * 0.1)
-    lasCal = jamLas - _get_noise(peak_power_per_generator * 0.1)
+    lasCal = jamLas + sanpedro - _get_noise(peak_power_per_generator * 0.1)
 
     vlv = peak_power_per_generator + delta_vlv - \
         _get_noise((peak_power_per_generator + delta_vlv) * 0.1)
     vlvCal = vlv - _get_noise((peak_power_per_generator + delta_vlv) * 0.1)
 
-    usy = peak_power_per_generator + delta_usy - \
-        _get_noise((peak_power_per_generator + delta_usy) * 0.1)
-
     cal = peak_power_per_generator + delta_cal - \
         _get_noise((peak_power_per_generator + delta_cal) * 0.1)
-
-    aza = peak_power_per_generator + delta_aza - \
-        _get_noise((peak_power_per_generator + delta_aza) * 0.1)
 
     calChu = lasCal + vlvCal + usy + aza + cal
     calSal = (calChu / 2) - _get_noise(peak_power_per_generator * 0.1)
