@@ -46,7 +46,10 @@ def _get_order():
     ]
 
 
-def _get_power(time: datetime, peak_power_per_generator: int = 10):
+def _get_power(time: datetime, peak_power_per_generator: int = 10, power_end: bool = False):
+    # power_end modifier that inverts the value adding a loss
+    power_factor = -1 if power_end else 1
+
     delta_vlv = -1.4
     delta_aza = 1.3
     delta_cal = 1.7
@@ -81,23 +84,27 @@ def _get_power(time: datetime, peak_power_per_generator: int = 10):
 
     values = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "jama0": str(round(max(jama0, 0), 3)),
-        "jama1": str(round(max(jama1, 0), 3)),
-        "jama": str(round(max(jama, 0), 3)),
-        "sanpedro": str(round(max(sanpedro, 0), 3)),
-        "jamLas": str(round(max(jamLas, 0), 3)),
-        "lasCal": str(round(max(lasCal, 0), 3)),
-        "vlv": str(round(max(vlv, 0), 3)),
-        "vlvCal": str(round(max(vlvCal, 0), 3)),
-        "usy": str(round(max(usy, 0), 3)),
-        "cal": str(round(max(cal, 0), 3)),
-        "aza": str(round(max(aza, 0), 3)),
-        "calChu": str(round(max(calChu, 0), 3)),
-        "calSal": str(round(max(calSal, 0), 3)),
-        "salChu": str(round(max(salChu, 0), 3)),
-        "calNch": str(round(max(calNch, 0), 3)),
-        "nchChu": str(round(max(nchChu, 0), 3)),
+        "jama0": str(max(round(jama0, 3), 0) * power_factor),
+        "jama1": str(max(round(jama1, 3), 0) * power_factor),
+        "jama": str(max(round(jama, 3), 0) * power_factor),
+        "sanpedro": str(max(round(sanpedro, 3), 0) * power_factor),
+        "jamLas": str(max(round(jamLas, 3), 0) * power_factor),
+        "lasCal": str(max(round(lasCal, 3), 0) * power_factor),
+        "vlv": str(max(round(vlv, 3), 0) * power_factor),
+        "vlvCal": str(max(round(vlvCal, 3), 0) * power_factor),
+        "usy": str(max(round(usy, 3), 0) * power_factor),
+        "cal": str(max(round(cal, 3), 0) * power_factor),
+        "aza": str(max(round(aza, 3), 0) * power_factor),
+        "calChu": str(max(round(calChu, 3), 0) * power_factor),
+        "calSal": str(max(round(calSal, 3), 0) * power_factor),
+        "salChu": str(max(round(salChu, 3), 0) * power_factor),
+        "calNch": str(max(round(calNch, 3), 0) * power_factor),
+        "nchChu": str(max(round(nchChu, 3), 0) * power_factor),
     }
+    # Avoid -0.0 values
+    for key, value in values.items():
+        if value == "-0.0":
+            values[key] = "0.0"
     return ",".join([values[order] for order in _get_order()])
 
 
@@ -159,6 +166,16 @@ def get_active_power():
             start_date = start_date + timedelta(minutes=1)
 
 
+def get_active_power_end():
+    start_date = datetime(2024, 1, 1, 0, 0, 0)
+    with open("active_power_end.csv", "w") as f:
+        f.write(get_headers() + "\n")
+        for i in range(60 * 24):
+            f.write(_get_power(start_date, peak_power_per_generator=10,
+                    power_end=True) + "\n")
+            start_date = start_date + timedelta(minutes=1)
+
+
 def get_reactive_power():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
     with open("reactive_power.csv", "w") as f:
@@ -200,7 +217,7 @@ def get_raw_daily_energy():
 def get_traces_json():
     traces = []
     for asset in get_headers().split(",")[1:]:
-        for power_type in ["active_power", "reactive_power", "temperature", "raw_daily_energy"]:
+        for power_type in ["active_power", "active_power_end", "reactive_power", "temperature", "raw_daily_energy"]:
             traces.append(
                 {
                     "name": f"Calama/{asset}/{power_type}",
@@ -221,6 +238,7 @@ def get_traces_json():
 
 if __name__ == "__main__":
     get_active_power()
+    get_active_power_end()
     get_reactive_power()
     get_temperature()
     get_raw_daily_energy()
