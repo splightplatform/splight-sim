@@ -6,12 +6,10 @@ import numpy as np
 import pandas as pd
 
 
-def _get_solar_gaussian_value(time: datetime, max_value: int = 5):
+def _get_solar_gaussian_value(time: datetime, max_value: int = 5, sigma: int = 2, mu: int = 14):
     x = time.hour + (time.minute / 60)
-    # Mean ("center" of the curve)
-    mu = 14
-    # Standard deviation (spread or "width" of the curve)
-    sigma = 2
+    # mu = Mean ("center" of the curve)
+    # sigma = Standard deviation (spread or "width" of the curve)
     # Amplitude (height of the curve)
     amplitude = max_value * np.sqrt(2 * np.pi * sigma**2)
     return round(
@@ -57,8 +55,10 @@ def _get_power(time: datetime, peak_power_per_generator: int = 10):
     sanpedro = _get_solar_gaussian_value(
         time, peak_power_per_generator + delta_sanpedro
     )
-    aza = _get_solar_gaussian_value(time, peak_power_per_generator + delta_aza)
-    usy = _get_solar_gaussian_value(time, peak_power_per_generator + delta_usy)
+    aza = _get_solar_gaussian_value(
+        time, peak_power_per_generator + delta_aza, sigma=3)
+    usy = _get_solar_gaussian_value(
+        time, peak_power_per_generator + delta_usy, sigma=2.5)
     jama1 = _get_solar_gaussian_value(time, peak_power_per_generator * 2 / 3)
     jama0 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
     jama = jama1 + jama0
@@ -164,7 +164,7 @@ def get_reactive_power():
     with open("reactive_power.csv", "w") as f:
         f.write(get_headers() + "\n")
         for i in range(60 * 24):
-            f.write(_get_power(start_date, peak_power_per_generator=2) + "\n")
+            f.write(_get_power(start_date, peak_power_per_generator=10*0.08) + "\n")
             start_date = start_date + timedelta(minutes=1)
 
 
