@@ -48,7 +48,7 @@ def _get_order():
 
 def _get_power(time: datetime, peak_power_per_generator: int = 10, power_end: bool = False):
     # power_end modifier that inverts the value adding a loss
-    power_factor = -1 if power_end else 1
+    power_factor = -0.93 if power_end else 1
 
     delta_vlv = -1.4
     delta_aza = 1.3
