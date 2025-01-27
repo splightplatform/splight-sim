@@ -134,6 +134,30 @@ def _get_temperature(time: datetime, peak_temperature_per_inverter: int = 10):
     return ",".join([values[order] for order in _get_order()])
 
 
+def _get_contingency(time: datetime):
+
+    values = {
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "jama0": json.dumps(False),
+        "jama1": json.dumps(False),
+        "jama": json.dumps(False),
+        "sanpedro": json.dumps(False),
+        "jamLas": json.dumps(False),
+        "lasCal": json.dumps(False),
+        "vlv": json.dumps(False),
+        "vlvCal": json.dumps(False),
+        "usy": json.dumps(False),
+        "cal": json.dumps(False),
+        "aza": json.dumps(False),
+        "calChu": json.dumps(False),
+        "calSal": json.dumps(False),
+        "salChu": json.dumps(False),
+        "calNch": json.dumps(False),
+        "nchChu": json.dumps(False),
+    }
+    return ",".join([values[order] for order in _get_order()])
+
+
 def get_headers():
     values = {
         "timestamp": "timestamp",
@@ -214,10 +238,19 @@ def get_raw_daily_energy():
     df.to_csv("raw_daily_energy.csv", index=False)
 
 
+def get_contingency():
+    start_date = datetime(2024, 1, 1, 0, 0, 0)
+    with open("contingency.csv", "w") as f:
+        f.write(get_headers() + "\n")
+        for i in range(60 * 24):
+            f.write(_get_contingency(start_date) + "\n")
+            start_date = start_date + timedelta(minutes=1)
+
+
 def get_traces_json():
     traces = []
     for asset in get_headers().split(",")[1:]:
-        for power_type in ["active_power", "active_power_end", "reactive_power", "temperature", "raw_daily_energy"]:
+        for power_type in ["active_power", "active_power_end", "reactive_power", "temperature", "raw_daily_energy", "contingency"]:
             traces.append(
                 {
                     "name": f"Calama/{asset}/{power_type}",
@@ -242,4 +275,5 @@ if __name__ == "__main__":
     get_reactive_power()
     get_temperature()
     get_raw_daily_energy()
+    get_contingency()
     get_traces_json()
