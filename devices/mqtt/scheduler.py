@@ -88,7 +88,9 @@ class Parser:
         # Get only one read and add noise and topic
         if data:
             data = data[0]
-            data["value"] = random.gauss(data[target_value], noise_factor)
+            data["value"] = data[target_value]
+            if noise_factor:
+                data["value"] = random.gauss(data[target_value], noise_factor)
             data["topic"] = topic
             data["timestamp"] = datetime.isoformat()
         return data
@@ -103,7 +105,8 @@ class Parser:
                 df["timestamp"].dt.day_of_week == datetime.timetuple().tm_wday
             )
         if criteria == TimeUnit.DAY_OF_MONTH:
-            filters.append(df["timestamp"].dt.day == datetime.timetuple().tm_mday)
+            filters.append(df["timestamp"].dt.day ==
+                           datetime.timetuple().tm_mday)
         if criteria == TimeUnit.DAY_OF_YEAR:
             filters.append(
                 df["timestamp"].dt.day_of_year == datetime.timetuple().tm_yday
@@ -134,7 +137,8 @@ class Scheduler:
             with open(os.path.join(TRACES_PATH, "traces.json"), "r") as f:
                 traces = [Trace(**trace) for trace in json.load(f)["traces"]]
                 for trace in traces:
-                    t = threading.Thread(target=self.simulate_trace, args=(trace,))
+                    t = threading.Thread(
+                        target=self.simulate_trace, args=(trace,))
                     self.threads.append(t)
                     t.start()
         except FileNotFoundError:
