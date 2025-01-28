@@ -250,13 +250,26 @@ def get_contingency():
 def get_traces_json():
     traces = []
     for asset in get_headers().split(",")[1:]:
-        for power_type in ["active_power", "active_power_end", "reactive_power", "temperature", "raw_daily_energy", "contingency"]:
+        for power_type in ["active_power", "active_power_end", "reactive_power", "temperature", "raw_daily_energy"]:
+            # Numbers
             traces.append(
                 {
                     "name": f"Calama/{asset}/{power_type}",
                     "topic": f"Calama/{asset}/{power_type}",
                     "filename": f"{power_type}.csv",
                     "noise_factor": 0.01,
+                    "match_timestamp_by": "hour",
+                    "target_value": f"{asset}",
+                },
+            )
+        for power_type in ["contingency"]:
+            # Booleans and Text
+            traces.append(
+                {
+                    "name": f"Calama/{asset}/{power_type}",
+                    "topic": f"Calama/{asset}/{power_type}",
+                    "filename": f"{power_type}.csv",
+                    "noise_factor": None,
                     "match_timestamp_by": "hour",
                     "target_value": f"{asset}",
                 },
