@@ -125,11 +125,11 @@ class Scheduler:
         self.threads = []
 
     def start(self):
-        logger.info("Starting scheduler")
+        logger.info("Starting scheduler..")
         self.load_traces()
 
     def stop(self):
-        logger.info("Stopping scheduler")
+        logger.info("Stopping scheduler..")
         self._stop_flag = True
 
     def load_traces(self):

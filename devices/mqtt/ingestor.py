@@ -15,7 +15,7 @@ class Ingestor:
         self._stop_flag = False
 
     def start(self):
-        logger.info("Starting ingestor")
+        logger.info("Starting ingestor..")
         self.client.connect(self.host, self.port)
         self.client.loop_start()
         while not self._stop_flag:
@@ -28,7 +28,7 @@ class Ingestor:
             self.send(data, topic)
 
     def stop(self):
-        logger.info("Stopping ingestor")
+        logger.info("Stopping ingestor..")
         self._stop_flag = True
         self.client.loop_stop()
 
