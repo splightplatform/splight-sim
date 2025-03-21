@@ -16,9 +16,7 @@ jobs:
     
   deploy-v4:
     name: Deploy v4
-    runs-on:
-      group: SplightSIM
-      labels: SplightSIM v4
+    runs-on: [self-hosted, SplightSIM, v4]
     steps:
     - uses: actions/checkout@v4
     - name: Run v4 container
