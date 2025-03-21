@@ -6,12 +6,24 @@ on:
       - master
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-v3:
+    name: Deploy v3
     runs-on: [self-hosted, SplightSIM]
     steps:
-      - uses: actions/checkout@v3
-      - name: Run container
-        run: |
-          sudo docker-compose build
-          sudo docker-compose up -d --force-recreate
+    - uses: actions/checkout@v4
+    - name: Run v3 container
+      run: |
+        sudo docker-compose build
+        sudo docker-compose up -d --force-recreate
+    
+  deploy-v4:
+    name: Deploy v4
+    runs-on:
+      group: SplightSIM
+      labels: SplightSIM v4
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run v4 container
+      run: |
+        sudo docker-compose build
+        sudo docker-compose up -d --force-recreate
