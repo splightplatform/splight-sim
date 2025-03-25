@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  deploy-prod-v3:
-    name: Deploy prod v3
+  deploy-production-v3:
+    name: Deploy production v3
     runs-on: 
       group: SplightSIM
       labels: [self-hosted, v3]
@@ -18,8 +18,8 @@ jobs:
         sudo docker-compose build
         sudo docker-compose up -d --force-recreate
 
-  deploy-int-v4:
-    name: Deploy int v4
+  deploy-integration-v4:
+    name: Deploy integration v4
     runs-on:
       group: SplightSIM
       labels: [self-hosted, integration-v4]
@@ -30,8 +30,8 @@ jobs:
         sudo docker-compose build
         sudo docker-compose up -d --force-recreate
 
-  deploy-prod-v4:
-    name: Deploy prod v4
+  deploy-production-v4:
+    name: Deploy production v4
     runs-on:
       group: SplightSIM
       labels: [self-hosted, v4]
