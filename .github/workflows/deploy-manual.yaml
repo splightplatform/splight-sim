@@ -4,26 +4,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-v3:
-    name: Deploy v3
+  deploy-prod-v3:
+    name: Deploy prod v3
     runs-on: 
       group: SplightSIM
       labels: [self-hosted, v3]
     steps:
     - uses: actions/checkout@v4
-    - name: Run v3 container
+    - name: Run production v3 container
       run: |
         sudo docker-compose build
         sudo docker-compose up -d --force-recreate
-    
-  deploy-v4:
-    name: Deploy v4
+
+  deploy-int-v4:
+    name: Deploy int v4
     runs-on:
       group: SplightSIM
       labels: [self-hosted, v4]
     steps:
     - uses: actions/checkout@v4
-    - name: Run v4 container
+    - name: Run integration v4 container
+      run: |
+        sudo docker-compose build
+        sudo docker-compose up -d --force-recreate
+
+  deploy-prod-v4:
+    name: Deploy prod v4
+    runs-on:
+      group: SplightSIM
+      labels: [self-hosted, v4]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run production v4 container
       run: |
         sudo docker-compose build
         sudo docker-compose up -d --force-recreate
