@@ -22,7 +22,7 @@ jobs:
     name: Deploy int v4
     runs-on:
       group: SplightSIM
-      labels: [self-hosted, int-v4]
+      labels: [self-hosted, integration-v4]
     steps:
     - uses: actions/checkout@v4
     - name: Run integration v4 container
