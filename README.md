@@ -46,3 +46,11 @@ timestamp,col1
 Where you set as many columns as you want to use for the 60 seconds defined.
 
 Now let us suppose we set `"match_timestamp_by"` to `"hour"` then you should set in your csv file a value for every hour and every minute for 1 day.
+
+## Alternative way to upload traces
+
+After code your trace function in scripts/trace_creator.py you need to add the function to the main of the file and run the following command
+```bash
+make traces
+```
+This create a new traces files in the respective data directory and update the traces.json file.

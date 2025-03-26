@@ -1,3 +1,13 @@
+ROOT_DIR := $(shell pwd)
+
+.venv:
+	python3 -m venv .venv
+	@( \
+		source .venv/bin/activate; \
+		pip install --upgrade pip; \
+		pip install -r requirements.txt; \
+	)
+
 start:
 	@docker-compose -f docker-compose.yml up -d
 
@@ -11,6 +21,7 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+	rm -rf .venv
 
 clean-test: ## remove test and coverage artifacts
 	find . -name '*.pytest_cache' -exec rm -rf {} +
@@ -18,12 +29,15 @@ clean-test: ## remove test and coverage artifacts
 
 # CODE STYLE
 black: 
-	black . --exclude '*/pydnp3/*'
+	black .
 
 isort:
-	isort . --skip-glob '*/pydnp3/*'
+	isort .
 
 flake8:
-	sh -c "find . -type f -name '*.py' -not -path '*/pydnp3/*' -exec autoflake {} +"
+	sh -c "find . -type f -name '*.py' -exec autoflake {} +"
 
 format: flake8 isort black
+
+traces: .venv
+	@. .venv/bin/activate; cd $(ROOT_DIR)/data/mqtt/traces && python3 $(ROOT_DIR)/scripts/trace_creator.py
