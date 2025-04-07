@@ -293,8 +293,8 @@ def get_voltage_start_and_end():
 def get_current_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
     for phase in ['r', 's', 't']:
-        with open(f"current_start_{phase}.csv", "w") as current_start, \
-        open(f"current_end_{phase}.csv", "w") as current_end:
+        with open(f"current_{phase}_start.csv", "w") as current_start, \
+        open(f"current_{phase}_end.csv", "w") as current_end:
             current_start.write(get_headers() + "\n")
             current_end.write(get_headers() + "\n")
             for _ in range(60 * 24):
