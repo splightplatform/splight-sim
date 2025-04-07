@@ -1,6 +1,7 @@
 import json
 import random
 from datetime import datetime, timedelta
+
 import numpy as np
 import pandas as pd
 
@@ -10,7 +11,7 @@ GENERATORS_ATTRIBUTES = [
     "frequency",
     "power_set_point",
     "reactive_power",
-    "switch_status"
+    "switch_status",
 ]
 LINES_ATTRIBUTES = [
     "active_power_start",
@@ -24,18 +25,18 @@ LINES_ATTRIBUTES = [
     "switch_status_start",
     "switch_status_end",
     "voltage_start",
-    "voltage_end"
+    "voltage_end",
 ]
 LINES = [
-    "JAM-LAS"
-    "LAS-CAL",
+    "JAM-LAS" "LAS-CAL",
     "VLC-CAL",
-    #"calChu", this line isn't deployed
+    # "calChu", this line isn't deployed
     "CAL-SAL",
     "SAL-CHU",
     "CAL-NCH",
-    "NCH-CHU"
+    "NCH-CHU",
 ]
+
 
 def _get_solar_gaussian_value(
     time: datetime, max_value: int = 5, sigma: int = 2, mu: int = 14
@@ -71,7 +72,7 @@ def _get_order():
         "jamLas",
         "lasCal",
         "vlvCal",
-        #"calChu", this line isn't deployed
+        # "calChu", this line isn't deployed
         "calSal",
         "salChu",
         "calNch",
@@ -221,20 +222,13 @@ def _get_switch_status(time: datetime):
     return ",".join([values[order] for order in _get_order()])
 
 
-def _get_available_active_power(time: datetime):
-    # All generators with 25MW available
-    values = {
-        key: "25" if key != "timestamp" else time.strftime("%Y-%m-%d %H:%M:%S")
-        for key in _get_order()
-    }
-    return ",".join([values[order] for order in _get_order()])
-
 def _get_voltage(time: datetime):
     values = {
         key: "350" if key != "timestamp" else time.strftime("%Y-%m-%d %H:%M:%S")
         for key in _get_order()
     }
     return ",".join([values[order] for order in _get_order()])
+
 
 def _get_current(time: datetime):
     values = {
@@ -266,10 +260,12 @@ def get_headers():
     }
     return ",".join([values[order] for order in _get_order()])
 
+
 def get_voltage_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("voltage_start.csv", "w") as voltage_start, \
-    open("voltage_end.csv", "w") as voltage_end:
+    with open("voltage_start.csv", "w") as voltage_start, open(
+        "voltage_end.csv", "w"
+    ) as voltage_end:
         voltage_start.write(get_headers() + "\n")
         voltage_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
@@ -278,10 +274,12 @@ def get_voltage_start_and_end():
             voltage_end.write(voltage_value + "\n")
             start_date = start_date + timedelta(minutes=1)
 
+
 def get_current_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("current_start.csv", "w") as current_start, \
-    open("current_end.csv", "w") as current_end:
+    with open("current_start.csv", "w") as current_start, open(
+        "current_end.csv", "w"
+    ) as current_end:
         current_start.write(get_headers() + "\n")
         current_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
@@ -293,8 +291,9 @@ def get_current_start_and_end():
 
 def get_active_power_and_power_set_point():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("active_power.csv", "w", newline="") as active_power_file,\
-    open("power_set_point.csv", "w", newline="") as power_set_point_file:
+    with open("active_power.csv", "w", newline="") as active_power_file, open(
+        "power_set_point.csv", "w", newline=""
+    ) as power_set_point_file:
         headers = get_headers() + "\n"
         active_power_file.write(headers)
         power_set_point_file.write(headers)
@@ -310,14 +309,13 @@ def get_active_power_and_power_set_point():
 
 def get_active_power_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("active_power_start.csv", "w") as active_power_start, \
-    open("active_power_end.csv", "w") as active_power_end:
+    with open("active_power_start.csv", "w") as active_power_start, open(
+        "active_power_end.csv", "w"
+    ) as active_power_end:
         active_power_start.write(get_headers() + "\n")
         active_power_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
-            power_value = _get_power(
-                start_date, peak_power_per_generator=10
-            )
+            power_value = _get_power(start_date, peak_power_per_generator=10)
             active_power_start.write(power_value + "\n")
             active_power_end.write(power_value + "\n")
             start_date = start_date + timedelta(minutes=1)
@@ -331,16 +329,16 @@ def get_reactive_power():
             f.write(_get_power(start_date, peak_power_per_generator=10 * 0.08) + "\n")
             start_date = start_date + timedelta(minutes=1)
 
+
 def get_reactive_power_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("reactive_power_start.csv", "w") as reactive_power_start, \
-    open("reactive_power_end.csv", "w") as reactive_power_end:
+    with open("reactive_power_start.csv", "w") as reactive_power_start, open(
+        "reactive_power_end.csv", "w"
+    ) as reactive_power_end:
         reactive_power_start.write(get_headers() + "\n")
         reactive_power_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
-            power_value = _get_power(
-                start_date, peak_power_per_generator=10 * 0.08
-            )
+            power_value = _get_power(start_date, peak_power_per_generator=10 * 0.08)
             reactive_power_start.write(power_value + "\n")
             reactive_power_end.write(power_value + "\n")
             start_date = start_date + timedelta(minutes=1)
@@ -401,10 +399,12 @@ def get_switch_status():
             f.write(_get_switch_status(start_date) + "\n")
             start_date = start_date + timedelta(minutes=1)
 
+
 def get_switch_status_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("switch_status_start.csv", "w") as switch_status_start, \
-    open("switch_status_end.csv", "w") as switch_status_end:
+    with open("switch_status_start.csv", "w") as switch_status_start, open(
+        "switch_status_end.csv", "w"
+    ) as switch_status_end:
         switch_status_start.write(get_headers() + "\n")
         switch_status_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
@@ -413,70 +413,19 @@ def get_switch_status_start_and_end():
             switch_status_end.write(switch_status + "\n")
             start_date = start_date + timedelta(minutes=1)
 
+
 def get_available_active_power():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
     with open("available_active_power.csv", "w") as f:
         f.write(get_headers() + "\n")
         for _ in range(60 * 24):
-            f.write(_get_available_active_power(start_date) + "\n")
+            f.write(_get_power(start_date, peak_power_per_generator=20) + "\n")
             start_date = start_date + timedelta(minutes=1)
 
 
-# def get_traces_json():
-#     traces = []
-#     for asset in get_headers().split(",")[1:]:
-#         for attribute in [
-#             "active_power",
-#             "active_power_start",
-#             "active_power_end",
-#             "reactive_power",
-#             "reactive_power_start",
-#             "reactive_power_end",
-#             "temperature",
-#             "raw_daily_energy",
-#             "power_set_point",
-#             "voltage_start",
-#             "voltage_end",
-#             "current_start",
-#             "current_end",
-#         ]:
-#             traces.append(
-#                 {
-#                     "name": f"Calama/{asset}/{attribute}",
-#                     "topic": f"Calama/{asset}/{attribute}",
-#                     "filename": f"{attribute}.csv",
-#                     "noise_factor": 0.01,
-#                     "match_timestamp_by": "hour",
-#                     "target_value": f"{asset}",
-#                 },
-#             )
-#         for attribute in [
-#             "contingency",
-#             "frequency",
-#             "switch_status",
-#             "available_active_power",
-#             "switch_status_start",
-#             "switch_status_end",
-#         ]:
-#             traces.append(
-#                 {
-#                     "name": f"Calama/{asset}/{attribute}",
-#                     "topic": f"Calama/{asset}/{attribute}",
-#                     "filename": f"{attribute}.csv",
-#                     "noise_factor": None,
-#                     "match_timestamp_by": "hour",
-#                     "target_value": f"{asset}",
-#                 },
-#             )
-#     traces_json = {"traces": traces}
-#     with open("traces.json", "w") as f:
-#         json.dump(
-#             traces_json,
-#             f,
-#         )
 def get_traces_json():
     traces = []
-    headers = get_headers().split(",")[1:] # Exclude the timestamp header
+    headers = get_headers().split(",")[1:]  # Exclude the timestamp header
     for asset in headers:
         if asset in LINES:
             attributes = LINES_ATTRIBUTES
@@ -484,7 +433,14 @@ def get_traces_json():
             attributes = GENERATORS_ATTRIBUTES
 
         for attribute in attributes:
-            noise_factor = 0.01 if (attribute not in ["contingency", "frequency"] and "switch_status" not in attribute ) else None
+            noise_factor = (
+                0.02
+                if (
+                    attribute not in ["contingency", "frequency"]
+                    and "switch_status" not in attribute
+                )
+                else None
+            )
             traces.append(
                 {
                     "name": f"Calama/{asset}/{attribute}",
