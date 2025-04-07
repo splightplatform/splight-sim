@@ -16,8 +16,12 @@ LINES_ATTRIBUTES = [
     "active_power_start",
     "active_power_end",
     "contingency",
-    "current_start",
-    "current_end",
+    "current_r_start",
+    "current_r_end",
+    "current_s_start",
+    "current_s_end",
+    "current_t_start",
+    "current_t_end",
     "frequency",
     "reactive_power_start",
     "reactive_power_end",
@@ -288,16 +292,16 @@ def get_voltage_start_and_end():
 
 def get_current_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("current_start.csv", "w") as current_start, \
-    open("current_end.csv", "w") as current_end:
-        current_start.write(get_headers() + "\n")
-        current_end.write(get_headers() + "\n")
-        for _ in range(60 * 24):
-            current_value = _get_current(start_date)
-            current_start.write(current_value + "\n")
-            current_end.write(current_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
-
+    for phase in ['r', 's', 't']:
+        with open(f"current_start_{phase}.csv", "w") as current_start, \
+        open(f"current_end_{phase}.csv", "w") as current_end:
+            current_start.write(get_headers() + "\n")
+            current_end.write(get_headers() + "\n")
+            for _ in range(60 * 24):
+                current_value = _get_current(start_date)
+                current_start.write(current_value + "\n")
+                current_end.write(current_value + "\n")
+                start_date = start_date + timedelta(minutes=1)
 
 def get_voltage_start_and_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
@@ -310,20 +314,6 @@ def get_voltage_start_and_end():
             voltage_value = _get_voltage(start_date)
             voltage_start.write(voltage_value + "\n")
             voltage_end.write(voltage_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
-
-
-def get_current_start_and_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("current_start.csv", "w") as current_start, open(
-        "current_end.csv", "w"
-    ) as current_end:
-        current_start.write(get_headers() + "\n")
-        current_end.write(get_headers() + "\n")
-        for _ in range(60 * 24):
-            current_value = _get_current(start_date)
-            current_start.write(current_value + "\n")
-            current_end.write(current_value + "\n")
             start_date = start_date + timedelta(minutes=1)
 
 
