@@ -641,20 +641,76 @@
             "topic": "Calama/LAS-CAL/voltage_end"
         },
         {
-            "filename": "active_power.csv",
+            "filename": "active_power_start.csv",
             "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/active_power",
+            "name": "Calama/VLV-CAL/active_power_start",
             "noise_factor": 0.02,
             "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/active_power"
+            "topic": "Calama/VLV-CAL/active_power_start"
         },
         {
-            "filename": "available_active_power.csv",
+            "filename": "active_power_end.csv",
             "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/available_active_power",
+            "name": "Calama/VLV-CAL/active_power_end",
             "noise_factor": 0.02,
             "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/available_active_power"
+            "topic": "Calama/VLV-CAL/active_power_end"
+        },
+        {
+            "filename": "contingency.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/contingency",
+            "noise_factor": null,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/contingency"
+        },
+        {
+            "filename": "current_r_start.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_r_start",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_r_start"
+        },
+        {
+            "filename": "current_r_end.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_r_end",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_r_end"
+        },
+        {
+            "filename": "current_s_start.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_s_start",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_s_start"
+        },
+        {
+            "filename": "current_s_end.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_s_end",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_s_end"
+        },
+        {
+            "filename": "current_t_start.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_t_start",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_t_start"
+        },
+        {
+            "filename": "current_t_end.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/current_t_end",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/current_t_end"
         },
         {
             "filename": "frequency.csv",
@@ -665,28 +721,52 @@
             "topic": "Calama/VLV-CAL/frequency"
         },
         {
-            "filename": "power_set_point.csv",
+            "filename": "reactive_power_start.csv",
             "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/power_set_point",
+            "name": "Calama/VLV-CAL/reactive_power_start",
             "noise_factor": 0.02,
             "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/power_set_point"
+            "topic": "Calama/VLV-CAL/reactive_power_start"
         },
         {
-            "filename": "reactive_power.csv",
+            "filename": "reactive_power_end.csv",
             "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/reactive_power",
+            "name": "Calama/VLV-CAL/reactive_power_end",
             "noise_factor": 0.02,
             "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/reactive_power"
+            "topic": "Calama/VLV-CAL/reactive_power_end"
         },
         {
-            "filename": "switch_status.csv",
+            "filename": "switch_status_start.csv",
             "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/switch_status",
+            "name": "Calama/VLV-CAL/switch_status_start",
             "noise_factor": null,
             "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/switch_status"
+            "topic": "Calama/VLV-CAL/switch_status_start"
+        },
+        {
+            "filename": "switch_status_end.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/switch_status_end",
+            "noise_factor": null,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/switch_status_end"
+        },
+        {
+            "filename": "voltage_start.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/voltage_start",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/voltage_start"
+        },
+        {
+            "filename": "voltage_end.csv",
+            "match_timestamp_by": "hour",
+            "name": "Calama/VLV-CAL/voltage_end",
+            "noise_factor": 0.02,
+            "target_value": "VLV-CAL",
+            "topic": "Calama/VLV-CAL/voltage_end"
         },
         {
             "filename": "active_power_start.csv",

@@ -33,7 +33,7 @@ LINES_ATTRIBUTES = [
 LINES = [
     "JAM-LAS",
     "LAS-CAL",
-    "VLC-CAL",
+    "VLV-CAL",
     # "calChu", this line isn't deployed
     "CAL-SAL",
     "SAL-CHU",
