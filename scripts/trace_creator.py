@@ -320,69 +320,58 @@ def get_voltage_start_and_end():
 def get_active_power_and_power_set_point():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
     with open("active_power.csv", "w", newline="") as active_power_file,\
-    open("power_set_point.csv", "w", newline="") as power_set_point_file:
+    open("power_set_point.csv", "w", newline="") as power_set_point_file, \
+    open("active_power_start.csv", "w") as active_power_start:
         headers = get_headers() + "\n"
         active_power_file.write(headers)
         power_set_point_file.write(headers)
+        active_power_start.write(headers)
 
         for _ in range(60 * 24):
             power_value = _get_power(start_date, peak_power_per_generator=10)
             active_power_file.write(power_value + "\n")
+            active_power_start.write(power_value + "\n")
             # TODO: desync power set point from active power
             # active power is the generator response to the power set point
             power_set_point_file.write(power_value + "\n")
             start_date += timedelta(minutes=1)
 
 
-def get_active_power_start_and_end():
+def get_active_power_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("active_power_start.csv", "w") as active_power_start, \
-    open("active_power_end.csv", "w") as active_power_end:
-        active_power_start.write(get_headers() + "\n")
+    with open("active_power_end.csv", "w") as active_power_end:
         active_power_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
-            power_value = _get_power(
-                start_date, peak_power_per_generator=10
+            end_power_value = _get_power(
+                start_date, peak_power_per_generator=10, power_end=True
             )
-            active_power_start.write(power_value + "\n")
-            active_power_end.write(power_value + "\n")
+            active_power_end.write(end_power_value + "\n")
             start_date = start_date + timedelta(minutes=1)
 
 
 def get_reactive_power():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("reactive_power.csv", "w") as f:
-        f.write(get_headers() + "\n")
-        for _ in range(60 * 24):
-            f.write(_get_power(start_date, peak_power_per_generator=10 * 0.08) + "\n")
-            start_date = start_date + timedelta(minutes=1)
-
-def get_reactive_power_start_and_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("reactive_power_start.csv", "w") as reactive_power_start, \
-    open("reactive_power_end.csv", "w") as reactive_power_end:
+    with open("reactive_power.csv", "w") as reactive_power, \
+    open("reactive_power_start.csv", "w") as reactive_power_start:
+        reactive_power.write(get_headers() + "\n")
         reactive_power_start.write(get_headers() + "\n")
-        reactive_power_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
             power_value = _get_power(
                 start_date, peak_power_per_generator=10 * 0.08
             )
+            reactive_power.write(power_value + "\n")
             reactive_power_start.write(power_value + "\n")
-            reactive_power_end.write(power_value + "\n")
             start_date = start_date + timedelta(minutes=1)
 
-
-def get_reactive_power_start_and_end():
+def get_reactive_power_end():
     start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("reactive_power_start.csv", "w") as reactive_power_start, open(
-        "reactive_power_end.csv", "w"
-    ) as reactive_power_end:
-        reactive_power_start.write(get_headers() + "\n")
+    with open("reactive_power_end.csv", "w") as reactive_power_end:
         reactive_power_end.write(get_headers() + "\n")
         for _ in range(60 * 24):
-            power_value = _get_power(start_date, peak_power_per_generator=10 * 0.08)
-            reactive_power_start.write(power_value + "\n")
-            reactive_power_end.write(power_value + "\n")
+            end_power_value = _get_power(
+                start_date, peak_power_per_generator=10 * 0.08, power_end=True
+            )
+            reactive_power_end.write(end_power_value + "\n")
             start_date = start_date + timedelta(minutes=1)
 
 
@@ -515,9 +504,9 @@ def get_traces_json():
 
 if __name__ == "__main__":
     get_active_power_and_power_set_point()
-    get_active_power_start_and_end()
-    get_reactive_power_start_and_end()
+    get_active_power_end()
     get_reactive_power()
+    get_reactive_power_end()
     get_temperature()
     get_raw_daily_energy()
     get_contingency()
