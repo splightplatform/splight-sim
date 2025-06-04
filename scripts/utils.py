@@ -31,10 +31,10 @@ class Location:
     def span_length_from(self, other_loc: Location, this_line_height: float, other_line_height: float) -> float:
         # span_length^2 = distance^2 + diff_in_altitude^2
         diff_in_altitude = abs((self.alt + this_line_height) - (other_loc.alt + other_line_height))
-        print(f"Alt1: {self.alt}, Alt2: {other_loc.alt}, LH1: {this_line_height}, LH2: {other_line_height} ")
+        # print(f"Alt1: {self.alt}, Alt2: {other_loc.alt}, LH1: {this_line_height}, LH2: {other_line_height} ")
         distance = self.distance_from(other_loc)
         span_length_sq = (diff_in_altitude ** 2) + (distance ** 2)
-        print(f"Alt diff: {diff_in_altitude}, distance: {distance}, span_2: {span_length_sq}")
+        # print(f"Alt diff: {diff_in_altitude}, distance: {distance}, span_2: {span_length_sq}")
         return span_length_sq ** (1/2)
 
 class Tower:

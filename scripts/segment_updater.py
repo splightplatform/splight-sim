@@ -10,8 +10,8 @@ from splight_lib.settings import workspace_settings
 
 
 #keys for SplightSim organization 
-workspace_settings.SPLIGHT_ACCESS_ID = "89d27d63-a630-4a4e-bd50-d6bdd95104b7"
-workspace_settings.SPLIGHT_SECRET_KEY = "82bd81b7182ec2b5bfef069b0371f3b4701c3cdc6d9e522b52db32db8e03955a"
+workspace_settings.SPLIGHT_ACCESS_ID = "A"
+workspace_settings.SPLIGHT_SECRET_KEY = "B"
 
 
 if __name__ == "__main__":
