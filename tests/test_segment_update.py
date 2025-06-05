@@ -1,47 +1,48 @@
 import pytest
-import sys
-import os
-from pathlib import Path
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts')))
+from scripts import utils
 
-import utils 
-
-class Test_Location:
+class TestAltitudeClient:
+    @pytest.mark.parametrize(
+            ('lat', 'lng', 'expected'),
+            (
+                (37.805, -122.40472, 10),
+                (-22.428174, -68.921705, 2270)
+            )
+    )
+    def test_get_altitude(self, lat, lng, expected,altitude_client):
+        assert altitude_client.get_altitude(lat,lng) == pytest.approx(expected, 0.05)
+    
+class TestLocation:
     def test_distance_calc(self):
-        golden_gate = utils.Location(37.8199, -122.4786)
-        coit_tower = utils.Location(37.802402, -122.405952)
+        golden_gate = utils.Location(37.8199, -122.4786, 0.0)
+        coit_tower = utils.Location(37.802402, -122.405952, 50.0)
         distance = golden_gate.distance_from(coit_tower)
-        #true calced using calculator.net 
         assert distance == pytest.approx(6700,0.05)
 
     def test_distance_zero(self):
-        loc = utils.Location(37.805, -122.40472) #Splight SF office
-        assert loc.distance_from(loc) == 0 
+        loc = utils.Location(37.805, -122.40472, 10.0) #Splight SF office
+        assert loc.distance_from(loc) == pytest.approx(0, abs=0.001) 
     
-    def test_get_altitude(self):
-        loc = utils.Location(37.805, -122.40472)
-        altitude = loc.get_altitude()
-        print(altitude)
-        assert altitude == pytest.approx(10, 0.1)
-    
-    def test_get_altitude_south_america(self):
-        loc = utils.Location(-22.428174, -68.921705)
-        altitude = loc.get_altitude()
-        assert altitude == pytest.approx(2270, 0.05)
+class TestTower: 
 
-    def test_span_length(self):
-        golden_gate = utils.Location(37.8199, -122.4786)
-        coit_tower = utils.Location(37.802402, -122.405952)
-        span = golden_gate.span_length_from(coit_tower, 0, 500)
+    def test_span_length_diff_heights(self):
+        golden_gate_tower = utils.Tower()
+        golden_gate_tower.location = utils.Location(37.8199, -122.4786, 0)
+        coit_tower_tower = utils.Tower()
+        coit_tower_tower.location = utils.Location(37.802402, -122.405952, 500)
+        span = golden_gate_tower.span_length_from(coit_tower_tower)
         assert span == pytest.approx(6718.6, 0.05)
 
-    def test_span_length(self):
-        cal1 = utils.Location(-22.427552, -68.921585)
-        cal0 = utils.Location(-22.428174, -68.921705)
-        span = cal0.span_length_from(cal1, 2276, 2276)
+    def test_span_length2(self):
+        cal0_tower = utils.Tower()
+        cal0_tower.location = utils.Location(-22.428174, -68.921705, 2276)
+        cal1_tower = utils.Tower()
+        cal1_tower.location = utils.Location(-22.427552, -68.921585, 2276)
+        span = cal0_tower.span_length_from(cal1_tower)
         assert span == pytest.approx(70.25,0.05)
-    
+
+class TestUtils: 
     @pytest.mark.parametrize(
             ('input_n', 'expected'),
             (

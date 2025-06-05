@@ -4,18 +4,17 @@ import requests
 import re
 import haversine as hs 
 import numpy as np
+from splight_lib.models import Asset, SplightDatabaseBaseModel
 
-class Location: 
-    def __init__(self, latitude: float, longitude: float):
-        self.lat = latitude
-        self.long = longitude
-        self.alt = self.get_altitude() 
+OPEN_ELEVATION_URL = "https://api.open-elevation.com/api/v1/lookup"
 
-    def get_altitude(self):
-        url = f"https://api.open-elevation.com/api/v1/lookup"
-        response = requests.get(url, params={"locations": f"{self.lat},{self.long}"})
+class OpenElevationClient:
+    def __init__(self, url: str = OPEN_ELEVATION_URL):
+        self.url = url
+    
+    def get_altitude(self, lat: float, lng: float) -> float:
+        response = requests.get(self.url, params={"locations": f"{lat},{lng}"})
         altitude = response.json()["results"][0]["elevation"]
-
         if altitude is None:
             error = response.json().get("status", {}).get("message", "Unknown error")
             raise ValueError(f"Error in response: {error}")
@@ -23,35 +22,56 @@ class Location:
         if altitude < 0:
             raise ValueError(f"Negative altitude received: {altitude}")
         return altitude
-    
+
+class Location: 
+    def __init__(self, latitude: float, longitude: float, altitude: float):
+        self.lat = latitude
+        self.lng = longitude
+        self.alt = altitude 
+
     def distance_from(self, other_loc: Location) -> float:
-        loc1 = (self.lat,self.long)
-        loc2 = (other_loc.lat,other_loc.long)
+        loc1 = (self.lat,self.lng)
+        loc2 = (other_loc.lat,other_loc.lng)
         return hs.haversine(loc1,loc2,unit=hs.Unit.METERS)
 
-    def span_length_from(self, other_loc: Location, this_line_height: float, other_line_height: float) -> float:
-        # span_length^2 = distance^2 + diff_in_altitude^2
-        diff_in_altitude = abs((self.alt + this_line_height) - (other_loc.alt + other_line_height))
-        print(f"Alt1: {self.alt}, Alt2: {other_loc.alt}, LH1: {this_line_height}, LH2: {other_line_height} ")
-        distance = self.distance_from(other_loc)
-        span_length_sq = (diff_in_altitude ** 2) + (distance ** 2)
-        print(f"Alt diff: {diff_in_altitude}, distance: {distance}, span_2: {span_length_sq}")
-        return np.sqrt(span_length_sq)
-
 class Tower:
-    def __init__(self, full_asset):
+    def __init__(self, full_asset: SplightDatabaseBaseModel = None, client: OpenElevationClient = None):
+        if full_asset and client:
+            self.create_from(full_asset, client)
+        else:
+            self.create_for_test()
+        
+    def create_from(self, full_asset: SplightDatabaseBaseModel, client: OpenElevationClient):
         self.id = full_asset.id
-        self.location = get_location(full_asset)
+        self.location = get_location(full_asset, client)
         self.next_tower = get_next_tower(full_asset.name)
-        self.altitude_id = get_metadata_id(full_asset, "altitude")
-        self.distance_id = get_metadata_id(full_asset, "distance_to_next_tower")
-        self.span_length_id = get_metadata_id(full_asset, "span_length")
-        self.line_height = get_metadata_value(full_asset, "line_height")
+        metadata_dict = {meta.name: meta for meta in full_asset.metadata}
+        # self.altitude_id = get_metadata_id(full_asset, "altitude")
+        self.altitude_id = metadata_dict["altitude"].id
+        self.distance_id = metadata_dict["distance_to_next_tower"].id
+        self.span_length_id = metadata_dict["span_length"].id
+        self.line_height = metadata_dict["line_height"].value
+    
+    def create_for_test(self):
+        self.id = "the-test-0"
+        self.location = None
+        self.next_tower = "the-test-1"
+        self.altitude_id = 0
+        self.distance_id = "distance_id"
+        self.span_length_id = "span_id"
+        self.line_height = 35
 
-def get_location(asset) -> Location:
+    def span_length_from(self, other_tower: Tower) -> float: 
+            # span_length^2 = distance^2 + diff_in_altitude^2
+            diff_in_altitude = abs((self.location.alt + self.line_height) - (other_tower.location.alt + other_tower.line_height))
+            distance = self.location.distance_from(other_tower.location)
+            span_length_sq = (diff_in_altitude ** 2) + (distance ** 2)
+            return np.sqrt(span_length_sq)
+
+def get_location(asset: SplightDatabaseBaseModel, client: OpenElevationClient) -> Location:
     #coordinates saved as (long, lat) instead of the standard (lat, long)
-    coordinates = asset.centroid_coordinates
-    return Location(coordinates[1],coordinates[0])
+    lng, lat = asset.centroid_coordinates
+    return Location(lat, lng, client.get_altitude(lat, lng))
 
 def get_next_tower(asset_name: str) -> str | None:
     #assumes segment 0 is connected to segement 1 i.e. segements created in order they are connected
@@ -64,14 +84,14 @@ def get_next_tower(asset_name: str) -> str | None:
         return next
     else: return None 
 
-def get_metadata_id(full_asset, metadata_name):
+def get_metadata_id(full_asset: SplightDatabaseBaseModel, metadata_name: str) -> str:
     all_metadata = full_asset.metadata
     for entry in all_metadata:
         if entry.name == metadata_name:
             return entry.id
     raise ValueError(f"Metadata: {metadata_name} not found in asset: {full_asset.id}")
 
-def get_metadata_value(full_asset, metadata_name):
+def get_metadata_value(full_asset: Asset, metadata_name: str):
     all_metadata = full_asset.metadata
     for entry in all_metadata:
         if entry.name == metadata_name:
