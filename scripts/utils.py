@@ -3,6 +3,7 @@ from __future__ import annotations
 import requests
 import re
 import haversine as hs 
+import numpy as np
 
 class Location: 
     def __init__(self, latitude: float, longitude: float):
@@ -31,11 +32,11 @@ class Location:
     def span_length_from(self, other_loc: Location, this_line_height: float, other_line_height: float) -> float:
         # span_length^2 = distance^2 + diff_in_altitude^2
         diff_in_altitude = abs((self.alt + this_line_height) - (other_loc.alt + other_line_height))
-        # print(f"Alt1: {self.alt}, Alt2: {other_loc.alt}, LH1: {this_line_height}, LH2: {other_line_height} ")
+        print(f"Alt1: {self.alt}, Alt2: {other_loc.alt}, LH1: {this_line_height}, LH2: {other_line_height} ")
         distance = self.distance_from(other_loc)
         span_length_sq = (diff_in_altitude ** 2) + (distance ** 2)
-        # print(f"Alt diff: {diff_in_altitude}, distance: {distance}, span_2: {span_length_sq}")
-        return span_length_sq ** (1/2)
+        print(f"Alt diff: {diff_in_altitude}, distance: {distance}, span_2: {span_length_sq}")
+        return np.sqrt(span_length_sq)
 
 class Tower:
     def __init__(self, full_asset):
@@ -52,16 +53,16 @@ def get_location(asset) -> Location:
     coordinates = asset.centroid_coordinates
     return Location(coordinates[1],coordinates[0])
 
-def get_next_tower(asset_name: str) -> str:
+def get_next_tower(asset_name: str) -> str | None:
     #assumes segment 0 is connected to segement 1 i.e. segements created in order they are connected
-    # TODO: add to segment kind the next next segment's ID
+    # TODO: add to segment kind the next segment's ID
     match = re.search(r'([^-]+-[^-]+)-(\d+)',asset_name)
     if match:
         prefix = match.group(1)
         number = int(match.group(2))
         next = prefix + "-" + f"{int(number)+1}"
         return next
-    else: return "None" 
+    else: return None 
 
 def get_metadata_id(full_asset, metadata_name):
     all_metadata = full_asset.metadata

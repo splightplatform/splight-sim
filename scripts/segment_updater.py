@@ -5,27 +5,25 @@
 
 from tqdm import tqdm
 import utils
-from splight_lib.models import Asset, Alert 
+from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
 
 #keys for SplightSim organization 
-workspace_settings.SPLIGHT_ACCESS_ID = "A"
-workspace_settings.SPLIGHT_SECRET_KEY = "B"
+workspace_settings.SPLIGHT_ACCESS_ID = "89d27d63-a630-4a4e-bd50-d6bdd95104b7"
+workspace_settings.SPLIGHT_SECRET_KEY = "82bd81b7182ec2b5bfef069b0371f3b4701c3cdc6d9e522b52db32db8e03955a"
 
 
 if __name__ == "__main__":
-    all_assets = Asset.list()
+    all_assets = Asset.list(type__in="Segment")
     i = 0
-    #create a dict with each assets id, name, location and next_tower
+
     asset_dict: dict[str, utils.Tower] = {}
     for asset in tqdm(all_assets, desc="Creating segment dictionary", unit="segments"):
-        if asset.kind.name == "Segment":
-            if i < 2: 
-                full_asset = Asset.retrieve(asset.id)
-                # print(full_asset)
-                asset_dict[asset.name] = utils.Tower(full_asset)
-                i += 1
+        if i < 2: 
+            full_asset = Asset.retrieve(asset.id)
+            asset_dict[asset.name] = utils.Tower(full_asset)
+            i += 1
 
     #go through each segment and update the database
     j = 0 #guard so that only one segment is updated during testing
@@ -33,10 +31,8 @@ if __name__ == "__main__":
         if j == 0:
             print(f"Updating {asset_name}")
             tower = asset_dict[asset_name]
-            #update altitude 
             utils.set_metadata(tower.altitude_id, tower.location.alt)
-            #update tower distance & span length
-            if tower.next_tower != "None":
+            if tower.next_tower != None:
                 next_tower = asset_dict[tower.next_tower]
                 _ = utils.set_metadata(tower.distance_id, str(tower.location.distance_from(next_tower.location)))
                 span_length = tower.location.span_length_from(next_tower.location, tower.line_height, next_tower.line_height)
