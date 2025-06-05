@@ -7,7 +7,8 @@ class TestAltitudeClient:
             ('lat', 'lng', 'expected'),
             (
                 (37.805, -122.40472, 10),
-                (-22.428174, -68.921705, 2270)
+                (-22.428174, -68.921705, 2270),
+                (-22.380,-68.930, 2478)
             )
     )
     def test_get_altitude(self, lat, lng, expected,altitude_client):
@@ -19,6 +20,12 @@ class TestLocation:
         coit_tower = utils.Location(37.802402, -122.405952, 50.0)
         distance = golden_gate.distance_from(coit_tower)
         assert distance == pytest.approx(6700,0.05)
+
+    def test_distance_calc2(self):
+        tower1 = utils.Location(-22.380, -68.930, 2478)
+        tower2 = utils.Location(-22.377, -68.931, 2501)
+        distance = tower1.distance_from(tower2)
+        assert distance == pytest.approx(347.8,0.05)
 
     def test_distance_zero(self):
         loc = utils.Location(37.805, -122.40472, 10.0) #Splight SF office
