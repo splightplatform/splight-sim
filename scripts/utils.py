@@ -13,8 +13,10 @@ class OpenElevationClient:
         self.url = url
     
     def get_altitude(self, lat: float, lng: float) -> float:
-        response = requests.get(self.url, params={"locations": f"{lat},{lng}"})
+        response = requests.get(self.url, params={"locations": f"{lat},{lng}"}, timeout=5)
+        response.raise_for_status
         altitude = response.json()["results"][0]["elevation"]
+        
         if altitude is None:
             error = response.json().get("status", {}).get("message", "Unknown error")
             raise ValueError(f"Error in response: {error}")
@@ -63,7 +65,7 @@ class Tower:
 
     def span_length_from(self, other_tower: Tower) -> float: 
             # span_length^2 = distance^2 + diff_in_altitude^2
-            diff_in_altitude = abs((self.location.alt + self.line_height) - (other_tower.location.alt + other_tower.line_height))
+            diff_in_altitude = (self.location.alt + self.line_height) - (other_tower.location.alt + other_tower.line_height)
             distance = self.location.distance_from(other_tower.location)
             span_length_sq = (diff_in_altitude ** 2) + (distance ** 2)
             return np.sqrt(span_length_sq)
@@ -90,14 +92,6 @@ def get_metadata_id(full_asset: SplightDatabaseBaseModel, metadata_name: str) ->
         if entry.name == metadata_name:
             return entry.id
     raise ValueError(f"Metadata: {metadata_name} not found in asset: {full_asset.id}")
-
-def get_metadata_value(full_asset: Asset, metadata_name: str):
-    all_metadata = full_asset.metadata
-    for entry in all_metadata:
-        if entry.name == metadata_name:
-            return entry.value
-    raise ValueError(f"Metadata for {metadata_name} not found in asset: {full_asset.id}")
-
 
 headers = {
     "Authorization": "Splight 89d27d63-a630-4a4e-bd50-d6bdd95104b7 82bd81b7182ec2b5bfef069b0371f3b4701c3cdc6d9e522b52db32db8e03955a"
