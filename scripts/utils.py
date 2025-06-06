@@ -16,7 +16,7 @@ class OpenElevationClient:
         response = requests.get(self.url, params={"locations": f"{lat},{lng}"}, timeout=5)
         response.raise_for_status
         altitude = response.json()["results"][0]["elevation"]
-        
+
         if altitude is None:
             error = response.json().get("status", {}).get("message", "Unknown error")
             raise ValueError(f"Error in response: {error}")
@@ -85,13 +85,6 @@ def get_next_tower(asset_name: str) -> str | None:
         next = prefix + "-" + f"{int(number)+1}"
         return next
     else: return None 
-
-def get_metadata_id(full_asset: SplightDatabaseBaseModel, metadata_name: str) -> str:
-    all_metadata = full_asset.metadata
-    for entry in all_metadata:
-        if entry.name == metadata_name:
-            return entry.id
-    raise ValueError(f"Metadata: {metadata_name} not found in asset: {full_asset.id}")
 
 headers = {
     "Authorization": "Splight 89d27d63-a630-4a4e-bd50-d6bdd95104b7 82bd81b7182ec2b5bfef069b0371f3b4701c3cdc6d9e522b52db32db8e03955a"
