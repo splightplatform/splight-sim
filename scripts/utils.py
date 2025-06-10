@@ -21,8 +21,6 @@ class OpenElevationClient:
             error = response.json().get("status", {}).get("message", "Unknown error")
             raise ValueError(f"Error in response: {error}")
 
-        if altitude < 0:
-            raise ValueError(f"Negative altitude received: {altitude}")
         return altitude
 
 class Location: 
