@@ -1,2 +1,5 @@
 numpy==1.26.4
 pandas==2.2.3
+haversine==2.9.0
+pytest==8.4.0
+tqdm==4.67.1
