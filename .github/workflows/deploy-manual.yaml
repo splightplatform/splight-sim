@@ -35,6 +35,19 @@ jobs:
         sudo docker-compose build
         sudo docker-compose up -d --force-recreate
 
+  deploy-integration-v3:
+    if: github.event.inputs.stage == 'integration-v3' || github.event.inputs.stage == 'all'
+    name: Deploy integration v3
+    runs-on:
+      group: SplightSIM
+      labels: [self-hosted, integration-v3]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run integration v3 container
+      run: |
+        sudo docker-compose build
+        sudo docker-compose up -d --force-recreate
+
   deploy-production-v4:
     if: github.event.inputs.stage == 'production-v4' || github.event.inputs.stage == 'all'
     name: Deploy production v4
