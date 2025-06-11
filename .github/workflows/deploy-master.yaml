@@ -31,7 +31,6 @@ jobs:
         sudo docker-compose up -d --force-recreate
 
   deploy-integration-v3:
-    if: github.event.inputs.stage == 'integration-v3' || github.event.inputs.stage == 'all'
     name: Deploy integration v3
     runs-on:
       group: SplightSIM
