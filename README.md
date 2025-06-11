@@ -54,3 +54,25 @@ After code your trace function in scripts/trace_creator.py you need to add the f
 make traces
 ```
 This create a new traces files in the respective data directory and update the traces.json file.
+
+## Segment Update
+
+### Setup
+`segment_updater` requires access to the splight-lib library. To utilize this library ensure you have properly setup a secret ID and secret key for the organization you wish to update. Add these credentials to your ~/.splight/config file as shown below:  
+
+current_workspace: default
+workspaces:
+  default:
+    SPLIGHT_ACCESS_ID: {accessID}
+    SPLIGHT_PLATFORM_API_HOST: https://integrationapi.splight.com
+    SPLIGHT_SECRET_KEY: {secretKey}
+
+Also, update your environment to use the correct version using: 
+
+export API_VERSION = v4
+
+Setup is complete
+
+### Run
+To run `segment_updater` navigate to the scripts directory and run `python segment_updater.py`. The script will update the `distance_to_next_tower`, `altitude`, and `cable_span` metadata fields on every segment in the organization. 
+
