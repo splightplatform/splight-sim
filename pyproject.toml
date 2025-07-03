@@ -1,0 +1,21 @@
+[project]
+name = "SplightSIM"
+version = "4.0.0"
+description = "A simulated organization"
+requires-python = ">=3.11"
+
+dependencies = [
+    "numpy==1.26.4",
+    "pandas==2.2.3",
+    "haversine==2.9.0",
+    "tqdm==4.67.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest==8.4.0",
+]
+
+[tool.ruff.lint]
+extend-select = ["I"]
