@@ -22,7 +22,6 @@ def main():
     for asset_name in tqdm(
         asset_dict.keys(), desc="Updating metadata", unit="segments"
     ):
-        # print(f"Updating {asset_name}")
         tower = asset_dict[asset_name]
         utils.set_metadata(tower.altitude_id, str(tower.location.alt))
         if tower.next_tower in asset_dict.keys():

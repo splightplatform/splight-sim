@@ -123,7 +123,6 @@ def get_metadata(metadata_name: str, asset_id: str) -> str:
     metadatas = response.json().get("metadata", {})
     for metadata in metadatas:
         if metadata["name"] == metadata_name:
-            print(metadata)
             return metadata["id"]
     raise ValueError(f"Metadata {metadata_name} not found for asset {asset_id}")
 
@@ -134,6 +133,5 @@ def set_metadata(metadata_id, value: str) -> str:
     """
     url = f"{host}/v4/engine/asset/metadata/{metadata_id}/set/"
     response = requests.post(url, headers=headers, json={"value": value})
-    # print(f"Status Code: {response.status_code}")
     assert response.status_code == 200, f"Failed to set metadata: {response.text}"
     return value
