@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import json
 import random
 from datetime import datetime, timedelta
@@ -88,7 +86,8 @@ def generic_row(
         if isinstance(raw, float):
             raw = round(raw, 3)
         row[n] = str(raw)
-        if row[n] == "-0.0": row[n] = "0.0"
+        if row[n] == "-0.0":
+            row[n] = "0.0"
         if isinstance(raw, bool):
             row[n] = row[n].lower()
 
@@ -112,7 +111,9 @@ def sinusoidal_component(time, amplitude, base_offset):
     return sine_value + base_offset
 
 
-def bess_active_power(time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]) -> float:
+def bess_active_power(
+    time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]
+) -> float:
     hours = time.hour + time.minute / 60
     cycles_per_day = len(peak_hours)
     first_peak = peak_hours[0]
@@ -120,7 +121,9 @@ def bess_active_power(time: datetime, max_power: float = 5.0, peak_hours: list[f
     frequency = cycles_per_day / 24
     phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
 
-    soc_change_rate = 50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
+    soc_change_rate = (
+        50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
+    )
 
     max_soc_rate = 50 * 2 * np.pi * frequency
     active_power = -(soc_change_rate / max_soc_rate) * max_power
@@ -367,7 +370,9 @@ TASKS: list[GenerationTask] = [
     GenerationTask("contingency.csv", "contingency", contingency_row),
     GenerationTask("frequency.csv", "frequency", frequency_row),
     GenerationTask("switch_status.csv", "switch_status", switch_status_row),
-    GenerationTask("switch_status_start.csv", "switch_status_start", switch_status_start_row),
+    GenerationTask(
+        "switch_status_start.csv", "switch_status_start", switch_status_start_row
+    ),
     GenerationTask("switch_status_end.csv", "switch_status_end", switch_status_end_row),
     GenerationTask(
         "available_active_power.csv",
