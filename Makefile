@@ -18,8 +18,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -rf .coverage_badge .coverage_report
 
 traces:
-	root=$(shell pwd)
-	cd ./data/mqtt/traces && uv run $(root)/scripts/trace_creator.py
+	cd ./data/mqtt/traces && uv run $(shell pwd)/scripts/trace_creator.py
 
 # CODE STYLE
 check:
