@@ -1,393 +1,438 @@
+from __future__ import annotations
+
 import json
 import random
 from datetime import datetime, timedelta
+from typing import Any, Callable, Sequence
+
 import numpy as np
-import pandas as pd
-from splight_lib.models import Asset, AssetRelationship, Attribute
-from rich import print
+from splight_lib.models import Asset
 
-attributes = {}
-all_attributes = Attribute.list()
-print(all_attributes[:10])
-all_relationships = AssetRelationship.list()
-priority = ["Grid", "Bus", "Line"]
+# --- Configuration: Asset kinds to valid input attributes ---
+KIND_INPUT_ATTRIBUTES: dict[str, list[str]] = {
+    "Battery": ["active_power", "reactive_power", "state_of_charge"],
+    "Bus": ["active_power", "reactive_power"],
+    "ExternalGrid": [],
+    "Generator": [
+        "active_power",
+        "available_active_power",
+        "frequency",
+        "power_set_point",
+        "reactive_power",
+        "switch_status",
+    ],
+    "Grid": [],
+    "Line": [
+        "active_power_end",
+        "active_power_start",
+        "contingency",
+        "current_r_end",
+        "current_r_start",
+        "current_s_end",
+        "current_s_start",
+        "current_t_end",
+        "current_t_start",
+        "reactive_power_end",
+        "reactive_power_start",
+        "switch_status_end",
+        "switch_status_start",
+        "voltage_end",
+        "voltage_start",
+    ],
+    "Load": ["active_power", "reactive_power", "switch_status"],
+    "Segment": [],
+    "SlackLine": [],
+    "Transformer": [
+        "active_power_end",
+        "active_power_start",
+        "active_power_loss",
+        "contingency",
+        "reactive_power_end",
+        "reactive_power_loss",
+        "reactive_power_start",
+        "switch_status_end",
+        "switch_status_start",
+        "voltage_end",
+        "voltage_start",
+    ],
+}
 
-# Agrupa los assets por kind
-assets_by_kind = {}
-for asset in Asset.list():
-    assets_by_kind.setdefault(asset.kind.name, []).append(asset)
-    attributes[asset.name] = [attr for attr in all_attributes if attr.asset == asset.id]
+# --- Constants ---
+ALL_ASSETS = Asset.list()
+START_DATE = datetime(2024, 1, 1)
 
-# Ordena y aplana los assets según la prioridad y luego el resto
-assets = []
-for kind in priority:
-    if kind in assets_by_kind:
-        assets.extend(assets_by_kind[kind])
-for kind, group in assets_by_kind.items():
-    if kind not in priority:
-        assets.extend(group)
 
-def _get_order():
-    return [asset.name for asset in assets]
+# --- Task descriptor for CSV generation ---
+class GenerationTask:
+    def __init__(
+        self,
+        filename: str,
+        asset_attr: str,
+        row_fn: Callable[[list[str], datetime], str],
+    ):
+        self.filename = filename
+        self.asset_attr = asset_attr
+        self.row_fn = row_fn
 
-def _get_grid(asset: Asset) -> Asset | None:
-    for rel in all_relationships:
-        if rel.asset == asset.id and rel.name == "Grid":
-            return rel.related_asset
-    return None
 
-def _get_assets_with_attribute(attribute_name: str) -> list[str]:
-    return [
-        asset_name
-        for asset_name, attributes in attributes.items()
-        if any(attribute.name == attribute_name for attribute in attributes)
-    ]
+def generic_row(
+    asset_names: Sequence[str],
+    timestamp: datetime,
+    values: dict[str, Any],
+    default: Any,
+) -> str:
+    sorted_names = sorted(asset_names)
+    row = {}
+    for n in sorted_names:
+        raw = values.get(n, default)
+        if isinstance(raw, float):
+            raw = round(raw, 3)
+        row[n] = str(raw)
+        if row[n] == "-0.0": row[n] = "0.0"
+        if isinstance(raw, bool):
+            row[n] = row[n].lower()
 
-def _get_asset_from_name(asset_name: str) -> Asset | None:
-    for asset in assets:
-        if asset.name == asset_name:
-            return asset
-    return None
+    cells = [timestamp.strftime("%Y-%m-%d %H:%M:%S")] + [row[n] for n in sorted_names]
+    return ",".join(cells) + "\n"
 
-def _get_headers():
-    return "timestamp," + ",".join(_get_order())
 
-def _get_solar_gaussian_value(
-    time: datetime, max_value: int = 5, sigma: int = 2, mu: int = 14
-):
-    x = time.hour + (time.minute / 60)
-    # mu = Mean ("center" of the curve)
-    # sigma = Standard deviation (spread or "width" of the curve)
-    # Amplitude (height of the curve)
+def solar_gaussian(
+    time: datetime, max_value: float = 5, sigma: float = 2, mu: float = 14
+) -> float:
+    x = time.hour + time.minute / 60
+    coef = 1 / (np.sqrt(2 * np.pi) * sigma)
+    exponent = -((x - mu) ** 2) / (2 * sigma**2)
     amplitude = max_value * np.sqrt(2 * np.pi * sigma**2)
-    return round(
-        amplitude
-        * (1 / np.sqrt(2 * np.pi * sigma**2))
-        * np.exp(-((x - mu) ** 2) / (2 * sigma**2)),
-        3,
-    )
+    return round(amplitude * coef * np.exp(exponent), 3)
 
 
-def _get_noise(max_value: int = 1):
-    return max_value * random.random()
+def sinusoidal_component(time, amplitude, base_offset):
+    time_fraction = (time.hour + time.minute / 60) / 24
+    sine_value = amplitude * np.sin(2 * np.pi * time_fraction)
+    return sine_value + base_offset
 
 
-def power_row(
-    time: datetime, peak_power_per_generator: int = 10, power_end: bool = False
-):
-    # power_end modifier that inverts the value adding a loss
-    power_factor = -0.93 if power_end else 1
+def bess_active_power(time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]) -> float:
+    hours = time.hour + time.minute / 60
+    cycles_per_day = len(peak_hours)
+    first_peak = peak_hours[0]
 
+    frequency = cycles_per_day / 24
+    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+
+    soc_change_rate = 50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
+
+    max_soc_rate = 50 * 2 * np.pi * frequency
+    active_power = -(soc_change_rate / max_soc_rate) * max_power
+
+    return round(active_power, 3)
+
+
+def bess_soc(time: datetime, peak_hours: list[float] = [6, 18]) -> float:
+    hours = time.hour + time.minute / 60
+
+    # Calculate cycles per day based on number of peaks
+    cycles_per_day = len(peak_hours)
+
+    # Use first peak hour to determine phase shift
+    # We want SOC = 100% at peak_hours[0]
+    first_peak = peak_hours[0]
+
+    # Adjust sine wave to hit 100% at first peak
+    # sin(x) = 1 when x = π/2
+    frequency = cycles_per_day / 24
+    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+
+    soc = 50 + 50 * np.sin(2 * np.pi * frequency * hours + phase_shift)
+
+    # Keep between 0-100%
+    soc = max(0, min(100, soc))
+    return round(soc, 2)
+
+
+def noise(scale: float = 1) -> float:
+    return random.random() * scale
+
+
+def compute_power_values(
+    time: datetime, peak_power: float, end: bool = False
+) -> dict[str, float]:
+    peak_power *= -0.93 if end else 1
     delta_vlv = -1.4
     delta_aza = 1.3
     delta_cal = 1.7
     delta_usy = -1.6
-    delta_sanpedro = 0
-    sanpedro = _get_solar_gaussian_value(
-        time, peak_power_per_generator + delta_sanpedro
-    )
-    aza = _get_solar_gaussian_value(time, peak_power_per_generator + delta_aza, sigma=3)
-    usy = _get_solar_gaussian_value(
-        time, peak_power_per_generator + delta_usy, sigma=2.5
-    )
-    jama1 = _get_solar_gaussian_value(time, peak_power_per_generator * 2 / 3)
-    jama0 = _get_solar_gaussian_value(time, peak_power_per_generator / 3)
-    jama = jama1 + jama0
+    delta_melena = 2.1
 
-    jamLas = jama1 + jama0 - _get_noise(peak_power_per_generator * 0.1)
-    lasCal = jamLas + sanpedro - _get_noise(peak_power_per_generator * 0.1)
+    # Calama Grid
+    # PFVs
+    pfv_jama = solar_gaussian(time, peak_power)
+    pfv_sanpedro = solar_gaussian(time, peak_power)
+    pfv_azabache = solar_gaussian(time, peak_power + delta_aza, sigma=3)
+    pfv_usya = solar_gaussian(time, peak_power + delta_usy, sigma=2.5)
 
-    vlv = (
-        peak_power_per_generator
-        + delta_vlv
-        - _get_noise((peak_power_per_generator + delta_vlv) * 0.1)
-    )
-    vlvCal = vlv - _get_noise((peak_power_per_generator + delta_vlv) * 0.1)
+    # PEs
+    pe_vlv = peak_power + delta_vlv - noise((peak_power + delta_vlv) * 0.1)
+    pe_calama = peak_power + delta_cal - noise((peak_power + delta_cal) * 0.1)
 
-    cal = (
-        peak_power_per_generator
-        + delta_cal
-        - _get_noise((peak_power_per_generator + delta_cal) * 0.1)
-    )
+    # Lines
+    jam_las = pfv_jama - noise(peak_power * 0.1)
+    las_cal = jam_las + pfv_sanpedro - noise(peak_power * 0.1)
+    vlv_cal = pe_vlv - noise((peak_power + delta_vlv) * 0.1)
+    total_cal_chu = las_cal + vlv_cal + pfv_usya + pfv_azabache + pe_calama
+    cal_sal = total_cal_chu / 2 - noise(peak_power * 0.1)
+    sal_chu = cal_sal - noise(peak_power * 0.1)
+    cal_nch = total_cal_chu / 2 - noise(peak_power * 0.1)
+    nch_chu = cal_nch - noise(peak_power * 0.1)
 
-    calChu = lasCal + vlvCal + usy + aza + cal
-    calSal = (calChu / 2) - _get_noise(peak_power_per_generator * 0.1)
-    salChu = calSal - _get_noise(peak_power_per_generator * 0.1)
-    calNch = (calChu / 2) - _get_noise(peak_power_per_generator * 0.1)
-    nchChu = calNch - _get_noise(peak_power_per_generator * 0.1)
+    # Buses
+    se_vlv = pe_vlv - noise((peak_power + delta_vlv) * 0.1)
+    se_jam = jam_las
+    se_las = las_cal
+    se_cal = pfv_usya + pfv_azabache + pe_calama + las_cal - noise(peak_power * 2 * 0.1)
+    se_sal = se_cal
+    se_nchu = se_cal
+    se_chu = se_sal + se_nchu
 
-    values = {
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "jama0": str(max(round(jama0, 3), 0) * power_factor),
-        "jama1": str(max(round(jama1, 3), 0) * power_factor),
-        "jama": str(max(round(jama, 3), 0) * power_factor),
-        "sanpedro": str(max(round(sanpedro, 3), 0) * power_factor),
-        "jamLas": str(max(round(jamLas, 3), 0) * power_factor),
-        "lasCal": str(max(round(lasCal, 3), 0) * power_factor),
-        "vlv": str(max(round(vlv, 3), 0) * power_factor),
-        "vlvCal": str(max(round(vlvCal, 3), 0) * power_factor),
-        "usy": str(max(round(usy, 3), 0) * power_factor),
-        "cal": str(max(round(cal, 3), 0) * power_factor),
-        "aza": str(max(round(aza, 3), 0) * power_factor),
-        "calChu": str(max(round(calChu, 3), 0) * power_factor),
-        "calSal": str(max(round(calSal, 3), 0) * power_factor),
-        "salChu": str(max(round(salChu, 3), 0) * power_factor),
-        "calNch": str(max(round(calNch, 3), 0) * power_factor),
-        "nchChu": str(max(round(nchChu, 3), 0) * power_factor),
+    # Marcona Grid
+    # Base CAH-DER calculations using sinusoidal_component
+    sine_base = sinusoidal_component(time, amplitude=3, base_offset=7)
+    cah_der_base = -1 * (sine_base + noise(0.2) - 0.1)  # Using existing noise function
+
+    # Calculate start values
+    cah_der_0 = -cah_der_base + 0.5 if end else cah_der_base
+    cah_der_1 = cah_der_0
+    der_ica = cah_der_0 + cah_der_1 + 0.5 if end else -(cah_der_0 + cah_der_1)
+
+    # Loads
+    datacenter0 = 2 * cah_der_base * 0.2
+    datacenter1 = 2 * cah_der_base * 0.5
+    datacenter2 = 2 * cah_der_base * 0.3
+
+    # Atlantica Grid
+    # Buses
+    se_melena = solar_gaussian(time, peak_power + delta_melena, sigma=2)
+    # Batteries
+    bess_melena = bess_active_power(time, peak_power, [14])
+
+    return {
+        # Atlantica Grid
+        "SEMariaElena": se_melena,
+        "BESSMariaElena": bess_melena,
+        # Calama Grid
+        "PFVJama": pfv_jama,
+        "PFVSanPedro": pfv_sanpedro,
+        "PFVAzabache": pfv_azabache,
+        "PFVUsya": pfv_usya,
+        "PEValleDeLosVientos": pe_vlv,
+        "PECalama": pe_calama,
+        "JAM-LAS": jam_las,
+        "LAS-CAL": las_cal,
+        "VLV-CAL": vlv_cal,
+        "CAL-CHU": total_cal_chu,
+        "CAL-SAL": cal_sal,
+        "SAL-CHU": sal_chu,
+        "CAL-NCH": cal_nch,
+        "NCH-CHU": nch_chu,
+        "SEValleDeLosVientos": se_vlv,
+        "SEJama": se_jam,
+        "SELasana": se_las,
+        "SECalama": se_cal,
+        "SENuevaChuquicamata": se_nchu,
+        "SESalar": se_sal,
+        "SEChuquicamata": se_chu,
+        # Marcona Grid
+        "CAH-DER-0": cah_der_0,
+        "CAH-DER-1": cah_der_1,
+        "DER-ICA": der_ica,
+        "Datacenter0": datacenter0,
+        "Datacenter1": datacenter1,
+        "Datacenter2": datacenter2,
     }
-    # Avoid -0.0 values
-    for key, value in values.items():
-        if value == "-0.0":
-            values[key] = "0.0"
-    return ",".join([values[order] for order in _get_order()])
 
 
-def temperature_row(time: datetime, peak_temperature_per_inverter: int = 10):
-    values = {"timestamp": time.strftime("%Y-%m-%d %H:%M:%S")}
-    for asset in assets:
-        if asset.kind.name == "Inverter":
-            temp = _get_solar_gaussian_value(time, peak_temperature_per_inverter)
-            values[asset.name] = str(temp)
-    return ",".join([values["timestamp"]] + [values[name] for name in _get_order() if name in values])
+def active_power_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=10)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def contingency_row(asset_names: list[str], timestamp: datetime):
-    row = {"timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S")}
-    row.update({name: json.dumps(False) for name in asset_names})
-    return row
+def active_power_start_row(asset_names: Sequence[str], time: datetime) -> str:
+    return active_power_row(asset_names, time)
 
 
-def frequency_row(asset_names: list[str], timestamp: datetime):
-    row = {"timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S")}
-    row.update({name: "50.0" for name in asset_names})
-    return row
+def active_power_end_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=10, end=True)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def switch_status_row(asset_names: list[str], timestamp: datetime):
-    row = {"timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S")}
-    row.update({name: json.dumps(False) for name in asset_names})
-    return row
+def available_active_power_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=20)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def voltage_row(asset_names: list[str], timestamp: datetime):
-    row = {"timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S")}
-    row.update({name: "350" for name in asset_names})
-    return row
+def reactive_power_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=0.8)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def current_row(asset_names: list[str], timestamp: datetime):
-    row = {"timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S")}
-    row.update({name: "300" for name in asset_names})
-    return row
+def reactive_power_start_row(asset_names: Sequence[str], time: datetime) -> str:
+    return reactive_power_row(asset_names, time)
 
 
-def get_voltage_start_and_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    asset_names = _get_assets_with_attribute("voltage_start")
-    with (
-        open("voltage_start.csv", "w") as voltage_start,
-        open("voltage_end.csv", "w") as voltage_end,
-    ):
-        voltage_start.write(_get_headers() + "\n")
-        voltage_end.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            voltage_value = voltage_row(asset_names, start_date)
-            voltage_start.write(voltage_value + "\n")
-            voltage_end.write(voltage_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def reactive_power_end_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=0.8, end=True)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def get_current_start_and_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    for phase in ["r", "s", "t"]:
-        with (
-            open(f"current_{phase}_start.csv", "w") as current_start,
-            open(f"current_{phase}_end.csv", "w") as current_end,
-        ):
-            current_start.write(_get_headers() + "\n")
-            current_end.write(_get_headers() + "\n")
-            for _ in range(60 * 24):
-                current_value = current_row(start_date)
-                current_start.write(current_value + "\n")
-                current_end.write(current_value + "\n")
-                start_date = start_date + timedelta(minutes=1)
+def power_set_point_row(asset_names: Sequence[str], time: datetime) -> str:
+    values = compute_power_values(time, peak_power=10)
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def get_active_power_and_power_set_point():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with (
-        open("active_power.csv", "w", newline="") as active_power_file,
-        open("power_set_point.csv", "w", newline="") as power_set_point_file,
-        open("active_power_start.csv", "w") as active_power_start,
-    ):
-        headers = _get_headers() + "\n"
-        active_power_file.write(headers)
-        power_set_point_file.write(headers)
-        active_power_start.write(headers)
-
-        for _ in range(60 * 24):
-            power_value = power_row(start_date, peak_power_per_generator=10)
-            active_power_file.write(power_value + "\n")
-            active_power_start.write(power_value + "\n")
-            # TODO: desync power set point from active power
-            # active power is the generator response to the power set point
-            power_set_point_file.write(power_value + "\n")
-            start_date += timedelta(minutes=1)
+def contingency_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="false")
 
 
-def get_active_power_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("active_power_end.csv", "w") as active_power_end:
-        active_power_end.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            end_power_value = power_row(
-                start_date, peak_power_per_generator=10, power_end=True
-            )
-            active_power_end.write(end_power_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def frequency_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="50")
 
 
-def get_reactive_power():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with (
-        open("reactive_power.csv", "w") as reactive_power,
-        open("reactive_power_start.csv", "w") as reactive_power_start,
-    ):
-        reactive_power.write(_get_headers() + "\n")
-        reactive_power_start.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            power_value = power_row(start_date, peak_power_per_generator=10 * 0.08)
-            reactive_power.write(power_value + "\n")
-            reactive_power_start.write(power_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def switch_status_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="true")
 
 
-def get_reactive_power_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    asset_names = _get_assets_with_attribute("reactive_power")
-    with open("reactive_power_end.csv", "w") as reactive_power_end:
-        reactive_power_end.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            end_power_value = power_row(
-                start_date, peak_power_per_generator=10 * 0.08, power_end=True
-            )
-            reactive_power_end.write(end_power_value + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def switch_status_start_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="true")
 
 
-def get_temperature():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("temperature.csv", "w") as f:
-        f.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            f.write(temperature_row(start_date, peak_temperature_per_inverter=37) + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def switch_status_end_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="true")
 
 
-def get_raw_daily_energy():
-    df = pd.read_csv("active_power.csv")
-    timestamp = df["timestamp"]
-    df = df.drop(columns=["timestamp"], axis=1)
-    df = df.shift(-1) - df
-    df[df < 0] = 0
-    df = df * 60
-    df = df.cumsum()
-    df = df.round(2)
-    for col in df.columns:
-        if col not in ["PFVJama-0", "PFVJama-1", "PFVJama"]:
-            df[col] = 0
-    col_order = ["timestamp"] + list(df.columns)
-    df["timestamp"] = timestamp
-    df = df[col_order]
-    df.to_csv("raw_daily_energy.csv", index=False)
+def voltage_start_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="350")
 
 
-def get_contingency():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    asset_names = _get_assets_with_attribute("contingency")
-    with open("contingency.csv", "w") as f:
-        f.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            row = contingency_row(asset_names, start_date)
-            f.write(",".join([row["timestamp"]] + [row[name] for name in asset_names]) + "\n")
-            start_date += timedelta(minutes=1)
+def voltage_end_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="330")
 
 
-def get_frequency():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    asset_names = _get_assets_with_attribute("frequency")
-    with open("frequency.csv", "w") as f:
-        f.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            f.write(frequency_row(asset_names, start_date) + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def current_row(asset_names: Sequence[str], time: datetime) -> str:
+    return generic_row(asset_names, time, {}, default="300")
 
 
-def get_switch_status():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("switch_status.csv", "w") as f:
-        f.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            f.write(_get_switch_status(start_date) + "\n")
-            start_date = start_date + timedelta(minutes=1)
+def state_of_charge_row(asset_names: Sequence[str], time: datetime) -> str:
+    bess_melena = bess_soc(time, [14])
+    values = {
+        "BESSMariaElena": bess_melena,
+    }
+    return generic_row(asset_names, time, values, default="0.0")
 
 
-def get_switch_status_start_and_end():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with (
-        open("switch_status_start.csv", "w") as switch_status_start,
-        open("switch_status_end.csv", "w") as switch_status_end,
-    ):
-        switch_status_start.write(_get_headers() + "\n")
-        switch_status_end.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            switch_status = _get_switch_status(start_date)
-            switch_status_start.write(switch_status + "\n")
-            switch_status_end.write(switch_status + "\n")
-            start_date = start_date + timedelta(minutes=1)
+# --- Asset filtering ---
+def get_assets_with_attr(attr: str) -> list[str]:
+    kinds = [k for k, attrs in KIND_INPUT_ATTRIBUTES.items() if attr in attrs]
+    return [a.name for a in ALL_ASSETS if a.kind.name in kinds]
 
 
-def get_available_active_power():
-    start_date = datetime(2024, 1, 1, 0, 0, 0)
-    with open("available_active_power.csv", "w") as f:
-        f.write(_get_headers() + "\n")
-        for _ in range(60 * 24):
-            f.write(power_row(start_date, peak_power_per_generator=20) + "\n")
-            start_date = start_date + timedelta(minutes=1)
+# --- Task list ---
+TASKS: list[GenerationTask] = [
+    GenerationTask("voltage_start.csv", "voltage_start", voltage_start_row),
+    GenerationTask("voltage_end.csv", "voltage_start", voltage_end_row),
+    *[
+        GenerationTask(
+            f"current_{phase}_start.csv", f"current_{phase}_start", current_row
+        )
+        for phase in ["r", "s", "t"]
+    ],
+    *[
+        GenerationTask(
+            f"current_{phase}_end.csv", f"current_{phase}_start", current_row
+        )
+        for phase in ["r", "s", "t"]
+    ],
+    GenerationTask("active_power.csv", "active_power", active_power_row),
+    GenerationTask(
+        "active_power_start.csv", "active_power_start", active_power_start_row
+    ),
+    GenerationTask("active_power_end.csv", "active_power_end", active_power_end_row),
+    GenerationTask("power_set_point.csv", "power_set_point", power_set_point_row),
+    GenerationTask("reactive_power.csv", "reactive_power", reactive_power_row),
+    GenerationTask(
+        "reactive_power_start.csv", "reactive_power_start", reactive_power_start_row
+    ),
+    GenerationTask(
+        "reactive_power_end.csv", "reactive_power_end", reactive_power_end_row
+    ),
+    GenerationTask("contingency.csv", "contingency", contingency_row),
+    GenerationTask("frequency.csv", "frequency", frequency_row),
+    GenerationTask("switch_status.csv", "switch_status", switch_status_row),
+    GenerationTask("switch_status_start.csv", "switch_status_start", switch_status_start_row),
+    GenerationTask("switch_status_end.csv", "switch_status_end", switch_status_end_row),
+    GenerationTask(
+        "available_active_power.csv",
+        "available_active_power",
+        available_active_power_row,
+    ),
+    GenerationTask("state_of_charge.csv", "state_of_charge", state_of_charge_row),
+]
 
 
-def get_traces_json():
-    traces = []
-    for asset_name in _get_order():
-        asset = _get_asset_from_name(asset_name)
-        for attribute in attributes[asset_name]:
-            if attribute.origin.value != "Input":
-                continue
+# --- Runner ---
+def run_generation(
+    tasks: Sequence[GenerationTask],
+    start: datetime = START_DATE,
+    minutes: int = 24 * 60,
+    step: timedelta = timedelta(minutes=1),
+) -> None:
+    for task in tasks:
+        assets = get_assets_with_attr(task.asset_attr)
+        with open(task.filename, "w", newline="") as f:
+            f.write("timestamp," + ",".join(sorted(assets)) + "\n")
+            current = start
+            for _ in range(minutes):
+                line = task.row_fn(assets, current)
+                f.write(line)
+                current += step
+
+
+# --- Trace JSON generator ---
+def generate_traces(filename: str = "traces.json") -> None:
+    marcona_assets = [
+        "Datacenter",
+        "CAH-DER",
+        "DER-ICA",
+        "SEDerivacion",
+        "SEIca",
+        "SECahuachi",
+        "PoromaExternal",
+        "Marcona",
+    ]
+    traces: list[dict] = []
+    for a in ALL_ASSETS:
+        grid = "Marcona" if any(m in a.name for m in marcona_assets) else "Calama"
+        for attr in KIND_INPUT_ATTRIBUTES[a.kind.name]:
             noise_factor = (
-                0.02 if attribute.type.value == "Number" else None
+                0.02
+                if attr not in ("contingency",) and "switch_status" not in attr
+                else None
             )
-            grid = _get_grid(asset)
-            if not grid:
-                continue
             traces.append(
                 {
-                    "name": f"{grid.name}/{asset_name}/{attribute.name}",
-                    "topic": f"{grid.name}/{asset_name}/{attribute.name}",
-                    "filename": f"{attribute.name}.csv",
+                    "name": f"{grid}/{a.name}/{attr}",
+                    "topic": f"{grid}/{a.name}/{attr}",
+                    "filename": f"{attr}.csv",
                     "noise_factor": noise_factor,
                     "match_timestamp_by": "hour",
-                    "target_value": f"{asset_name}",
-                },
+                    "target_value": a.name,
+                }
             )
-
-    traces_json = {"traces": traces}
-    with open("traces.json", "w") as f:
-        json.dump(
-            traces_json,
-            f,
-        )
+    with open(filename, "w") as f:
+        json.dump({"traces": traces}, f, indent=2)
 
 
+# --- Main ---
 if __name__ == "__main__":
-    get_contingency()
-    get_traces_json()
+    start_date = datetime(2024, 1, 1)
+    run_generation(TASKS)
+    generate_traces()
