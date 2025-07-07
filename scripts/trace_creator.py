@@ -6,7 +6,6 @@ from typing import Any, Callable, Sequence
 import numpy as np
 from splight_lib.models import Asset
 
-# --- Configuration: Asset kinds to valid input attributes ---
 KIND_INPUT_ATTRIBUTES: dict[str, list[str]] = {
     "Battery": ["active_power", "reactive_power", "state_of_charge"],
     "Bus": ["active_power", "reactive_power"],
@@ -55,12 +54,10 @@ KIND_INPUT_ATTRIBUTES: dict[str, list[str]] = {
     ],
 }
 
-# --- Constants ---
 ALL_ASSETS = Asset.list()
 START_DATE = datetime(2024, 1, 1)
 
 
-# --- Task descriptor for CSV generation ---
 class GenerationTask:
     def __init__(
         self,
@@ -133,16 +130,8 @@ def bess_active_power(
 
 def bess_soc(time: datetime, peak_hours: list[float] = [6, 18]) -> float:
     hours = time.hour + time.minute / 60
-
-    # Calculate cycles per day based on number of peaks
     cycles_per_day = len(peak_hours)
-
-    # Use first peak hour to determine phase shift
-    # We want SOC = 100% at peak_hours[0]
     first_peak = peak_hours[0]
-
-    # Adjust sine wave to hit 100% at first peak
-    # sin(x) = 1 when x = π/2
     frequency = cycles_per_day / 24
     phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
 
@@ -198,11 +187,9 @@ def compute_power_values(
     se_chu = se_sal + se_nchu
 
     # Marcona Grid
-    # Base CAH-DER calculations using sinusoidal_component
     sine_base = sinusoidal_component(time, amplitude=3, base_offset=7)
     cah_der_base = -1 * (sine_base + noise(0.2) - 0.1)  # Using existing noise function
 
-    # Calculate start values
     cah_der_0 = -cah_der_base + 0.5 if end else cah_der_base
     cah_der_1 = cah_der_0
     der_ica = cah_der_0 + cah_der_1 + 0.5 if end else -(cah_der_0 + cah_der_1)
@@ -332,13 +319,11 @@ def state_of_charge_row(asset_names: Sequence[str], time: datetime) -> str:
     return generic_row(asset_names, time, values, default="0.0")
 
 
-# --- Asset filtering ---
 def get_assets_with_attr(attr: str) -> list[str]:
     kinds = [k for k, attrs in KIND_INPUT_ATTRIBUTES.items() if attr in attrs]
     return [a.name for a in ALL_ASSETS if a.kind.name in kinds]
 
 
-# --- Task list ---
 TASKS: list[GenerationTask] = [
     GenerationTask("voltage_start.csv", "voltage_start", voltage_start_row),
     GenerationTask("voltage_end.csv", "voltage_start", voltage_end_row),
@@ -383,7 +368,6 @@ TASKS: list[GenerationTask] = [
 ]
 
 
-# --- Runner ---
 def run_generation(
     tasks: Sequence[GenerationTask],
     start: datetime = START_DATE,
@@ -401,7 +385,6 @@ def run_generation(
                 current += step
 
 
-# --- Trace JSON generator ---
 def generate_traces(filename: str = "traces.json") -> None:
     marcona_assets = [
         "Datacenter",
@@ -436,7 +419,6 @@ def generate_traces(filename: str = "traces.json") -> None:
         json.dump({"traces": traces}, f, indent=2)
 
 
-# --- Main ---
 if __name__ == "__main__":
     start_date = datetime(2024, 1, 1)
     run_generation(TASKS)
