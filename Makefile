@@ -1,3 +1,5 @@
+.PHONY: start stop clean clean-pyc clean-test traces check fix
+
 start:
 	@docker-compose -f docker-compose.yml up -d
 
