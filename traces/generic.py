@@ -1,5 +1,6 @@
+import os
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from utils import normalize
 
@@ -93,6 +94,77 @@ class GridDefinition(ABC):
         if attr == "frequency":
             return 50.0
         return 0.0
+
+    def build(
+        self,
+        output_base_dir="data/mqtt/traces",
+        start_date=None,
+        minutes=24 * 60,
+        step_minutes=1,
+    ):
+        """
+        Generate CSVs for each attribute in a grid directory and return traces for this grid.
+        """
+
+        if start_date is None:
+            start_date = datetime(2024, 1, 1)
+        step = timedelta(minutes=step_minutes)
+        output_dir = os.path.join(output_base_dir, self.name)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        traces = []
+        all_attributes = self.get_all_attributes()
+        for attr in all_attributes:
+            method_name = f"get_{attr}"
+            filename = os.path.join(output_dir, f"{attr}.csv")
+
+            # get assets with the attribute
+            asset_list = [
+                asset
+                for asset in self.assets
+                if attr in self.get_attributes_for_asset(asset)
+            ]
+            asset_list = sorted(asset_list)
+            if not asset_list:
+                continue
+            with open(filename, "w") as f:
+                f.write("timestamp," + ",".join(asset_list) + "\n")
+                current = start_date
+                for _ in range(minutes):
+                    merged_values = {}
+                    if hasattr(self, method_name):
+                        method = getattr(self, method_name)
+                        values = method(current)  # {asset: normalized_value}
+                        merged_values.update(values)
+                    row_values = [
+                        merged_values.get(asset, normalize(self.default_value(attr)))
+                        for asset in asset_list
+                    ]
+                    f.write(
+                        f"{current.strftime('%Y-%m-%d %H:%M:%S')},"
+                        + ",".join(row_values)
+                        + "\n"
+                    )
+                    current += step
+            # Add trace dicts for each asset/attribute
+            for asset in asset_list:
+                noise = (
+                    0.02
+                    if ("switch_status" not in attr and attr != "contingency")
+                    else None
+                )
+                traces.append(
+                    {
+                        "name": f"{self.name}/{asset}/{attr}",
+                        "topic": f"{self.name}/{asset}/{attr}",
+                        "filename": f"{self.name}/{attr}.csv",
+                        "noise_factor": noise,
+                        "match_timestamp_by": "hour",
+                        "target_value": asset,
+                    }
+                )
+        return traces
 
     def get_active_power(self, time: datetime) -> dict[str, str]:
         result = {}

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from generic import GridDefinition
-from utils import normalize, solar_gaussian,  bess_active_power, bess_soc
+from utils import bess_active_power, bess_soc, normalize, solar_gaussian
 
 
 def power(time: datetime, peak_power: float, end: bool = False, reactive: bool = False):
@@ -9,7 +9,6 @@ def power(time: datetime, peak_power: float, end: bool = False, reactive: bool =
     peak_power *= 0.08 if reactive else 1
     delta_melena = 2.1
 
-    # Atlantica Grid
     # Buses
     se_melena = solar_gaussian(time, peak_power + delta_melena, sigma=2)
     # Batteries
@@ -55,5 +54,4 @@ class AtlanticaGrid(GridDefinition):
         return result
 
 
-# Export the class
 AtlanticaGrid = AtlanticaGrid

@@ -65,7 +65,6 @@ class MarconaGrid(GridDefinition):
             return 370.0
         return super().default_value(attr)
 
-
     def get_active_power(self, time: datetime) -> dict[str, str]:
         result = super().get_active_power(time)
         result["Datacenter0"] = normalize(power(time, 12).get("Datacenter0", 0.0))
