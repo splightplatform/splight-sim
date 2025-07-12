@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Any, Dict
 
-import numpy as np
+from utils import normalize
 
 KIND_INPUT_ATTRIBUTES: dict[str, list[str]] = {
     "Battery": ["active_power", "reactive_power", "state_of_charge"],
@@ -53,7 +52,6 @@ KIND_INPUT_ATTRIBUTES: dict[str, list[str]] = {
 }
 
 
-# --- ABC for Grid Definitions ---
 class GridDefinition(ABC):
     @property
     @abstractmethod
@@ -62,11 +60,8 @@ class GridDefinition(ABC):
 
     @property
     @abstractmethod
-    def assets(self) -> Dict[str, str]:  # asset_name -> kind
-        pass
-
-    @abstractmethod
-    def get_value(self, asset: str, attr: str, time: datetime) -> Any:
+    def assets(self) -> dict[str, str]:
+        """Returns a dict of asset_name : kind_name"""
         pass
 
     def get_attributes_for_asset(self, asset: str) -> list[str]:
@@ -83,7 +78,8 @@ class GridDefinition(ABC):
             all_attrs.update(self.get_attributes_for_asset(asset))
         return sorted(list(all_attrs))
 
-    def default_value(attr: str) -> float | str:
+    @classmethod
+    def default_value(self, attr: str) -> float | str:
         if "switch_status" in attr:
             return "true"
         if "voltage_start" in attr:
@@ -98,36 +94,194 @@ class GridDefinition(ABC):
             return 50.0
         return 0.0
 
+    def get_active_power(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "active_power" in self.get_attributes_for_asset(asset):
+                value = self.default_value("active_power")
+                result[asset] = normalize(value)
+        return result
 
-def bess_active_power(
-    time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]
-) -> float:
-    hours = time.hour + time.minute / 60
-    cycles_per_day = len(peak_hours)
-    first_peak = peak_hours[0]
+    def get_reactive_power(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "reactive_power" in self.get_attributes_for_asset(asset):
+                value = self.default_value("reactive_power")
+                result[asset] = normalize(value)
+        return result
 
-    frequency = cycles_per_day / 24
-    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+    def get_state_of_charge(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "state_of_charge" in self.get_attributes_for_asset(asset):
+                value = self.default_value("state_of_charge")
+                result[asset] = normalize(value)
+        return result
 
-    soc_change_rate = (
-        50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
-    )
+    def get_available_active_power(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "available_active_power" in self.get_attributes_for_asset(asset):
+                value = self.default_value("available_active_power")
+                result[asset] = normalize(value)
+        return result
 
-    max_soc_rate = 50 * 2 * np.pi * frequency
-    active_power = -(soc_change_rate / max_soc_rate) * max_power
+    def get_frequency(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "frequency" in self.get_attributes_for_asset(asset):
+                value = self.default_value("frequency")
+                result[asset] = normalize(value)
+        return result
 
-    return round(active_power, 3)
+    def get_power_set_point(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "power_set_point" in self.get_attributes_for_asset(asset):
+                value = self.default_value("power_set_point")
+                result[asset] = normalize(value)
+        return result
 
+    def get_switch_status(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "switch_status" in self.get_attributes_for_asset(asset):
+                value = self.default_value("switch_status")
+                result[asset] = normalize(value)
+        return result
 
-def bess_soc(time: datetime, peak_hours: list[float] = [6, 18]) -> float:
-    hours = time.hour + time.minute / 60
-    cycles_per_day = len(peak_hours)
-    first_peak = peak_hours[0]
-    frequency = cycles_per_day / 24
-    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+    def get_active_power_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "active_power_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("active_power_end")
+                result[asset] = normalize(value)
+        return result
 
-    soc = 50 + 50 * np.sin(2 * np.pi * frequency * hours + phase_shift)
+    def get_active_power_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "active_power_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("active_power_start")
+                result[asset] = normalize(value)
+        return result
 
-    # Keep between 0-100%
-    soc = max(0, min(100, soc))
-    return round(soc, 2)
+    def get_contingency(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "contingency" in self.get_attributes_for_asset(asset):
+                value = self.default_value("contingency")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_r_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_r_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_r_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_r_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_r_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_r_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_s_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_s_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_s_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_s_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_s_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_s_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_t_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_t_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_t_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_current_t_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "current_t_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("current_t_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_reactive_power_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "reactive_power_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("reactive_power_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_reactive_power_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "reactive_power_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("reactive_power_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_switch_status_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "switch_status_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("switch_status_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_switch_status_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "switch_status_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("switch_status_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_voltage_end(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "voltage_end" in self.get_attributes_for_asset(asset):
+                value = self.default_value("voltage_end")
+                result[asset] = normalize(value)
+        return result
+
+    def get_voltage_start(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "voltage_start" in self.get_attributes_for_asset(asset):
+                value = self.default_value("voltage_start")
+                result[asset] = normalize(value)
+        return result
+
+    def get_active_power_loss(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "active_power_loss" in self.get_attributes_for_asset(asset):
+                value = self.default_value("active_power_loss")
+                result[asset] = normalize(value)
+        return result
+
+    def get_reactive_power_loss(self, time: datetime) -> dict[str, str]:
+        result = {}
+        for asset in self.assets:
+            if "reactive_power_loss" in self.get_attributes_for_asset(asset):
+                value = self.default_value("reactive_power_loss")
+                result[asset] = normalize(value)
+        return result

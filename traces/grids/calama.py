@@ -1,33 +1,7 @@
 from datetime import datetime
 
 from generic import GridDefinition
-from utils import noise, solar_gaussian
-
-ASSETS: dict[str, str] = {
-    "Calama": "Grid",
-    "SEValleDeLosVientos": "Bus",
-    "SEJama": "Bus",
-    "SELasana": "Bus",
-    "SECalama": "Bus",
-    "SENuevaChuquicamata": "Bus",
-    "SESalar": "Bus",
-    "SEChuquicamata": "Bus",
-    "External": "ExternalGrid",
-    "PFVJama": "Generator",
-    "PEValleDeLosVientos": "Generator",
-    "PFVSanPedro": "Generator",
-    "PECalama": "Generator",
-    "PFVAzabache": "Generator",
-    "PFVUsya": "Generator",
-    "CAL-NCH": "Line",
-    "CAL-SAL": "Line",
-    "SAL-CHU": "Line",
-    "VLV-CAL": "Line",
-    "JAM-LAS": "Line",
-    "LAS-CAL": "Line",
-    "NCH-CHU": "Line",
-    "SlackSAL-CHU": "SlackLine",
-}
+from utils import noise, normalize, solar_gaussian
 
 
 def power(time: datetime, peak_power: float, end: bool = False, reactive: bool = False):
@@ -38,7 +12,6 @@ def power(time: datetime, peak_power: float, end: bool = False, reactive: bool =
     delta_cal = 1.7
     delta_usy = -1.6
 
-    # Calama Grid
     # PFVs
     pfv_jama = solar_gaussian(time, peak_power)
     pfv_sanpedro = solar_gaussian(time, peak_power)
@@ -99,92 +72,162 @@ class CalamaGrid(GridDefinition):
 
     @property
     def assets(self) -> dict[str, str]:
-        return ASSETS
+        return {
+            "Calama": "Grid",
+            "SEValleDeLosVientos": "Bus",
+            "SEJama": "Bus",
+            "SELasana": "Bus",
+            "SECalama": "Bus",
+            "SENuevaChuquicamata": "Bus",
+            "SESalar": "Bus",
+            "SEChuquicamata": "Bus",
+            "External": "ExternalGrid",
+            "PFVJama": "Generator",
+            "PEValleDeLosVientos": "Generator",
+            "PFVSanPedro": "Generator",
+            "PECalama": "Generator",
+            "PFVAzabache": "Generator",
+            "PFVUsya": "Generator",
+            "CAL-NCH": "Line",
+            "CAL-SAL": "Line",
+            "SAL-CHU": "Line",
+            "VLV-CAL": "Line",
+            "JAM-LAS": "Line",
+            "LAS-CAL": "Line",
+            "NCH-CHU": "Line",
+            "SlackSAL-CHU": "SlackLine",
+        }
 
-    def get_value(self, asset: str, attr: str, time: datetime):
-        # Custom value functions for specific assets
-        if (
-            asset in ["PFVJama", "PFVSanPedro", "PFVAzabache", "PFVUsya"]
-            and attr == "active_power"
-        ):
-            return power(time, 10).get(asset, 0.0)
-        elif (
-            asset in ["PFVJama", "PFVSanPedro", "PFVAzabache", "PFVUsya"]
-            and attr == "available_active_power"
-        ):
-            return power(time, 20).get(asset, 0.0)
-        elif (
-            asset in ["PFVJama", "PFVSanPedro", "PFVAzabache", "PFVUsya"]
-            and attr == "power_set_point"
-        ):
-            return power(time, 11).get(asset, 0.0)
-        elif asset in ["PEValleDeLosVientos", "PECalama"] and attr == "active_power":
-            return power(time, 10).get(asset, 0.0)
-        elif (
-            asset in ["PEValleDeLosVientos", "PECalama"]
-            and attr == "available_active_power"
-        ):
-            return power(time, 20).get(asset, 0.0)
-        elif asset in ["PEValleDeLosVientos", "PECalama"] and attr == "power_set_point":
-            return power(time, 11).get(asset, 0.0)
-        elif asset in ["PEValleDeLosVientos", "PECalama"] and attr == "frequency":
-            return 50.0
-        elif asset in ["PEValleDeLosVientos", "PECalama"] and attr == "switch_status":
-            return "true"
-        elif asset in [
-            "CAL-NCH",
-            "CAL-SAL",
-            "SAL-CHU",
-            "VLV-CAL",
-            "JAM-LAS",
-            "LAS-CAL",
-            "NCH-CHU",
-        ] and attr in ["active_power_start", "active_power_end"]:
-            return power(time, 10, end=attr.endswith("_end")).get(asset, 0.0)
-        elif asset in [
-            "CAL-NCH",
-            "CAL-SAL",
-            "SAL-CHU",
-            "VLV-CAL",
-            "JAM-LAS",
-            "LAS-CAL",
-            "NCH-CHU",
-        ] and attr in ["reactive_power_start", "reactive_power_end"]:
-            return power(time, 10, reactive=True, end=attr.endswith("_end")).get(
-                asset, 0.0
-            )
-        elif (
-            asset
-            in [
-                "SEValleDeLosVientos",
-                "SEJama",
-                "SELasana",
-                "SECalama",
-                "SENuevaChuquicamata",
-                "SESalar",
-                "SEChuquicamata",
-            ]
-            and attr == "active_power"
-        ):
-            return power(time, 10).get(asset, 0.0)
-        elif (
-            asset
-            in [
-                "SEValleDeLosVientos",
-                "SEJama",
-                "SELasana",
-                "SECalama",
-                "SENuevaChuquicamata",
-                "SESalar",
-                "SEChuquicamata",
-            ]
-            and attr == "reactive_power"
-        ):
-            return power(time, 10, reactive=True).get(asset, 0.0)
-        # Default values for other attributes
-        else:
-            return self.default_value(attr)
+    def get_active_power(self, time: datetime) -> dict[str, str]:
+        result = super().get_active_power(time)
+        result["PFVJama"] = normalize(power(time, 10).get("PFVJama", 0.0))
+        result["PFVSanPedro"] = normalize(power(time, 10).get("PFVSanPedro", 0.0))
+        result["PFVAzabache"] = normalize(power(time, 10).get("PFVAzabache", 0.0))
+        result["PFVUsya"] = normalize(power(time, 10).get("PFVUsya", 0.0))
+        result["PEValleDeLosVientos"] = normalize(
+            power(time, 10).get("PEValleDeLosVientos", 0.0)
+        )
+        result["PECalama"] = normalize(power(time, 10).get("PECalama", 0.0))
+        result["SEValleDeLosVientos"] = normalize(
+            power(time, 10).get("SEValleDeLosVientos", 0.0)
+        )
+        result["SEJama"] = normalize(power(time, 10).get("SEJama", 0.0))
+        result["SELasana"] = normalize(power(time, 10).get("SELasana", 0.0))
+        result["SECalama"] = normalize(power(time, 10).get("SECalama", 0.0))
+        result["SENuevaChuquicamata"] = normalize(
+            power(time, 10).get("SENuevaChuquicamata", 0.0)
+        )
+        result["SESalar"] = normalize(power(time, 10).get("SESalar", 0.0))
+        result["SEChuquicamata"] = normalize(power(time, 10).get("SEChuquicamata", 0.0))
+        return result
+
+    def get_available_active_power(self, time: datetime) -> dict[str, str]:
+        result = super().get_available_active_power(time)
+        result["PFVJama"] = normalize(power(time, 20).get("PFVJama", 0.0))
+        result["PFVSanPedro"] = normalize(power(time, 20).get("PFVSanPedro", 0.0))
+        result["PFVAzabache"] = normalize(power(time, 20).get("PFVAzabache", 0.0))
+        result["PFVUsya"] = normalize(power(time, 20).get("PFVUsya", 0.0))
+        result["PEValleDeLosVientos"] = normalize(
+            power(time, 20).get("PEValleDeLosVientos", 0.0)
+        )
+        result["PECalama"] = normalize(power(time, 20).get("PECalama", 0.0))
+        return result
+
+    def get_power_set_point(self, time: datetime) -> dict[str, str]:
+        result = super().get_power_set_point(time)
+        result["PFVJama"] = normalize(power(time, 11).get("PFVJama", 0.0))
+        result["PFVSanPedro"] = normalize(power(time, 11).get("PFVSanPedro", 0.0))
+        result["PFVAzabache"] = normalize(power(time, 11).get("PFVAzabache", 0.0))
+        result["PFVUsya"] = normalize(power(time, 11).get("PFVUsya", 0.0))
+        result["PEValleDeLosVientos"] = normalize(
+            power(time, 11).get("PEValleDeLosVientos", 0.0)
+        )
+        result["PECalama"] = normalize(power(time, 11).get("PECalama", 0.0))
+        return result
+
+    def get_frequency(self, time: datetime) -> dict[str, str]:
+        result = super().get_frequency(time)
+        result["PEValleDeLosVientos"] = normalize(50.0)
+        result["PECalama"] = normalize(50.0)
+        return result
+
+    def get_switch_status(self, time: datetime) -> dict[str, str]:
+        result = super().get_switch_status(time)
+        result["PEValleDeLosVientos"] = normalize("true")
+        result["PECalama"] = normalize("true")
+        return result
+
+    def get_active_power_start(self, time: datetime) -> dict[str, str]:
+        result = super().get_active_power_start(time)
+        result["CAL-NCH"] = normalize(power(time, 10, end=False).get("CAL-NCH", 0.0))
+        result["CAL-SAL"] = normalize(power(time, 10, end=False).get("CAL-SAL", 0.0))
+        result["SAL-CHU"] = normalize(power(time, 10, end=False).get("SAL-CHU", 0.0))
+        result["VLV-CAL"] = normalize(power(time, 10, end=False).get("VLV-CAL", 0.0))
+        result["JAM-LAS"] = normalize(power(time, 10, end=False).get("JAM-LAS", 0.0))
+        result["LAS-CAL"] = normalize(power(time, 10, end=False).get("LAS-CAL", 0.0))
+        result["NCH-CHU"] = normalize(power(time, 10, end=False).get("NCH-CHU", 0.0))
+        return result
+
+    def get_active_power_end(self, time: datetime) -> dict[str, str]:
+        result = super().get_active_power_end(time)
+        result["CAL-NCH"] = normalize(power(time, 10, end=True).get("CAL-NCH", 0.0))
+        result["CAL-SAL"] = normalize(power(time, 10, end=True).get("CAL-SAL", 0.0))
+        result["SAL-CHU"] = normalize(power(time, 10, end=True).get("SAL-CHU", 0.0))
+        result["VLV-CAL"] = normalize(power(time, 10, end=True).get("VLV-CAL", 0.0))
+        result["JAM-LAS"] = normalize(power(time, 10, end=True).get("JAM-LAS", 0.0))
+        result["LAS-CAL"] = normalize(power(time, 10, end=True).get("LAS-CAL", 0.0))
+        result["NCH-CHU"] = normalize(power(time, 10, end=True).get("NCH-CHU", 0.0))
+        return result
+
+    def get_reactive_power_start(self, time: datetime) -> dict[str, str]:
+        result = super().get_reactive_power_start(time)
+        result["CAL-NCH"] = normalize(
+            power(time, 10, reactive=True, end=False).get("CAL-NCH", 0.0)
+        )
+        result["CAL-SAL"] = normalize(
+            power(time, 10, reactive=True, end=False).get("CAL-SAL", 0.0)
+        )
+        result["SAL-CHU"] = normalize(
+            power(time, 10, reactive=True, end=False).get("SAL-CHU", 0.0)
+        )
+        result["VLV-CAL"] = normalize(
+            power(time, 10, reactive=True, end=False).get("VLV-CAL", 0.0)
+        )
+        result["JAM-LAS"] = normalize(
+            power(time, 10, reactive=True, end=False).get("JAM-LAS", 0.0)
+        )
+        result["LAS-CAL"] = normalize(
+            power(time, 10, reactive=True, end=False).get("LAS-CAL", 0.0)
+        )
+        result["NCH-CHU"] = normalize(
+            power(time, 10, reactive=True, end=False).get("NCH-CHU", 0.0)
+        )
+        return result
+
+    def get_reactive_power_end(self, time: datetime) -> dict[str, str]:
+        result = super().get_reactive_power_end(time)
+        result["CAL-NCH"] = normalize(
+            power(time, 10, reactive=True, end=True).get("CAL-NCH", 0.0)
+        )
+        result["CAL-SAL"] = normalize(
+            power(time, 10, reactive=True, end=True).get("CAL-SAL", 0.0)
+        )
+        result["SAL-CHU"] = normalize(
+            power(time, 10, reactive=True, end=True).get("SAL-CHU", 0.0)
+        )
+        result["VLV-CAL"] = normalize(
+            power(time, 10, reactive=True, end=True).get("VLV-CAL", 0.0)
+        )
+        result["JAM-LAS"] = normalize(
+            power(time, 10, reactive=True, end=True).get("JAM-LAS", 0.0)
+        )
+        result["LAS-CAL"] = normalize(
+            power(time, 10, reactive=True, end=True).get("LAS-CAL", 0.0)
+        )
+        result["NCH-CHU"] = normalize(
+            power(time, 10, reactive=True, end=True).get("NCH-CHU", 0.0)
+        )
+        return result
 
 
-# Export the class
 CalamaGrid = CalamaGrid

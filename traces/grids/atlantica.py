@@ -1,12 +1,7 @@
 from datetime import datetime
 
-from generic import GridDefinition, bess_active_power, bess_soc
-from utils import solar_gaussian
-
-ASSETS = {
-    "SEMariaElena": "Bus",
-    "BESSMariaElena": "Battery",
-}
+from generic import GridDefinition
+from utils import normalize, solar_gaussian,  bess_active_power, bess_soc
 
 
 def power(time: datetime, peak_power: float, end: bool = False, reactive: bool = False):
@@ -33,23 +28,31 @@ class AtlanticaGrid(GridDefinition):
 
     @property
     def assets(self) -> dict[str, str]:
-        return ASSETS
+        return {
+            "SEMariaElena": "Bus",
+            "BESSMariaElena": "Battery",
+        }
 
-    def get_value(self, asset: str, attr: str, time: datetime):
-        # Custom value functions for specific assets
-        if asset == "SEMariaElena" and attr == "active_power":
-            return power(time, 15).get(asset, 0.0)
-        elif asset == "SEMariaElena" and attr == "reactive_power":
-            return power(time, 15, reactive=True).get(asset, 0.0)
-        elif asset == "BESSMariaElena" and attr == "active_power":
-            return power(time, 15).get(asset, 0.0)
-        elif asset == "BESSMariaElena" and attr == "reactive_power":
-            return power(time, 15, reactive=True).get(asset, 0.0)
-        elif asset == "BESSMariaElena" and attr == "state_of_charge":
-            return bess_soc(time, [14])
-        # Default values for other attributes
-        else:
-            return self.default_value(attr)
+    def get_active_power(self, time: datetime) -> dict[str, str]:
+        result = super().get_active_power(time)
+        result["SEMariaElena"] = normalize(power(time, 15).get("SEMariaElena", 0.0))
+        result["BESSMariaElena"] = normalize(power(time, 15).get("BESSMariaElena", 0.0))
+        return result
+
+    def get_reactive_power(self, time: datetime) -> dict[str, str]:
+        result = super().get_reactive_power(time)
+        result["SEMariaElena"] = normalize(
+            power(time, 15, reactive=True).get("SEMariaElena", 0.0)
+        )
+        result["BESSMariaElena"] = normalize(
+            power(time, 15, reactive=True).get("BESSMariaElena", 0.0)
+        )
+        return result
+
+    def get_state_of_charge(self, time: datetime) -> dict[str, str]:
+        result = super().get_state_of_charge(time)
+        result["BESSMariaElena"] = normalize(bess_soc(time, [14]))
+        return result
 
 
 # Export the class

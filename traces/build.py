@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timedelta
+import json
 
 from grids.atlantica import AtlanticaGrid
 from grids.calama import CalamaGrid
@@ -26,45 +27,43 @@ def get_all_attributes(grids):
 
 
 def get_assets_with_attribute(attr, grids):
-    """Get all assets that have a specific attribute"""
-    assets_with_attr = []
+    """Get all (grid, asset) pairs that have a specific attribute"""
+    asset_grid_pairs = []
     for grid in grids:
         for asset in grid.assets:
             if attr in grid.get_attributes_for_asset(asset):
-                assets_with_attr.append(asset)
-    return sorted(list(set(assets_with_attr)))
+                asset_grid_pairs.append((grid, asset))
+    return asset_grid_pairs
 
 
 def generate_attribute_csv(attr, grids, output_dir=OUTPUT_DIR):
     ensure_dir(output_dir)
     filename = os.path.join(output_dir, f"{attr}.csv")
 
-    # Get all assets that have this attribute
-    assets_with_attr = get_assets_with_attribute(attr, grids)
-
-    if not assets_with_attr:
+    asset_grid_pairs = get_assets_with_attribute(attr, grids)
+    asset_grid_pairs = sorted(asset_grid_pairs, key=lambda pair: pair[1])
+    if not asset_grid_pairs:
         print(f"No assets found for attribute {attr}, skipping...")
         return
 
-    with open(filename, "w") as f:
-        # Write header
-        f.write("timestamp," + ",".join(assets_with_attr) + "\n")
+    method_name = f"get_{attr}"
 
-        # Write data rows
+    with open(filename, "w") as f:
+        # header
+        f.write("timestamp," + ",".join(asset for _, asset in asset_grid_pairs) + "\n")
+
         current = START_DATE
         for _ in range(MINUTES):
-            row_values = []
-            for asset in assets_with_attr:
-                # Find which grid this asset belongs to
-                value = 0.0
-                for grid in grids:
-                    if asset in grid.assets and attr in grid.get_attributes_for_asset(
-                        asset
-                    ):
-                        value = grid.get_value(asset, attr, current)
-                        break
-                row_values.append(normalize(value))
-
+            merged_values = {}
+            for grid, _ in asset_grid_pairs:
+                if hasattr(grid, method_name):
+                    method = getattr(grid, method_name)
+                    values = method(current)  # returns {asset: normalized_value}
+                    merged_values.update(values)
+            row_values = [
+                merged_values.get(asset, normalize(grid.default_value(attr)))
+                for grid, asset in asset_grid_pairs
+            ]
             f.write(
                 f"{current.strftime('%Y-%m-%d %H:%M:%S')},"
                 + ",".join(row_values)
@@ -72,11 +71,32 @@ def generate_attribute_csv(attr, grids, output_dir=OUTPUT_DIR):
             )
             current += STEP
 
-    print(f"Wrote {filename} with {len(assets_with_attr)} assets")
+    print(f"Wrote {filename} with {len(asset_grid_pairs)} assets")
+
+
+def generate_traces_json(grids, all_attributes, output_path="data/mqtt/traces/traces.json"):
+    traces = []
+    for attr in all_attributes:
+        asset_grid_pairs = get_assets_with_attribute(attr, grids)
+        asset_grid_pairs = sorted(asset_grid_pairs, key=lambda pair: pair[1])
+        for grid, asset in asset_grid_pairs:
+            noise = 0.02 if ("switch_status" not in attr and attr != "contingency") else None
+            trace = {
+                "name": f"{grid.name}/{asset}/{attr}",
+                "topic": f"{grid.name}/{asset}/{attr}",
+                "filename": f"{attr}.csv",
+                "noise_factor": noise,
+                "match_timestamp_by": "hour",
+                "target_value": asset
+            }
+            traces.append(trace)
+    ensure_dir(os.path.dirname(output_path))
+    with open(output_path, "w") as f:
+        json.dump({"traces": traces}, f, indent=2)
 
 
 def main():
-    # Initialize all grids
+    # Initialize
     grids = [MarconaGrid(), CalamaGrid(), AtlanticaGrid()]
 
     # Get all unique attributes
@@ -86,6 +106,9 @@ def main():
     # Generate one CSV per attribute
     for attr in all_attributes:
         generate_attribute_csv(attr, grids)
+
+    # Generate traces.json
+    generate_traces_json(grids, all_attributes)
 
 
 if __name__ == "__main__":

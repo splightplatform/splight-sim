@@ -35,3 +35,37 @@ def normalize(value: float | str | bool | int) -> str:
 
 def noise(peak: float) -> float:
     return np.random.normal(0, max(peak, 1))
+
+
+def bess_active_power(
+    time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]
+) -> float:
+    hours = time.hour + time.minute / 60
+    cycles_per_day = len(peak_hours)
+    first_peak = peak_hours[0]
+
+    frequency = cycles_per_day / 24
+    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+
+    soc_change_rate = (
+        50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
+    )
+
+    max_soc_rate = 50 * 2 * np.pi * frequency
+    active_power = -(soc_change_rate / max_soc_rate) * max_power
+
+    return round(active_power, 3)
+
+
+def bess_soc(time: datetime, peak_hours: list[float] = [6, 18]) -> float:
+    hours = time.hour + time.minute / 60
+    cycles_per_day = len(peak_hours)
+    first_peak = peak_hours[0]
+    frequency = cycles_per_day / 24
+    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+
+    soc = 50 + 50 * np.sin(2 * np.pi * frequency * hours + phase_shift)
+
+    # Keep between 0-100%
+    soc = max(0, min(100, soc))
+    return round(soc, 2)
