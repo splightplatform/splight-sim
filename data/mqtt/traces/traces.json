@@ -1,1428 +1,1764 @@
 {
-    "traces": [
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/frequency",
-            "noise_factor": null,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-0/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVJama-0",
-            "topic": "Calama/PFVJama-0/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/frequency",
-            "noise_factor": null,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama-1/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVJama-1",
-            "topic": "Calama/PFVJama-1/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/frequency",
-            "noise_factor": null,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVJama/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVJama",
-            "topic": "Calama/PFVJama/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/frequency",
-            "noise_factor": null,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVSanPedro/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVSanPedro",
-            "topic": "Calama/PFVSanPedro/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/frequency",
-            "noise_factor": null,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PEValleDeLosVientos/switch_status",
-            "noise_factor": null,
-            "target_value": "PEValleDeLosVientos",
-            "topic": "Calama/PEValleDeLosVientos/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/frequency",
-            "noise_factor": null,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVUsya/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVUsya",
-            "topic": "Calama/PFVUsya/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/frequency",
-            "noise_factor": null,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PECalama/switch_status",
-            "noise_factor": null,
-            "target_value": "PECalama",
-            "topic": "Calama/PECalama/switch_status"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/active_power"
-        },
-        {
-            "filename": "available_active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/available_active_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/available_active_power"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/frequency",
-            "noise_factor": null,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/frequency"
-        },
-        {
-            "filename": "power_set_point.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/power_set_point",
-            "noise_factor": 0.02,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/power_set_point"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/reactive_power"
-        },
-        {
-            "filename": "switch_status.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/PFVAzabache/switch_status",
-            "noise_factor": null,
-            "target_value": "PFVAzabache",
-            "topic": "Calama/PFVAzabache/switch_status"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/contingency",
-            "noise_factor": null,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/frequency",
-            "noise_factor": null,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/switch_status_start",
-            "noise_factor": null,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/switch_status_end",
-            "noise_factor": null,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/JAM-LAS/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "JAM-LAS",
-            "topic": "Calama/JAM-LAS/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/contingency",
-            "noise_factor": null,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/frequency",
-            "noise_factor": null,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/switch_status_start",
-            "noise_factor": null,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/switch_status_end",
-            "noise_factor": null,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/LAS-CAL/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "LAS-CAL",
-            "topic": "Calama/LAS-CAL/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/contingency",
-            "noise_factor": null,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/frequency",
-            "noise_factor": null,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/switch_status_start",
-            "noise_factor": null,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/switch_status_end",
-            "noise_factor": null,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/VLV-CAL/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "VLV-CAL",
-            "topic": "Calama/VLV-CAL/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/contingency",
-            "noise_factor": null,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/frequency",
-            "noise_factor": null,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/switch_status_start",
-            "noise_factor": null,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/switch_status_end",
-            "noise_factor": null,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-SAL/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-SAL",
-            "topic": "Calama/CAL-SAL/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/contingency",
-            "noise_factor": null,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/frequency",
-            "noise_factor": null,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/switch_status_start",
-            "noise_factor": null,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/switch_status_end",
-            "noise_factor": null,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/SAL-CHU/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "SAL-CHU",
-            "topic": "Calama/SAL-CHU/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/contingency",
-            "noise_factor": null,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/frequency",
-            "noise_factor": null,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/switch_status_start",
-            "noise_factor": null,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/switch_status_end",
-            "noise_factor": null,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/CAL-NCH/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "CAL-NCH",
-            "topic": "Calama/CAL-NCH/voltage_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/active_power_end"
-        },
-        {
-            "filename": "contingency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/contingency",
-            "noise_factor": null,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/contingency"
-        },
-        {
-            "filename": "current_r_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_r_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_r_start"
-        },
-        {
-            "filename": "current_r_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_r_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_r_end"
-        },
-        {
-            "filename": "current_s_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_s_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_s_start"
-        },
-        {
-            "filename": "current_s_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_s_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_s_end"
-        },
-        {
-            "filename": "current_t_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_t_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_t_start"
-        },
-        {
-            "filename": "current_t_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/current_t_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/current_t_end"
-        },
-        {
-            "filename": "frequency.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/frequency",
-            "noise_factor": null,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/frequency"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/reactive_power_end"
-        },
-        {
-            "filename": "switch_status_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/switch_status_start",
-            "noise_factor": null,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/switch_status_start"
-        },
-        {
-            "filename": "switch_status_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/switch_status_end",
-            "noise_factor": null,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/switch_status_end"
-        },
-        {
-            "filename": "voltage_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/voltage_start",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/voltage_start"
-        },
-        {
-            "filename": "voltage_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Calama/NCH-CHU/voltage_end",
-            "noise_factor": 0.02,
-            "target_value": "NCH-CHU",
-            "topic": "Calama/NCH-CHU/voltage_end"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-0/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-0",
-            "topic": "Marcona/CAH-DER-0/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-0/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-0",
-            "topic": "Marcona/CAH-DER-0/reactive_power_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-0/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-0",
-            "topic": "Marcona/CAH-DER-0/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-0/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-0",
-            "topic": "Marcona/CAH-DER-0/active_power_end"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-1/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-1",
-            "topic": "Marcona/CAH-DER-1/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-1/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-1",
-            "topic": "Marcona/CAH-DER-1/reactive_power_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-1/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-1",
-            "topic": "Marcona/CAH-DER-1/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/CAH-DER-1/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "CAH-DER-1",
-            "topic": "Marcona/CAH-DER-1/active_power_end"
-        },
-        {
-            "filename": "reactive_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/DER-ICA/reactive_power_start",
-            "noise_factor": 0.02,
-            "target_value": "DER-ICA",
-            "topic": "Marcona/DER-ICA/reactive_power_start"
-        },
-        {
-            "filename": "reactive_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/DER-ICA/reactive_power_end",
-            "noise_factor": 0.02,
-            "target_value": "DER-ICA",
-            "topic": "Marcona/DER-ICA/reactive_power_end"
-        },
-        {
-            "filename": "active_power_start.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/DER-ICA/active_power_start",
-            "noise_factor": 0.02,
-            "target_value": "DER-ICA",
-            "topic": "Marcona/DER-ICA/active_power_start"
-        },
-        {
-            "filename": "active_power_end.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/DER-ICA/active_power_end",
-            "noise_factor": 0.02,
-            "target_value": "DER-ICA",
-            "topic": "Marcona/DER-ICA/active_power_end"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Aeropuerto/active_power",
-            "noise_factor": 0.02,
-            "target_value": "Aeropuerto",
-            "topic": "Marcona/Aeropuerto/active_power"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Aeropuerto/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "Aeropuerto",
-            "topic": "Marcona/Aeropuerto/reactive_power"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Mina/active_power",
-            "noise_factor": 0.02,
-            "target_value": "Mina",
-            "topic": "Marcona/Mina/active_power"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Mina/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "Mina",
-            "topic": "Marcona/Mina/reactive_power"
-        },
-        {
-            "filename": "active_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Datacenter/active_power",
-            "noise_factor": 0.02,
-            "target_value": "Datacenter",
-            "topic": "Marcona/Datacenter/active_power"
-        },
-        {
-            "filename": "reactive_power.csv",
-            "match_timestamp_by": "hour",
-            "name": "Marcona/Datacenter/reactive_power",
-            "noise_factor": 0.02,
-            "target_value": "Datacenter",
-            "topic": "Marcona/Datacenter/reactive_power"
-        }
-    ]
+  "traces": [
+    {
+      "name": "Marcona/Datacenter0/active_power",
+      "topic": "Marcona/Datacenter0/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter0"
+    },
+    {
+      "name": "Marcona/Datacenter1/active_power",
+      "topic": "Marcona/Datacenter1/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter1"
+    },
+    {
+      "name": "Marcona/Datacenter2/active_power",
+      "topic": "Marcona/Datacenter2/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter2"
+    },
+    {
+      "name": "Marcona/SECahuachi/active_power",
+      "topic": "Marcona/SECahuachi/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SECahuachi"
+    },
+    {
+      "name": "Marcona/SEDerivacion/active_power",
+      "topic": "Marcona/SEDerivacion/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEDerivacion"
+    },
+    {
+      "name": "Marcona/SEIca/active_power",
+      "topic": "Marcona/SEIca/active_power",
+      "filename": "Marcona/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEIca"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/active_power_end",
+      "topic": "Marcona/CAH-DER-0/active_power_end",
+      "filename": "Marcona/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/active_power_end",
+      "topic": "Marcona/CAH-DER-1/active_power_end",
+      "filename": "Marcona/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/active_power_end",
+      "topic": "Marcona/DER-ICA/active_power_end",
+      "filename": "Marcona/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/active_power_start",
+      "topic": "Marcona/CAH-DER-0/active_power_start",
+      "filename": "Marcona/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/active_power_start",
+      "topic": "Marcona/CAH-DER-1/active_power_start",
+      "filename": "Marcona/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/active_power_start",
+      "topic": "Marcona/DER-ICA/active_power_start",
+      "filename": "Marcona/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/contingency",
+      "topic": "Marcona/CAH-DER-0/contingency",
+      "filename": "Marcona/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/contingency",
+      "topic": "Marcona/CAH-DER-1/contingency",
+      "filename": "Marcona/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/contingency",
+      "topic": "Marcona/DER-ICA/contingency",
+      "filename": "Marcona/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_r_end",
+      "topic": "Marcona/CAH-DER-0/current_r_end",
+      "filename": "Marcona/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_r_end",
+      "topic": "Marcona/CAH-DER-1/current_r_end",
+      "filename": "Marcona/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_r_end",
+      "topic": "Marcona/DER-ICA/current_r_end",
+      "filename": "Marcona/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_r_start",
+      "topic": "Marcona/CAH-DER-0/current_r_start",
+      "filename": "Marcona/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_r_start",
+      "topic": "Marcona/CAH-DER-1/current_r_start",
+      "filename": "Marcona/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_r_start",
+      "topic": "Marcona/DER-ICA/current_r_start",
+      "filename": "Marcona/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_s_end",
+      "topic": "Marcona/CAH-DER-0/current_s_end",
+      "filename": "Marcona/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_s_end",
+      "topic": "Marcona/CAH-DER-1/current_s_end",
+      "filename": "Marcona/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_s_end",
+      "topic": "Marcona/DER-ICA/current_s_end",
+      "filename": "Marcona/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_s_start",
+      "topic": "Marcona/CAH-DER-0/current_s_start",
+      "filename": "Marcona/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_s_start",
+      "topic": "Marcona/CAH-DER-1/current_s_start",
+      "filename": "Marcona/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_s_start",
+      "topic": "Marcona/DER-ICA/current_s_start",
+      "filename": "Marcona/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_t_end",
+      "topic": "Marcona/CAH-DER-0/current_t_end",
+      "filename": "Marcona/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_t_end",
+      "topic": "Marcona/CAH-DER-1/current_t_end",
+      "filename": "Marcona/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_t_end",
+      "topic": "Marcona/DER-ICA/current_t_end",
+      "filename": "Marcona/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/current_t_start",
+      "topic": "Marcona/CAH-DER-0/current_t_start",
+      "filename": "Marcona/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/current_t_start",
+      "topic": "Marcona/CAH-DER-1/current_t_start",
+      "filename": "Marcona/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/current_t_start",
+      "topic": "Marcona/DER-ICA/current_t_start",
+      "filename": "Marcona/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/Datacenter0/reactive_power",
+      "topic": "Marcona/Datacenter0/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter0"
+    },
+    {
+      "name": "Marcona/Datacenter1/reactive_power",
+      "topic": "Marcona/Datacenter1/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter1"
+    },
+    {
+      "name": "Marcona/Datacenter2/reactive_power",
+      "topic": "Marcona/Datacenter2/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter2"
+    },
+    {
+      "name": "Marcona/SECahuachi/reactive_power",
+      "topic": "Marcona/SECahuachi/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SECahuachi"
+    },
+    {
+      "name": "Marcona/SEDerivacion/reactive_power",
+      "topic": "Marcona/SEDerivacion/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEDerivacion"
+    },
+    {
+      "name": "Marcona/SEIca/reactive_power",
+      "topic": "Marcona/SEIca/reactive_power",
+      "filename": "Marcona/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEIca"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/reactive_power_end",
+      "topic": "Marcona/CAH-DER-0/reactive_power_end",
+      "filename": "Marcona/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/reactive_power_end",
+      "topic": "Marcona/CAH-DER-1/reactive_power_end",
+      "filename": "Marcona/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/reactive_power_end",
+      "topic": "Marcona/DER-ICA/reactive_power_end",
+      "filename": "Marcona/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/reactive_power_start",
+      "topic": "Marcona/CAH-DER-0/reactive_power_start",
+      "filename": "Marcona/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/reactive_power_start",
+      "topic": "Marcona/CAH-DER-1/reactive_power_start",
+      "filename": "Marcona/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/reactive_power_start",
+      "topic": "Marcona/DER-ICA/reactive_power_start",
+      "filename": "Marcona/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/Datacenter0/switch_status",
+      "topic": "Marcona/Datacenter0/switch_status",
+      "filename": "Marcona/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter0"
+    },
+    {
+      "name": "Marcona/Datacenter1/switch_status",
+      "topic": "Marcona/Datacenter1/switch_status",
+      "filename": "Marcona/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter1"
+    },
+    {
+      "name": "Marcona/Datacenter2/switch_status",
+      "topic": "Marcona/Datacenter2/switch_status",
+      "filename": "Marcona/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "Datacenter2"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/switch_status_end",
+      "topic": "Marcona/CAH-DER-0/switch_status_end",
+      "filename": "Marcona/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/switch_status_end",
+      "topic": "Marcona/CAH-DER-1/switch_status_end",
+      "filename": "Marcona/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/switch_status_end",
+      "topic": "Marcona/DER-ICA/switch_status_end",
+      "filename": "Marcona/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/switch_status_start",
+      "topic": "Marcona/CAH-DER-0/switch_status_start",
+      "filename": "Marcona/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/switch_status_start",
+      "topic": "Marcona/CAH-DER-1/switch_status_start",
+      "filename": "Marcona/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/switch_status_start",
+      "topic": "Marcona/DER-ICA/switch_status_start",
+      "filename": "Marcona/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/voltage_end",
+      "topic": "Marcona/CAH-DER-0/voltage_end",
+      "filename": "Marcona/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/voltage_end",
+      "topic": "Marcona/CAH-DER-1/voltage_end",
+      "filename": "Marcona/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/voltage_end",
+      "topic": "Marcona/DER-ICA/voltage_end",
+      "filename": "Marcona/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Marcona/CAH-DER-0/voltage_start",
+      "topic": "Marcona/CAH-DER-0/voltage_start",
+      "filename": "Marcona/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-0"
+    },
+    {
+      "name": "Marcona/CAH-DER-1/voltage_start",
+      "topic": "Marcona/CAH-DER-1/voltage_start",
+      "filename": "Marcona/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAH-DER-1"
+    },
+    {
+      "name": "Marcona/DER-ICA/voltage_start",
+      "topic": "Marcona/DER-ICA/voltage_start",
+      "filename": "Marcona/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "DER-ICA"
+    },
+    {
+      "name": "Calama/PECalama/active_power",
+      "topic": "Calama/PECalama/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/active_power",
+      "topic": "Calama/PEValleDeLosVientos/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/active_power",
+      "topic": "Calama/PFVAzabache/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/active_power",
+      "topic": "Calama/PFVJama/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/active_power",
+      "topic": "Calama/PFVSanPedro/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/active_power",
+      "topic": "Calama/PFVUsya/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/SECalama/active_power",
+      "topic": "Calama/SECalama/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SECalama"
+    },
+    {
+      "name": "Calama/SEChuquicamata/active_power",
+      "topic": "Calama/SEChuquicamata/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEChuquicamata"
+    },
+    {
+      "name": "Calama/SEJama/active_power",
+      "topic": "Calama/SEJama/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEJama"
+    },
+    {
+      "name": "Calama/SELasana/active_power",
+      "topic": "Calama/SELasana/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SELasana"
+    },
+    {
+      "name": "Calama/SENuevaChuquicamata/active_power",
+      "topic": "Calama/SENuevaChuquicamata/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SENuevaChuquicamata"
+    },
+    {
+      "name": "Calama/SESalar/active_power",
+      "topic": "Calama/SESalar/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SESalar"
+    },
+    {
+      "name": "Calama/SEValleDeLosVientos/active_power",
+      "topic": "Calama/SEValleDeLosVientos/active_power",
+      "filename": "Calama/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/CAL-NCH/active_power_end",
+      "topic": "Calama/CAL-NCH/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/active_power_end",
+      "topic": "Calama/CAL-SAL/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/active_power_end",
+      "topic": "Calama/JAM-LAS/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/active_power_end",
+      "topic": "Calama/LAS-CAL/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/active_power_end",
+      "topic": "Calama/NCH-CHU/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/active_power_end",
+      "topic": "Calama/SAL-CHU/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/active_power_end",
+      "topic": "Calama/VLV-CAL/active_power_end",
+      "filename": "Calama/active_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/active_power_start",
+      "topic": "Calama/CAL-NCH/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/active_power_start",
+      "topic": "Calama/CAL-SAL/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/active_power_start",
+      "topic": "Calama/JAM-LAS/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/active_power_start",
+      "topic": "Calama/LAS-CAL/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/active_power_start",
+      "topic": "Calama/NCH-CHU/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/active_power_start",
+      "topic": "Calama/SAL-CHU/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/active_power_start",
+      "topic": "Calama/VLV-CAL/active_power_start",
+      "filename": "Calama/active_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/PECalama/available_active_power",
+      "topic": "Calama/PECalama/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/available_active_power",
+      "topic": "Calama/PEValleDeLosVientos/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/available_active_power",
+      "topic": "Calama/PFVAzabache/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/available_active_power",
+      "topic": "Calama/PFVJama/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/available_active_power",
+      "topic": "Calama/PFVSanPedro/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/available_active_power",
+      "topic": "Calama/PFVUsya/available_active_power",
+      "filename": "Calama/available_active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/CAL-NCH/contingency",
+      "topic": "Calama/CAL-NCH/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/contingency",
+      "topic": "Calama/CAL-SAL/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/contingency",
+      "topic": "Calama/JAM-LAS/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/contingency",
+      "topic": "Calama/LAS-CAL/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/contingency",
+      "topic": "Calama/NCH-CHU/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/contingency",
+      "topic": "Calama/SAL-CHU/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/contingency",
+      "topic": "Calama/VLV-CAL/contingency",
+      "filename": "Calama/contingency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_r_end",
+      "topic": "Calama/CAL-NCH/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_r_end",
+      "topic": "Calama/CAL-SAL/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_r_end",
+      "topic": "Calama/JAM-LAS/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_r_end",
+      "topic": "Calama/LAS-CAL/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_r_end",
+      "topic": "Calama/NCH-CHU/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_r_end",
+      "topic": "Calama/SAL-CHU/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_r_end",
+      "topic": "Calama/VLV-CAL/current_r_end",
+      "filename": "Calama/current_r_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_r_start",
+      "topic": "Calama/CAL-NCH/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_r_start",
+      "topic": "Calama/CAL-SAL/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_r_start",
+      "topic": "Calama/JAM-LAS/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_r_start",
+      "topic": "Calama/LAS-CAL/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_r_start",
+      "topic": "Calama/NCH-CHU/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_r_start",
+      "topic": "Calama/SAL-CHU/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_r_start",
+      "topic": "Calama/VLV-CAL/current_r_start",
+      "filename": "Calama/current_r_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_s_end",
+      "topic": "Calama/CAL-NCH/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_s_end",
+      "topic": "Calama/CAL-SAL/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_s_end",
+      "topic": "Calama/JAM-LAS/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_s_end",
+      "topic": "Calama/LAS-CAL/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_s_end",
+      "topic": "Calama/NCH-CHU/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_s_end",
+      "topic": "Calama/SAL-CHU/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_s_end",
+      "topic": "Calama/VLV-CAL/current_s_end",
+      "filename": "Calama/current_s_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_s_start",
+      "topic": "Calama/CAL-NCH/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_s_start",
+      "topic": "Calama/CAL-SAL/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_s_start",
+      "topic": "Calama/JAM-LAS/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_s_start",
+      "topic": "Calama/LAS-CAL/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_s_start",
+      "topic": "Calama/NCH-CHU/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_s_start",
+      "topic": "Calama/SAL-CHU/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_s_start",
+      "topic": "Calama/VLV-CAL/current_s_start",
+      "filename": "Calama/current_s_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_t_end",
+      "topic": "Calama/CAL-NCH/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_t_end",
+      "topic": "Calama/CAL-SAL/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_t_end",
+      "topic": "Calama/JAM-LAS/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_t_end",
+      "topic": "Calama/LAS-CAL/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_t_end",
+      "topic": "Calama/NCH-CHU/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_t_end",
+      "topic": "Calama/SAL-CHU/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_t_end",
+      "topic": "Calama/VLV-CAL/current_t_end",
+      "filename": "Calama/current_t_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/current_t_start",
+      "topic": "Calama/CAL-NCH/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/current_t_start",
+      "topic": "Calama/CAL-SAL/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/current_t_start",
+      "topic": "Calama/JAM-LAS/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/current_t_start",
+      "topic": "Calama/LAS-CAL/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/current_t_start",
+      "topic": "Calama/NCH-CHU/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/current_t_start",
+      "topic": "Calama/SAL-CHU/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/current_t_start",
+      "topic": "Calama/VLV-CAL/current_t_start",
+      "filename": "Calama/current_t_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/PECalama/frequency",
+      "topic": "Calama/PECalama/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/frequency",
+      "topic": "Calama/PEValleDeLosVientos/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/frequency",
+      "topic": "Calama/PFVAzabache/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/frequency",
+      "topic": "Calama/PFVJama/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/frequency",
+      "topic": "Calama/PFVSanPedro/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/frequency",
+      "topic": "Calama/PFVUsya/frequency",
+      "filename": "Calama/frequency.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/PECalama/power_set_point",
+      "topic": "Calama/PECalama/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/power_set_point",
+      "topic": "Calama/PEValleDeLosVientos/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/power_set_point",
+      "topic": "Calama/PFVAzabache/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/power_set_point",
+      "topic": "Calama/PFVJama/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/power_set_point",
+      "topic": "Calama/PFVSanPedro/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/power_set_point",
+      "topic": "Calama/PFVUsya/power_set_point",
+      "filename": "Calama/power_set_point.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/PECalama/reactive_power",
+      "topic": "Calama/PECalama/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/reactive_power",
+      "topic": "Calama/PEValleDeLosVientos/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/reactive_power",
+      "topic": "Calama/PFVAzabache/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/reactive_power",
+      "topic": "Calama/PFVJama/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/reactive_power",
+      "topic": "Calama/PFVSanPedro/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/reactive_power",
+      "topic": "Calama/PFVUsya/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/SECalama/reactive_power",
+      "topic": "Calama/SECalama/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SECalama"
+    },
+    {
+      "name": "Calama/SEChuquicamata/reactive_power",
+      "topic": "Calama/SEChuquicamata/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEChuquicamata"
+    },
+    {
+      "name": "Calama/SEJama/reactive_power",
+      "topic": "Calama/SEJama/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEJama"
+    },
+    {
+      "name": "Calama/SELasana/reactive_power",
+      "topic": "Calama/SELasana/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SELasana"
+    },
+    {
+      "name": "Calama/SENuevaChuquicamata/reactive_power",
+      "topic": "Calama/SENuevaChuquicamata/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SENuevaChuquicamata"
+    },
+    {
+      "name": "Calama/SESalar/reactive_power",
+      "topic": "Calama/SESalar/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SESalar"
+    },
+    {
+      "name": "Calama/SEValleDeLosVientos/reactive_power",
+      "topic": "Calama/SEValleDeLosVientos/reactive_power",
+      "filename": "Calama/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/CAL-NCH/reactive_power_end",
+      "topic": "Calama/CAL-NCH/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/reactive_power_end",
+      "topic": "Calama/CAL-SAL/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/reactive_power_end",
+      "topic": "Calama/JAM-LAS/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/reactive_power_end",
+      "topic": "Calama/LAS-CAL/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/reactive_power_end",
+      "topic": "Calama/NCH-CHU/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/reactive_power_end",
+      "topic": "Calama/SAL-CHU/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/reactive_power_end",
+      "topic": "Calama/VLV-CAL/reactive_power_end",
+      "filename": "Calama/reactive_power_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/reactive_power_start",
+      "topic": "Calama/CAL-NCH/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/reactive_power_start",
+      "topic": "Calama/CAL-SAL/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/reactive_power_start",
+      "topic": "Calama/JAM-LAS/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/reactive_power_start",
+      "topic": "Calama/LAS-CAL/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/reactive_power_start",
+      "topic": "Calama/NCH-CHU/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/reactive_power_start",
+      "topic": "Calama/SAL-CHU/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/reactive_power_start",
+      "topic": "Calama/VLV-CAL/reactive_power_start",
+      "filename": "Calama/reactive_power_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/PECalama/switch_status",
+      "topic": "Calama/PECalama/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PECalama"
+    },
+    {
+      "name": "Calama/PEValleDeLosVientos/switch_status",
+      "topic": "Calama/PEValleDeLosVientos/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PEValleDeLosVientos"
+    },
+    {
+      "name": "Calama/PFVAzabache/switch_status",
+      "topic": "Calama/PFVAzabache/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVAzabache"
+    },
+    {
+      "name": "Calama/PFVJama/switch_status",
+      "topic": "Calama/PFVJama/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVJama"
+    },
+    {
+      "name": "Calama/PFVSanPedro/switch_status",
+      "topic": "Calama/PFVSanPedro/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVSanPedro"
+    },
+    {
+      "name": "Calama/PFVUsya/switch_status",
+      "topic": "Calama/PFVUsya/switch_status",
+      "filename": "Calama/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVUsya"
+    },
+    {
+      "name": "Calama/CAL-NCH/switch_status_end",
+      "topic": "Calama/CAL-NCH/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/switch_status_end",
+      "topic": "Calama/CAL-SAL/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/switch_status_end",
+      "topic": "Calama/JAM-LAS/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/switch_status_end",
+      "topic": "Calama/LAS-CAL/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/switch_status_end",
+      "topic": "Calama/NCH-CHU/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/switch_status_end",
+      "topic": "Calama/SAL-CHU/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/switch_status_end",
+      "topic": "Calama/VLV-CAL/switch_status_end",
+      "filename": "Calama/switch_status_end.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/switch_status_start",
+      "topic": "Calama/CAL-NCH/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/switch_status_start",
+      "topic": "Calama/CAL-SAL/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/switch_status_start",
+      "topic": "Calama/JAM-LAS/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/switch_status_start",
+      "topic": "Calama/LAS-CAL/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/switch_status_start",
+      "topic": "Calama/NCH-CHU/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/switch_status_start",
+      "topic": "Calama/SAL-CHU/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/switch_status_start",
+      "topic": "Calama/VLV-CAL/switch_status_start",
+      "filename": "Calama/switch_status_start.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/voltage_end",
+      "topic": "Calama/CAL-NCH/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/voltage_end",
+      "topic": "Calama/CAL-SAL/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/voltage_end",
+      "topic": "Calama/JAM-LAS/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/voltage_end",
+      "topic": "Calama/LAS-CAL/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/voltage_end",
+      "topic": "Calama/NCH-CHU/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/voltage_end",
+      "topic": "Calama/SAL-CHU/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/voltage_end",
+      "topic": "Calama/VLV-CAL/voltage_end",
+      "filename": "Calama/voltage_end.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Calama/CAL-NCH/voltage_start",
+      "topic": "Calama/CAL-NCH/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-NCH"
+    },
+    {
+      "name": "Calama/CAL-SAL/voltage_start",
+      "topic": "Calama/CAL-SAL/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "CAL-SAL"
+    },
+    {
+      "name": "Calama/JAM-LAS/voltage_start",
+      "topic": "Calama/JAM-LAS/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "JAM-LAS"
+    },
+    {
+      "name": "Calama/LAS-CAL/voltage_start",
+      "topic": "Calama/LAS-CAL/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "LAS-CAL"
+    },
+    {
+      "name": "Calama/NCH-CHU/voltage_start",
+      "topic": "Calama/NCH-CHU/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "NCH-CHU"
+    },
+    {
+      "name": "Calama/SAL-CHU/voltage_start",
+      "topic": "Calama/SAL-CHU/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SAL-CHU"
+    },
+    {
+      "name": "Calama/VLV-CAL/voltage_start",
+      "topic": "Calama/VLV-CAL/voltage_start",
+      "filename": "Calama/voltage_start.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "VLV-CAL"
+    },
+    {
+      "name": "Atlantica/BESSMariaElena/active_power",
+      "topic": "Atlantica/BESSMariaElena/active_power",
+      "filename": "Atlantica/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSMariaElena"
+    },
+    {
+      "name": "Atlantica/SEMariaElena/active_power",
+      "topic": "Atlantica/SEMariaElena/active_power",
+      "filename": "Atlantica/active_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEMariaElena"
+    },
+    {
+      "name": "Atlantica/BESSMariaElena/reactive_power",
+      "topic": "Atlantica/BESSMariaElena/reactive_power",
+      "filename": "Atlantica/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSMariaElena"
+    },
+    {
+      "name": "Atlantica/SEMariaElena/reactive_power",
+      "topic": "Atlantica/SEMariaElena/reactive_power",
+      "filename": "Atlantica/reactive_power.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "SEMariaElena"
+    },
+    {
+      "name": "Atlantica/BESSMariaElena/state_of_charge",
+      "topic": "Atlantica/BESSMariaElena/state_of_charge",
+      "filename": "Atlantica/state_of_charge.csv",
+      "noise_factor": 0.02,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSMariaElena"
+    }
+  ]
 }

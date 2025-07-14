@@ -1,3 +1,4 @@
+.PHONY: start stop clean clean-pyc clean-test traces check fix
 
 start:
 	@docker-compose -f docker-compose.yml up -d
@@ -19,7 +20,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -rf .coverage_badge .coverage_report
 
 traces:
-	cd ./data/mqtt/traces && uv run $(shell pwd)/scripts/trace_creator.py
+	uv run traces/build.py
 
 # CODE STYLE
 check:
