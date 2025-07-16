@@ -4,30 +4,30 @@ import time
 import pandas as pd
 from datetime import datetime
 
-# Ruta a la API de HYPERSIM
+# Path to the HYPERSIM API
 sys.path.append(r'C:\OPAL-RT\HYPERSIM\hypersim_2024.3.0.o30\Windows\HyApi\python')
 import HyWorksApiGRPC as HyWorksApi
 
-# Conectar con HYPERSIM y abrir el diseño
+# Connect to HYPERSIM and open the design
 HyWorksApi.startAndConnectHypersim()
 designPath = os.path.join(os.getcwd(), 'CambioDePgen1.ecf')
 HyWorksApi.openDesign(designPath)
 HyWorksApi.startSim()
-print("🔄 Simulación iniciada...")
+print("🔄 Simulation started...")
 
-# Leer archivos CSV
+# Read CSV files
 active_path = os.path.join(os.getcwd(), 'active_power.csv')
 reactive_path = os.path.join(os.getcwd(), 'reactive_power.csv')
 
 df_active = pd.read_csv(active_path, sep=',', encoding='utf-8')
 df_reactive = pd.read_csv(reactive_path, sep=',', encoding='utf-8')
 
-# Convertir timestamp a solo hora
+# Convert timestamp to hour only
 for df in [df_active, df_reactive]:
     df['timestamp'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d %H:%M:%S')
     df['hora'] = df['timestamp'].dt.strftime('%H:%M:%S')
 
-# Mapeos
+# Mappings
 mapeo_activa = {
     'P1': 'PECalama',
     'P2': 'PEValleDeLosVientos',
@@ -62,23 +62,23 @@ try:
                 try:
                     valor = float(valores_activa[columna])
                     HyWorksApi.setComponentParameter(bloque, 'A', str(valor))
-                    print(f"[{hora_str}] ✅ Activa: {columna} → {bloque}.A = {valor}")
+                    print(f"[{hora_str}] ✅ Active: {columna} → {bloque}.A = {valor}")
                 except Exception as e:
-                    print(f"[{hora_str}] ⚠️ Error activa {columna} → {bloque}: {e}")
+                    print(f"[{hora_str}] ⚠️ Error active {columna} → {bloque}: {e}")
 
             for bloque, columna in mapeo_reactiva.items():
                 try:
                     valor = float(valores_reactiva[columna])
                     HyWorksApi.setComponentParameter(bloque, 'A', str(valor))
-                    print(f"[{hora_str}] ✅ Reactiva: {columna} → {bloque}.A = {valor}")
+                    print(f"[{hora_str}] ✅ Reactive: {columna} → {bloque}.A = {valor}")
                 except Exception as e:
-                    print(f"[{hora_str}] ⚠️ Error reactiva {columna} → {bloque}: {e}")
+                    print(f"[{hora_str}] ⚠️ Error reactive {columna} → {bloque}: {e}")
         else:
-            print(f"[{hora_str}] ⏳ Datos no encontrados para esta hora.")
+            print(f"[{hora_str}] ⏳ Data not found for this hour.")
 
         time.sleep(60)
 
 except KeyboardInterrupt:
-    print("\n🛑 Ctrl+C detectado. Deteniendo simulación...")
+    print("\n🛑 Ctrl+C detected. Stopping simulation...")
     HyWorksApi.stopSim()
-    print("✅ Simulación detenida y HYPERSIM cerrado correctamente.")
+    print("✅ Simulation stopped and HYPERSIM closed successfully.")
