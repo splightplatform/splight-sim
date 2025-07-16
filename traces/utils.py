@@ -37,35 +37,104 @@ def noise(peak: float) -> float:
     return np.random.normal(0, max(peak, 1))
 
 
-def bess_active_power(
-    time: datetime, max_power: float = 5.0, peak_hours: list[float] = [6, 18]
+def _in_interval(x: float, start: float, end: float) -> bool:
+    if start <= end:
+        return start <= x < end
+    else:
+        return x >= start or x < end
+
+
+def _compute_windows(
+    low_hours: list[float],
+    peak_hours: list[float],
+    charge_rate: float,  # MWh
+    discharge_rate: float,  # MWh
+    capacity: float,
+):
+    lows = sorted(low_hours)
+    peaks = sorted(peak_hours)
+    n = max(len(lows), len(peaks))
+    cycles = []
+    for i in range(n):
+        low = lows[i % len(lows)]
+        peak = peaks[i % len(peaks)]
+        next_low = lows[(i + 1) % len(lows)]
+        t_charge = capacity / charge_rate
+        t_discharge = capacity / discharge_rate
+        charge_start = (peak - t_charge) % 24
+        discharge_start = (next_low - t_discharge) % 24
+
+        cycles.append(
+            {
+                "low": low,
+                "peak": peak,
+                "next_low": next_low,
+                "charge_start": charge_start,
+                "discharge_start": discharge_start,
+            }
+        )
+    return cycles
+
+
+def bess_soc(
+    time: datetime,
+    low_hours: list[float],
+    peak_hours: list[float],
+    charge_rate: float,  # MWh
+    discharge_rate: float,  # MWh
+    capacity: float,
 ) -> float:
-    hours = time.hour + time.minute / 60
-    cycles_per_day = len(peak_hours)
-    first_peak = peak_hours[0]
+    h = time.hour + time.minute / 60 + time.second / 3600
+    for c in _compute_windows(
+        low_hours, peak_hours, charge_rate, discharge_rate, capacity
+    ):
+        lo, ps, nl = c["low"], c["peak"], c["next_low"]
+        cs, ds = c["charge_start"], c["discharge_start"]
 
-    frequency = cycles_per_day / 24
-    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+        if _in_interval(h, lo, cs):
+            soc_mwh = 0.0
 
-    soc_change_rate = (
-        50 * 2 * np.pi * frequency * np.cos(2 * np.pi * frequency * hours + phase_shift)
-    )
+        elif _in_interval(h, cs, ps):
+            hours_into = (h - cs) % 24
+            soc_mwh = min(capacity, hours_into * charge_rate)
 
-    max_soc_rate = 50 * 2 * np.pi * frequency
-    active_power = -(soc_change_rate / max_soc_rate) * max_power
+        elif _in_interval(h, ps, ds):
+            soc_mwh = capacity
 
-    return round(active_power, 3)
+        elif _in_interval(h, ds, nl):
+            hours_in = (h - ds) % 24
+            soc_mwh = max(0.0, capacity - hours_in * discharge_rate)
+
+        else:
+            continue
+
+        return round((soc_mwh / capacity) * 100.0, 2)
+    return 0.0
 
 
-def bess_soc(time: datetime, peak_hours: list[float] = [6, 18]) -> float:
-    hours = time.hour + time.minute / 60
-    cycles_per_day = len(peak_hours)
-    first_peak = peak_hours[0]
-    frequency = cycles_per_day / 24
-    phase_shift = (np.pi / 2) - (2 * np.pi * frequency * first_peak)
+def bess_active_power(
+    time: datetime,
+    low_hours: list[float],
+    peak_hours: list[float],
+    charge_rate: float,  # MWh
+    discharge_rate: float,  # MWh
+    capacity: float,
+) -> float:
+    # Negative = charging; positive = discharging; zero = hold.
+    h = time.hour + time.minute / 60 + time.second / 3600
+    for c in _compute_windows(
+        low_hours, peak_hours, charge_rate, discharge_rate, capacity
+    ):
+        lo, ps, nl = c["low"], c["peak"], c["next_low"]
+        cs, ds = c["charge_start"], c["discharge_start"]
 
-    soc = 50 + 50 * np.sin(2 * np.pi * frequency * hours + phase_shift)
+        if _in_interval(h, lo, cs):
+            return 0.0
+        elif _in_interval(h, cs, ps):
+            return -round(charge_rate, 3)
+        elif _in_interval(h, ps, ds):
+            return 0.0
+        elif _in_interval(h, ds, nl):
+            return round(discharge_rate, 3)
 
-    # Keep between 0-100%
-    soc = max(0, min(100, soc))
-    return round(soc, 2)
+    return 0.0
