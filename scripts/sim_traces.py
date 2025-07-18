@@ -4,81 +4,86 @@ import time
 import pandas as pd
 from datetime import datetime
 
-# Path to the HYPERSIM API
 sys.path.append(r'C:\OPAL-RT\HYPERSIM\hypersim_2024.3.0.o30\Windows\HyApi\python')
 import HyWorksApiGRPC as HyWorksApi
 
-# Connect to HYPERSIM and open the design
-HyWorksApi.startAndConnectHypersim()
-designPath = os.path.join(os.getcwd(), 'CambioDePgen1.ecf')
-HyWorksApi.openDesign(designPath)
-HyWorksApi.startSim()
-print("🔄 Simulation started...")
+def set_parameter(value, block, column, hour_str):
+    try:
+        value = float(value[column])
+        HyWorksApi.setComponentParameter(block, 'A', str(value))
+        print(f"[{hour_str}] Active: {column} → {block}.A = {value}")
+    except Exception as e:
+        print(f"[{hour_str}] Error active {column} → {block}: {e}")
 
-# Read CSV files
-active_path = os.path.join(os.getcwd(), 'active_power.csv')
-reactive_path = os.path.join(os.getcwd(), 'reactive_power.csv')
 
-df_active = pd.read_csv(active_path, sep=',', encoding='utf-8')
-df_reactive = pd.read_csv(reactive_path, sep=',', encoding='utf-8')
 
-# Convert timestamp to hour only
-for df in [df_active, df_reactive]:
-    df['timestamp'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d %H:%M:%S')
-    df['hora'] = df['timestamp'].dt.strftime('%H:%M:%S')
+def process(df_active, df_reactive, active_mapping, reactive_mapping):
+    now = datetime.utcnow().replace(second=0, microsecond=0)
+    hora_str = now.strftime('%H:%M:%S')
 
-# Mappings
-mapeo_activa = {
-    'P1': 'PECalama',
-    'P2': 'PEValleDeLosVientos',
-    'P3': 'PFVAzabache',
-    'P4': 'PFVJama',
-    'P5': 'PFVSanPedro',
-    'P6': 'PFVUsya'
-}
+    active_row = df_active[df_active['hour'] == hora_str]
+    reactive_row = df_reactive[df_reactive['hour'] == hora_str]
 
-mapeo_reactiva = {
-    'Q1': 'PECalama',
-    'Q2': 'PEValleDeLosVientos',
-    'Q3': 'PFVAzabache',
-    'Q4': 'PFVJama',
-    'Q5': 'PFVSanPedro',
-    'Q6': 'PFVUsya'
-}
+    if not active_row.empty and not reactive_row.empty:
+        valores_activa = active_row.iloc[0]
+        valores_reactiva = reactive_row.iloc[0]
 
-try:
-    while True:
-        ahora = datetime.utcnow().replace(second=0, microsecond=0)
-        hora_str = ahora.strftime('%H:%M:%S')
+        for bloque, columna in active_mapping.items():
+            set_parameter(valores_activa, bloque, columna, hora_str)
 
-        fila_activa = df_active[df_active['hora'] == hora_str]
-        fila_reactiva = df_reactive[df_reactive['hora'] == hora_str]
+        for bloque, columna in reactive_mapping.items():
+            set_parameter(valores_reactiva, bloque, columna, hora_str)
+    else:
+        print(f"[{hora_str}] Data not found for this hour.")
 
-        if not fila_activa.empty and not fila_reactiva.empty:
-            valores_activa = fila_activa.iloc[0]
-            valores_reactiva = fila_reactiva.iloc[0]
 
-            for bloque, columna in mapeo_activa.items():
-                try:
-                    valor = float(valores_activa[columna])
-                    HyWorksApi.setComponentParameter(bloque, 'A', str(valor))
-                    print(f"[{hora_str}] ✅ Active: {columna} → {bloque}.A = {valor}")
-                except Exception as e:
-                    print(f"[{hora_str}] ⚠️ Error active {columna} → {bloque}: {e}")
 
-            for bloque, columna in mapeo_reactiva.items():
-                try:
-                    valor = float(valores_reactiva[columna])
-                    HyWorksApi.setComponentParameter(bloque, 'A', str(valor))
-                    print(f"[{hora_str}] ✅ Reactive: {columna} → {bloque}.A = {valor}")
-                except Exception as e:
-                    print(f"[{hora_str}] ⚠️ Error reactive {columna} → {bloque}: {e}")
-        else:
-            print(f"[{hora_str}] ⏳ Data not found for this hour.")
+def main():
 
-        time.sleep(60)
+    HyWorksApi.startAndConnectHypersim()
+    design_path = "C:\\Users\\lucas\\OneDrive\\Documentos\\HYPERSIM\\Black Box\\Python\\CambioDePgen1.ecf"
+    HyWorksApi.openDesign(design_path)
+    HyWorksApi.startSim()
+    print("Simulation started...")
 
-except KeyboardInterrupt:
-    print("\n🛑 Ctrl+C detected. Stopping simulation...")
-    HyWorksApi.stopSim()
-    print("✅ Simulation stopped and HYPERSIM closed successfully.")
+    active_path = "C:\\Users\\lucas\\OneDrive\\Documentos\\HYPERSIM\\Black Box\\Python\\active_power.csv"
+    reactive_path = "C:\\Users\\lucas\\OneDrive\\Documentos\\HYPERSIM\\Black Box\\Python\\reactive_power.csv"
+
+    df_active = pd.read_csv(active_path, sep=',', encoding='utf-8')
+    df_reactive = pd.read_csv(reactive_path, sep=',', encoding='utf-8')
+
+    for df in [df_active, df_reactive]:
+        df['timestamp'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d %H:%M:%S')
+        df['hour'] = df['timestamp'].dt.strftime('%H:%M:%S')
+
+    active_mapping = {
+        "P1": "PECalama",
+        "P2": "PEValleDeLosVientos",
+        "P3": "PFVAzabache",
+        "P4": "PFVJama",
+        "P5": "PFVSanPedro",
+        "P6": "PFVUsya"
+    }
+
+    reactive_mapping = {
+        "Q1": "PECalama",
+        "Q2": "PEValleDeLosVientos",
+        "Q3": "PFVAzabache",
+        "Q4": "PFVJama",
+        "Q5": "PFVSanPedro",
+        "Q6": "PFVUsya"
+    }
+
+    try:
+        while True:
+            process(df_active, df_reactive, active_mapping, reactive_mapping)
+            time.sleep(60)
+
+    except KeyboardInterrupt:
+        print("\n Ctrl+C detected. Stopping simulation...")
+        HyWorksApi.stopSim()
+        print(" Simulation stopped and HYPERSIM closed successfully.")
+
+
+if __name__ == "__main__":
+    main()
