@@ -37,7 +37,7 @@ class AtlanticaGrid(GridDefinition):
         # Buses
         se_melena = solar_gaussian(time, peak_power + delta_melena, sigma=2)
         # Batteries
-        bess_melena = bess_active_power(time, [5, 12], [9, 14], 9, 6, 18)
+        bess_melena = bess_active_power(time, [5, 13], [9, 16], 9, 6, 18)
 
         return {
             "SEMariaElena": se_melena,
@@ -56,5 +56,5 @@ class AtlanticaGrid(GridDefinition):
 
     def get_state_of_charge(self, time: datetime) -> dict[str, str]:
         result = super().get_state_of_charge(time)
-        result["BESSMariaElena"] = normalize(bess_soc(time, [5, 12], [9, 14], 9, 6, 18))
+        result["BESSMariaElena"] = normalize(bess_soc(time, [5, 13], [9, 16], 9, 6, 18))
         return result
