@@ -4,7 +4,7 @@
       "name": "Marcona/Datacenter0/active_power",
       "topic": "Marcona/Datacenter0/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter0"
     },
@@ -12,7 +12,7 @@
       "name": "Marcona/Datacenter1/active_power",
       "topic": "Marcona/Datacenter1/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter1"
     },
@@ -20,7 +20,7 @@
       "name": "Marcona/Datacenter2/active_power",
       "topic": "Marcona/Datacenter2/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter2"
     },
@@ -28,7 +28,7 @@
       "name": "Marcona/SECahuachi/active_power",
       "topic": "Marcona/SECahuachi/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SECahuachi"
     },
@@ -36,7 +36,7 @@
       "name": "Marcona/SEDerivacion/active_power",
       "topic": "Marcona/SEDerivacion/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEDerivacion"
     },
@@ -44,7 +44,7 @@
       "name": "Marcona/SEIca/active_power",
       "topic": "Marcona/SEIca/active_power",
       "filename": "Marcona/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEIca"
     },
@@ -52,7 +52,7 @@
       "name": "Marcona/CAH-DER-0/active_power_end",
       "topic": "Marcona/CAH-DER-0/active_power_end",
       "filename": "Marcona/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -60,7 +60,7 @@
       "name": "Marcona/CAH-DER-1/active_power_end",
       "topic": "Marcona/CAH-DER-1/active_power_end",
       "filename": "Marcona/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -68,7 +68,7 @@
       "name": "Marcona/DER-ICA/active_power_end",
       "topic": "Marcona/DER-ICA/active_power_end",
       "filename": "Marcona/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -76,7 +76,7 @@
       "name": "Marcona/CAH-DER-0/active_power_start",
       "topic": "Marcona/CAH-DER-0/active_power_start",
       "filename": "Marcona/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -84,7 +84,7 @@
       "name": "Marcona/CAH-DER-1/active_power_start",
       "topic": "Marcona/CAH-DER-1/active_power_start",
       "filename": "Marcona/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -92,7 +92,7 @@
       "name": "Marcona/DER-ICA/active_power_start",
       "topic": "Marcona/DER-ICA/active_power_start",
       "filename": "Marcona/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -124,7 +124,7 @@
       "name": "Marcona/CAH-DER-0/current_r_end",
       "topic": "Marcona/CAH-DER-0/current_r_end",
       "filename": "Marcona/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -132,7 +132,7 @@
       "name": "Marcona/CAH-DER-1/current_r_end",
       "topic": "Marcona/CAH-DER-1/current_r_end",
       "filename": "Marcona/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -140,7 +140,7 @@
       "name": "Marcona/DER-ICA/current_r_end",
       "topic": "Marcona/DER-ICA/current_r_end",
       "filename": "Marcona/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -148,7 +148,7 @@
       "name": "Marcona/CAH-DER-0/current_r_start",
       "topic": "Marcona/CAH-DER-0/current_r_start",
       "filename": "Marcona/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -156,7 +156,7 @@
       "name": "Marcona/CAH-DER-1/current_r_start",
       "topic": "Marcona/CAH-DER-1/current_r_start",
       "filename": "Marcona/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -164,7 +164,7 @@
       "name": "Marcona/DER-ICA/current_r_start",
       "topic": "Marcona/DER-ICA/current_r_start",
       "filename": "Marcona/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -172,7 +172,7 @@
       "name": "Marcona/CAH-DER-0/current_s_end",
       "topic": "Marcona/CAH-DER-0/current_s_end",
       "filename": "Marcona/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -180,7 +180,7 @@
       "name": "Marcona/CAH-DER-1/current_s_end",
       "topic": "Marcona/CAH-DER-1/current_s_end",
       "filename": "Marcona/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -188,7 +188,7 @@
       "name": "Marcona/DER-ICA/current_s_end",
       "topic": "Marcona/DER-ICA/current_s_end",
       "filename": "Marcona/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -196,7 +196,7 @@
       "name": "Marcona/CAH-DER-0/current_s_start",
       "topic": "Marcona/CAH-DER-0/current_s_start",
       "filename": "Marcona/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -204,7 +204,7 @@
       "name": "Marcona/CAH-DER-1/current_s_start",
       "topic": "Marcona/CAH-DER-1/current_s_start",
       "filename": "Marcona/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -212,7 +212,7 @@
       "name": "Marcona/DER-ICA/current_s_start",
       "topic": "Marcona/DER-ICA/current_s_start",
       "filename": "Marcona/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -220,7 +220,7 @@
       "name": "Marcona/CAH-DER-0/current_t_end",
       "topic": "Marcona/CAH-DER-0/current_t_end",
       "filename": "Marcona/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -228,7 +228,7 @@
       "name": "Marcona/CAH-DER-1/current_t_end",
       "topic": "Marcona/CAH-DER-1/current_t_end",
       "filename": "Marcona/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -236,7 +236,7 @@
       "name": "Marcona/DER-ICA/current_t_end",
       "topic": "Marcona/DER-ICA/current_t_end",
       "filename": "Marcona/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -244,7 +244,7 @@
       "name": "Marcona/CAH-DER-0/current_t_start",
       "topic": "Marcona/CAH-DER-0/current_t_start",
       "filename": "Marcona/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -252,7 +252,7 @@
       "name": "Marcona/CAH-DER-1/current_t_start",
       "topic": "Marcona/CAH-DER-1/current_t_start",
       "filename": "Marcona/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -260,7 +260,7 @@
       "name": "Marcona/DER-ICA/current_t_start",
       "topic": "Marcona/DER-ICA/current_t_start",
       "filename": "Marcona/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -268,7 +268,7 @@
       "name": "Marcona/Datacenter0/reactive_power",
       "topic": "Marcona/Datacenter0/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter0"
     },
@@ -276,7 +276,7 @@
       "name": "Marcona/Datacenter1/reactive_power",
       "topic": "Marcona/Datacenter1/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter1"
     },
@@ -284,7 +284,7 @@
       "name": "Marcona/Datacenter2/reactive_power",
       "topic": "Marcona/Datacenter2/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "Datacenter2"
     },
@@ -292,7 +292,7 @@
       "name": "Marcona/SECahuachi/reactive_power",
       "topic": "Marcona/SECahuachi/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SECahuachi"
     },
@@ -300,7 +300,7 @@
       "name": "Marcona/SEDerivacion/reactive_power",
       "topic": "Marcona/SEDerivacion/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEDerivacion"
     },
@@ -308,7 +308,7 @@
       "name": "Marcona/SEIca/reactive_power",
       "topic": "Marcona/SEIca/reactive_power",
       "filename": "Marcona/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEIca"
     },
@@ -316,7 +316,7 @@
       "name": "Marcona/CAH-DER-0/reactive_power_end",
       "topic": "Marcona/CAH-DER-0/reactive_power_end",
       "filename": "Marcona/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -324,7 +324,7 @@
       "name": "Marcona/CAH-DER-1/reactive_power_end",
       "topic": "Marcona/CAH-DER-1/reactive_power_end",
       "filename": "Marcona/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -332,7 +332,7 @@
       "name": "Marcona/DER-ICA/reactive_power_end",
       "topic": "Marcona/DER-ICA/reactive_power_end",
       "filename": "Marcona/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -340,7 +340,7 @@
       "name": "Marcona/CAH-DER-0/reactive_power_start",
       "topic": "Marcona/CAH-DER-0/reactive_power_start",
       "filename": "Marcona/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -348,7 +348,7 @@
       "name": "Marcona/CAH-DER-1/reactive_power_start",
       "topic": "Marcona/CAH-DER-1/reactive_power_start",
       "filename": "Marcona/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -356,7 +356,7 @@
       "name": "Marcona/DER-ICA/reactive_power_start",
       "topic": "Marcona/DER-ICA/reactive_power_start",
       "filename": "Marcona/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -436,7 +436,7 @@
       "name": "Marcona/CAH-DER-0/voltage_end",
       "topic": "Marcona/CAH-DER-0/voltage_end",
       "filename": "Marcona/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -444,7 +444,7 @@
       "name": "Marcona/CAH-DER-1/voltage_end",
       "topic": "Marcona/CAH-DER-1/voltage_end",
       "filename": "Marcona/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -452,7 +452,7 @@
       "name": "Marcona/DER-ICA/voltage_end",
       "topic": "Marcona/DER-ICA/voltage_end",
       "filename": "Marcona/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -460,7 +460,7 @@
       "name": "Marcona/CAH-DER-0/voltage_start",
       "topic": "Marcona/CAH-DER-0/voltage_start",
       "filename": "Marcona/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-0"
     },
@@ -468,7 +468,7 @@
       "name": "Marcona/CAH-DER-1/voltage_start",
       "topic": "Marcona/CAH-DER-1/voltage_start",
       "filename": "Marcona/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAH-DER-1"
     },
@@ -476,7 +476,7 @@
       "name": "Marcona/DER-ICA/voltage_start",
       "topic": "Marcona/DER-ICA/voltage_start",
       "filename": "Marcona/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "DER-ICA"
     },
@@ -484,7 +484,7 @@
       "name": "Calama/PECalama/active_power",
       "topic": "Calama/PECalama/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PECalama"
     },
@@ -492,7 +492,7 @@
       "name": "Calama/PEValleDeLosVientos/active_power",
       "topic": "Calama/PEValleDeLosVientos/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PEValleDeLosVientos"
     },
@@ -500,7 +500,7 @@
       "name": "Calama/PFVAzabache/active_power",
       "topic": "Calama/PFVAzabache/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVAzabache"
     },
@@ -508,7 +508,7 @@
       "name": "Calama/PFVJama/active_power",
       "topic": "Calama/PFVJama/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVJama"
     },
@@ -516,7 +516,7 @@
       "name": "Calama/PFVSanPedro/active_power",
       "topic": "Calama/PFVSanPedro/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVSanPedro"
     },
@@ -524,7 +524,7 @@
       "name": "Calama/PFVUsya/active_power",
       "topic": "Calama/PFVUsya/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVUsya"
     },
@@ -532,7 +532,7 @@
       "name": "Calama/SECalama/active_power",
       "topic": "Calama/SECalama/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SECalama"
     },
@@ -540,7 +540,7 @@
       "name": "Calama/SEChuquicamata/active_power",
       "topic": "Calama/SEChuquicamata/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEChuquicamata"
     },
@@ -548,7 +548,7 @@
       "name": "Calama/SEJama/active_power",
       "topic": "Calama/SEJama/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEJama"
     },
@@ -556,7 +556,7 @@
       "name": "Calama/SELasana/active_power",
       "topic": "Calama/SELasana/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SELasana"
     },
@@ -564,7 +564,7 @@
       "name": "Calama/SENuevaChuquicamata/active_power",
       "topic": "Calama/SENuevaChuquicamata/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SENuevaChuquicamata"
     },
@@ -572,7 +572,7 @@
       "name": "Calama/SESalar/active_power",
       "topic": "Calama/SESalar/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SESalar"
     },
@@ -580,7 +580,7 @@
       "name": "Calama/SEValleDeLosVientos/active_power",
       "topic": "Calama/SEValleDeLosVientos/active_power",
       "filename": "Calama/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEValleDeLosVientos"
     },
@@ -588,7 +588,7 @@
       "name": "Calama/CAL-NCH/active_power_end",
       "topic": "Calama/CAL-NCH/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -596,7 +596,7 @@
       "name": "Calama/CAL-SAL/active_power_end",
       "topic": "Calama/CAL-SAL/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -604,7 +604,7 @@
       "name": "Calama/JAM-LAS/active_power_end",
       "topic": "Calama/JAM-LAS/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -612,7 +612,7 @@
       "name": "Calama/LAS-CAL/active_power_end",
       "topic": "Calama/LAS-CAL/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -620,7 +620,7 @@
       "name": "Calama/NCH-CHU/active_power_end",
       "topic": "Calama/NCH-CHU/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -628,7 +628,7 @@
       "name": "Calama/SAL-CHU/active_power_end",
       "topic": "Calama/SAL-CHU/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -636,7 +636,7 @@
       "name": "Calama/VLV-CAL/active_power_end",
       "topic": "Calama/VLV-CAL/active_power_end",
       "filename": "Calama/active_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -644,7 +644,7 @@
       "name": "Calama/CAL-NCH/active_power_start",
       "topic": "Calama/CAL-NCH/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -652,7 +652,7 @@
       "name": "Calama/CAL-SAL/active_power_start",
       "topic": "Calama/CAL-SAL/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -660,7 +660,7 @@
       "name": "Calama/JAM-LAS/active_power_start",
       "topic": "Calama/JAM-LAS/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -668,7 +668,7 @@
       "name": "Calama/LAS-CAL/active_power_start",
       "topic": "Calama/LAS-CAL/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -676,7 +676,7 @@
       "name": "Calama/NCH-CHU/active_power_start",
       "topic": "Calama/NCH-CHU/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -684,7 +684,7 @@
       "name": "Calama/SAL-CHU/active_power_start",
       "topic": "Calama/SAL-CHU/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -692,7 +692,7 @@
       "name": "Calama/VLV-CAL/active_power_start",
       "topic": "Calama/VLV-CAL/active_power_start",
       "filename": "Calama/active_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -700,7 +700,7 @@
       "name": "Calama/PECalama/available_active_power",
       "topic": "Calama/PECalama/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PECalama"
     },
@@ -708,7 +708,7 @@
       "name": "Calama/PEValleDeLosVientos/available_active_power",
       "topic": "Calama/PEValleDeLosVientos/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PEValleDeLosVientos"
     },
@@ -716,7 +716,7 @@
       "name": "Calama/PFVAzabache/available_active_power",
       "topic": "Calama/PFVAzabache/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVAzabache"
     },
@@ -724,7 +724,7 @@
       "name": "Calama/PFVJama/available_active_power",
       "topic": "Calama/PFVJama/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVJama"
     },
@@ -732,7 +732,7 @@
       "name": "Calama/PFVSanPedro/available_active_power",
       "topic": "Calama/PFVSanPedro/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVSanPedro"
     },
@@ -740,7 +740,7 @@
       "name": "Calama/PFVUsya/available_active_power",
       "topic": "Calama/PFVUsya/available_active_power",
       "filename": "Calama/available_active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVUsya"
     },
@@ -804,7 +804,7 @@
       "name": "Calama/CAL-NCH/current_r_end",
       "topic": "Calama/CAL-NCH/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -812,7 +812,7 @@
       "name": "Calama/CAL-SAL/current_r_end",
       "topic": "Calama/CAL-SAL/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -820,7 +820,7 @@
       "name": "Calama/JAM-LAS/current_r_end",
       "topic": "Calama/JAM-LAS/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -828,7 +828,7 @@
       "name": "Calama/LAS-CAL/current_r_end",
       "topic": "Calama/LAS-CAL/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -836,7 +836,7 @@
       "name": "Calama/NCH-CHU/current_r_end",
       "topic": "Calama/NCH-CHU/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -844,7 +844,7 @@
       "name": "Calama/SAL-CHU/current_r_end",
       "topic": "Calama/SAL-CHU/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -852,7 +852,7 @@
       "name": "Calama/VLV-CAL/current_r_end",
       "topic": "Calama/VLV-CAL/current_r_end",
       "filename": "Calama/current_r_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -860,7 +860,7 @@
       "name": "Calama/CAL-NCH/current_r_start",
       "topic": "Calama/CAL-NCH/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -868,7 +868,7 @@
       "name": "Calama/CAL-SAL/current_r_start",
       "topic": "Calama/CAL-SAL/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -876,7 +876,7 @@
       "name": "Calama/JAM-LAS/current_r_start",
       "topic": "Calama/JAM-LAS/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -884,7 +884,7 @@
       "name": "Calama/LAS-CAL/current_r_start",
       "topic": "Calama/LAS-CAL/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -892,7 +892,7 @@
       "name": "Calama/NCH-CHU/current_r_start",
       "topic": "Calama/NCH-CHU/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -900,7 +900,7 @@
       "name": "Calama/SAL-CHU/current_r_start",
       "topic": "Calama/SAL-CHU/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -908,7 +908,7 @@
       "name": "Calama/VLV-CAL/current_r_start",
       "topic": "Calama/VLV-CAL/current_r_start",
       "filename": "Calama/current_r_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -916,7 +916,7 @@
       "name": "Calama/CAL-NCH/current_s_end",
       "topic": "Calama/CAL-NCH/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -924,7 +924,7 @@
       "name": "Calama/CAL-SAL/current_s_end",
       "topic": "Calama/CAL-SAL/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -932,7 +932,7 @@
       "name": "Calama/JAM-LAS/current_s_end",
       "topic": "Calama/JAM-LAS/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -940,7 +940,7 @@
       "name": "Calama/LAS-CAL/current_s_end",
       "topic": "Calama/LAS-CAL/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -948,7 +948,7 @@
       "name": "Calama/NCH-CHU/current_s_end",
       "topic": "Calama/NCH-CHU/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -956,7 +956,7 @@
       "name": "Calama/SAL-CHU/current_s_end",
       "topic": "Calama/SAL-CHU/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -964,7 +964,7 @@
       "name": "Calama/VLV-CAL/current_s_end",
       "topic": "Calama/VLV-CAL/current_s_end",
       "filename": "Calama/current_s_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -972,7 +972,7 @@
       "name": "Calama/CAL-NCH/current_s_start",
       "topic": "Calama/CAL-NCH/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -980,7 +980,7 @@
       "name": "Calama/CAL-SAL/current_s_start",
       "topic": "Calama/CAL-SAL/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -988,7 +988,7 @@
       "name": "Calama/JAM-LAS/current_s_start",
       "topic": "Calama/JAM-LAS/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -996,7 +996,7 @@
       "name": "Calama/LAS-CAL/current_s_start",
       "topic": "Calama/LAS-CAL/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1004,7 +1004,7 @@
       "name": "Calama/NCH-CHU/current_s_start",
       "topic": "Calama/NCH-CHU/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1012,7 +1012,7 @@
       "name": "Calama/SAL-CHU/current_s_start",
       "topic": "Calama/SAL-CHU/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1020,7 +1020,7 @@
       "name": "Calama/VLV-CAL/current_s_start",
       "topic": "Calama/VLV-CAL/current_s_start",
       "filename": "Calama/current_s_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1028,7 +1028,7 @@
       "name": "Calama/CAL-NCH/current_t_end",
       "topic": "Calama/CAL-NCH/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1036,7 +1036,7 @@
       "name": "Calama/CAL-SAL/current_t_end",
       "topic": "Calama/CAL-SAL/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1044,7 +1044,7 @@
       "name": "Calama/JAM-LAS/current_t_end",
       "topic": "Calama/JAM-LAS/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1052,7 +1052,7 @@
       "name": "Calama/LAS-CAL/current_t_end",
       "topic": "Calama/LAS-CAL/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1060,7 +1060,7 @@
       "name": "Calama/NCH-CHU/current_t_end",
       "topic": "Calama/NCH-CHU/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1068,7 +1068,7 @@
       "name": "Calama/SAL-CHU/current_t_end",
       "topic": "Calama/SAL-CHU/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1076,7 +1076,7 @@
       "name": "Calama/VLV-CAL/current_t_end",
       "topic": "Calama/VLV-CAL/current_t_end",
       "filename": "Calama/current_t_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1084,7 +1084,7 @@
       "name": "Calama/CAL-NCH/current_t_start",
       "topic": "Calama/CAL-NCH/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1092,7 +1092,7 @@
       "name": "Calama/CAL-SAL/current_t_start",
       "topic": "Calama/CAL-SAL/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1100,7 +1100,7 @@
       "name": "Calama/JAM-LAS/current_t_start",
       "topic": "Calama/JAM-LAS/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1108,7 +1108,7 @@
       "name": "Calama/LAS-CAL/current_t_start",
       "topic": "Calama/LAS-CAL/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1116,7 +1116,7 @@
       "name": "Calama/NCH-CHU/current_t_start",
       "topic": "Calama/NCH-CHU/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1124,7 +1124,7 @@
       "name": "Calama/SAL-CHU/current_t_start",
       "topic": "Calama/SAL-CHU/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1132,7 +1132,7 @@
       "name": "Calama/VLV-CAL/current_t_start",
       "topic": "Calama/VLV-CAL/current_t_start",
       "filename": "Calama/current_t_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1140,7 +1140,7 @@
       "name": "Calama/PECalama/frequency",
       "topic": "Calama/PECalama/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PECalama"
     },
@@ -1148,7 +1148,7 @@
       "name": "Calama/PEValleDeLosVientos/frequency",
       "topic": "Calama/PEValleDeLosVientos/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PEValleDeLosVientos"
     },
@@ -1156,7 +1156,7 @@
       "name": "Calama/PFVAzabache/frequency",
       "topic": "Calama/PFVAzabache/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVAzabache"
     },
@@ -1164,7 +1164,7 @@
       "name": "Calama/PFVJama/frequency",
       "topic": "Calama/PFVJama/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVJama"
     },
@@ -1172,7 +1172,7 @@
       "name": "Calama/PFVSanPedro/frequency",
       "topic": "Calama/PFVSanPedro/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVSanPedro"
     },
@@ -1180,7 +1180,7 @@
       "name": "Calama/PFVUsya/frequency",
       "topic": "Calama/PFVUsya/frequency",
       "filename": "Calama/frequency.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVUsya"
     },
@@ -1188,7 +1188,7 @@
       "name": "Calama/PECalama/power_set_point",
       "topic": "Calama/PECalama/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PECalama"
     },
@@ -1196,7 +1196,7 @@
       "name": "Calama/PEValleDeLosVientos/power_set_point",
       "topic": "Calama/PEValleDeLosVientos/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PEValleDeLosVientos"
     },
@@ -1204,7 +1204,7 @@
       "name": "Calama/PFVAzabache/power_set_point",
       "topic": "Calama/PFVAzabache/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVAzabache"
     },
@@ -1212,7 +1212,7 @@
       "name": "Calama/PFVJama/power_set_point",
       "topic": "Calama/PFVJama/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVJama"
     },
@@ -1220,7 +1220,7 @@
       "name": "Calama/PFVSanPedro/power_set_point",
       "topic": "Calama/PFVSanPedro/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVSanPedro"
     },
@@ -1228,7 +1228,7 @@
       "name": "Calama/PFVUsya/power_set_point",
       "topic": "Calama/PFVUsya/power_set_point",
       "filename": "Calama/power_set_point.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVUsya"
     },
@@ -1236,7 +1236,7 @@
       "name": "Calama/PECalama/reactive_power",
       "topic": "Calama/PECalama/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PECalama"
     },
@@ -1244,7 +1244,7 @@
       "name": "Calama/PEValleDeLosVientos/reactive_power",
       "topic": "Calama/PEValleDeLosVientos/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PEValleDeLosVientos"
     },
@@ -1252,7 +1252,7 @@
       "name": "Calama/PFVAzabache/reactive_power",
       "topic": "Calama/PFVAzabache/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVAzabache"
     },
@@ -1260,7 +1260,7 @@
       "name": "Calama/PFVJama/reactive_power",
       "topic": "Calama/PFVJama/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVJama"
     },
@@ -1268,7 +1268,7 @@
       "name": "Calama/PFVSanPedro/reactive_power",
       "topic": "Calama/PFVSanPedro/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVSanPedro"
     },
@@ -1276,7 +1276,7 @@
       "name": "Calama/PFVUsya/reactive_power",
       "topic": "Calama/PFVUsya/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "PFVUsya"
     },
@@ -1284,7 +1284,7 @@
       "name": "Calama/SECalama/reactive_power",
       "topic": "Calama/SECalama/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SECalama"
     },
@@ -1292,7 +1292,7 @@
       "name": "Calama/SEChuquicamata/reactive_power",
       "topic": "Calama/SEChuquicamata/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEChuquicamata"
     },
@@ -1300,7 +1300,7 @@
       "name": "Calama/SEJama/reactive_power",
       "topic": "Calama/SEJama/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEJama"
     },
@@ -1308,7 +1308,7 @@
       "name": "Calama/SELasana/reactive_power",
       "topic": "Calama/SELasana/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SELasana"
     },
@@ -1316,7 +1316,7 @@
       "name": "Calama/SENuevaChuquicamata/reactive_power",
       "topic": "Calama/SENuevaChuquicamata/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SENuevaChuquicamata"
     },
@@ -1324,7 +1324,7 @@
       "name": "Calama/SESalar/reactive_power",
       "topic": "Calama/SESalar/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SESalar"
     },
@@ -1332,7 +1332,7 @@
       "name": "Calama/SEValleDeLosVientos/reactive_power",
       "topic": "Calama/SEValleDeLosVientos/reactive_power",
       "filename": "Calama/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEValleDeLosVientos"
     },
@@ -1340,7 +1340,7 @@
       "name": "Calama/CAL-NCH/reactive_power_end",
       "topic": "Calama/CAL-NCH/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1348,7 +1348,7 @@
       "name": "Calama/CAL-SAL/reactive_power_end",
       "topic": "Calama/CAL-SAL/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1356,7 +1356,7 @@
       "name": "Calama/JAM-LAS/reactive_power_end",
       "topic": "Calama/JAM-LAS/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1364,7 +1364,7 @@
       "name": "Calama/LAS-CAL/reactive_power_end",
       "topic": "Calama/LAS-CAL/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1372,7 +1372,7 @@
       "name": "Calama/NCH-CHU/reactive_power_end",
       "topic": "Calama/NCH-CHU/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1380,7 +1380,7 @@
       "name": "Calama/SAL-CHU/reactive_power_end",
       "topic": "Calama/SAL-CHU/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1388,7 +1388,7 @@
       "name": "Calama/VLV-CAL/reactive_power_end",
       "topic": "Calama/VLV-CAL/reactive_power_end",
       "filename": "Calama/reactive_power_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1396,7 +1396,7 @@
       "name": "Calama/CAL-NCH/reactive_power_start",
       "topic": "Calama/CAL-NCH/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1404,7 +1404,7 @@
       "name": "Calama/CAL-SAL/reactive_power_start",
       "topic": "Calama/CAL-SAL/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1412,7 +1412,7 @@
       "name": "Calama/JAM-LAS/reactive_power_start",
       "topic": "Calama/JAM-LAS/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1420,7 +1420,7 @@
       "name": "Calama/LAS-CAL/reactive_power_start",
       "topic": "Calama/LAS-CAL/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1428,7 +1428,7 @@
       "name": "Calama/NCH-CHU/reactive_power_start",
       "topic": "Calama/NCH-CHU/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1436,7 +1436,7 @@
       "name": "Calama/SAL-CHU/reactive_power_start",
       "topic": "Calama/SAL-CHU/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1444,7 +1444,7 @@
       "name": "Calama/VLV-CAL/reactive_power_start",
       "topic": "Calama/VLV-CAL/reactive_power_start",
       "filename": "Calama/reactive_power_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1612,7 +1612,7 @@
       "name": "Calama/CAL-NCH/voltage_end",
       "topic": "Calama/CAL-NCH/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1620,7 +1620,7 @@
       "name": "Calama/CAL-SAL/voltage_end",
       "topic": "Calama/CAL-SAL/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1628,7 +1628,7 @@
       "name": "Calama/JAM-LAS/voltage_end",
       "topic": "Calama/JAM-LAS/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1636,7 +1636,7 @@
       "name": "Calama/LAS-CAL/voltage_end",
       "topic": "Calama/LAS-CAL/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1644,7 +1644,7 @@
       "name": "Calama/NCH-CHU/voltage_end",
       "topic": "Calama/NCH-CHU/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1652,7 +1652,7 @@
       "name": "Calama/SAL-CHU/voltage_end",
       "topic": "Calama/SAL-CHU/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1660,7 +1660,7 @@
       "name": "Calama/VLV-CAL/voltage_end",
       "topic": "Calama/VLV-CAL/voltage_end",
       "filename": "Calama/voltage_end.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1668,7 +1668,7 @@
       "name": "Calama/CAL-NCH/voltage_start",
       "topic": "Calama/CAL-NCH/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-NCH"
     },
@@ -1676,7 +1676,7 @@
       "name": "Calama/CAL-SAL/voltage_start",
       "topic": "Calama/CAL-SAL/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "CAL-SAL"
     },
@@ -1684,7 +1684,7 @@
       "name": "Calama/JAM-LAS/voltage_start",
       "topic": "Calama/JAM-LAS/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "JAM-LAS"
     },
@@ -1692,7 +1692,7 @@
       "name": "Calama/LAS-CAL/voltage_start",
       "topic": "Calama/LAS-CAL/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "LAS-CAL"
     },
@@ -1700,7 +1700,7 @@
       "name": "Calama/NCH-CHU/voltage_start",
       "topic": "Calama/NCH-CHU/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "NCH-CHU"
     },
@@ -1708,7 +1708,7 @@
       "name": "Calama/SAL-CHU/voltage_start",
       "topic": "Calama/SAL-CHU/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SAL-CHU"
     },
@@ -1716,7 +1716,7 @@
       "name": "Calama/VLV-CAL/voltage_start",
       "topic": "Calama/VLV-CAL/voltage_start",
       "filename": "Calama/voltage_start.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "VLV-CAL"
     },
@@ -1724,7 +1724,7 @@
       "name": "Atlantica/BESSMariaElena/active_power",
       "topic": "Atlantica/BESSMariaElena/active_power",
       "filename": "Atlantica/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "BESSMariaElena"
     },
@@ -1732,7 +1732,7 @@
       "name": "Atlantica/SEMariaElena/active_power",
       "topic": "Atlantica/SEMariaElena/active_power",
       "filename": "Atlantica/active_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEMariaElena"
     },
@@ -1740,7 +1740,7 @@
       "name": "Atlantica/BESSMariaElena/reactive_power",
       "topic": "Atlantica/BESSMariaElena/reactive_power",
       "filename": "Atlantica/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "BESSMariaElena"
     },
@@ -1748,7 +1748,7 @@
       "name": "Atlantica/SEMariaElena/reactive_power",
       "topic": "Atlantica/SEMariaElena/reactive_power",
       "filename": "Atlantica/reactive_power.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "SEMariaElena"
     },
@@ -1756,7 +1756,7 @@
       "name": "Atlantica/BESSMariaElena/state_of_charge",
       "topic": "Atlantica/BESSMariaElena/state_of_charge",
       "filename": "Atlantica/state_of_charge.csv",
-      "noise_factor": 0.02,
+      "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "BESSMariaElena"
     }
