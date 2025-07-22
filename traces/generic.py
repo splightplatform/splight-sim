@@ -149,17 +149,12 @@ class GridDefinition(ABC):
                     current += step
             # Add trace dicts for each asset/attribute
             for asset in asset_list:
-                noise = (
-                    0.02
-                    if ("switch_status" not in attr and attr != "contingency")
-                    else None
-                )
                 traces.append(
                     {
                         "name": f"{self.name}/{asset}/{attr}",
                         "topic": f"{self.name}/{asset}/{attr}",
                         "filename": f"{self.name}/{attr}.csv",
-                        "noise_factor": noise,
+                        "noise_factor": None,
                         "match_timestamp_by": "hour",
                         "target_value": asset,
                     }
