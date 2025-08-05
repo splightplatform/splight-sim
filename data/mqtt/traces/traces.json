@@ -1759,6 +1759,94 @@
       "noise_factor": null,
       "match_timestamp_by": "hour",
       "target_value": "BESSMariaElena"
+    },
+    {
+      "name": "FinisTerrae/BESSFinisTerrae/active_power",
+      "topic": "FinisTerrae/BESSFinisTerrae/active_power",
+      "filename": "FinisTerrae/active_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/active_power",
+      "topic": "FinisTerrae/PFVFinisTerrae/active_power",
+      "filename": "FinisTerrae/active_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/SEFinisTerrae/active_power",
+      "topic": "FinisTerrae/SEFinisTerrae/active_power",
+      "filename": "FinisTerrae/active_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "SEFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/available_active_power",
+      "topic": "FinisTerrae/PFVFinisTerrae/available_active_power",
+      "filename": "FinisTerrae/available_active_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/frequency",
+      "topic": "FinisTerrae/PFVFinisTerrae/frequency",
+      "filename": "FinisTerrae/frequency.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/power_set_point",
+      "topic": "FinisTerrae/PFVFinisTerrae/power_set_point",
+      "filename": "FinisTerrae/power_set_point.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/BESSFinisTerrae/reactive_power",
+      "topic": "FinisTerrae/BESSFinisTerrae/reactive_power",
+      "filename": "FinisTerrae/reactive_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/reactive_power",
+      "topic": "FinisTerrae/PFVFinisTerrae/reactive_power",
+      "filename": "FinisTerrae/reactive_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/SEFinisTerrae/reactive_power",
+      "topic": "FinisTerrae/SEFinisTerrae/reactive_power",
+      "filename": "FinisTerrae/reactive_power.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "SEFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/BESSFinisTerrae/state_of_charge",
+      "topic": "FinisTerrae/BESSFinisTerrae/state_of_charge",
+      "filename": "FinisTerrae/state_of_charge.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "BESSFinisTerrae"
+    },
+    {
+      "name": "FinisTerrae/PFVFinisTerrae/switch_status",
+      "topic": "FinisTerrae/PFVFinisTerrae/switch_status",
+      "filename": "FinisTerrae/switch_status.csv",
+      "noise_factor": null,
+      "match_timestamp_by": "hour",
+      "target_value": "PFVFinisTerrae"
     }
   ]
 }

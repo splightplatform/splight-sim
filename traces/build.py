@@ -3,6 +3,7 @@ import os
 
 from grids.atlantica import AtlanticaGrid
 from grids.calama import CalamaGrid
+from grids.finisterrae import FinisTerraeGrid
 from grids.marcona import MarconaGrid
 
 OUTPUT_DIR = "data/mqtt/traces"
@@ -21,7 +22,7 @@ def generate_traces_json(traces, output_path="data/mqtt/traces/traces.json"):
 
 def main():
     # Initialize
-    grids = [MarconaGrid(), CalamaGrid(), AtlanticaGrid()]
+    grids = [MarconaGrid(), CalamaGrid(), AtlanticaGrid(), FinisTerraeGrid()]
 
     # Build each grid and collect traces
     all_traces = []
