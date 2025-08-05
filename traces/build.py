@@ -3,8 +3,8 @@ import os
 
 from grids.atlantica import AtlanticaGrid
 from grids.calama import CalamaGrid
-from grids.marcona import MarconaGrid
 from grids.finisterrae import FinisTerraeGrid
+from grids.marcona import MarconaGrid
 
 OUTPUT_DIR = "data/mqtt/traces"
 

@@ -14,7 +14,7 @@ class FinisTerraeGrid(GridDefinition):
         return {
             "SEFinisTerrae": "Bus",
             "BESSFinisTerrae": "Battery",
-            "PFVFinisTerrae" : "Generator",
+            "PFVFinisTerrae": "Generator",
         }
 
     def get_active_power(self, time: datetime) -> dict[str, str]:
@@ -61,15 +61,21 @@ class FinisTerraeGrid(GridDefinition):
 
     def get_available_active_power(self, time: datetime) -> dict[str, str]:
         result = super().get_available_active_power(time)
-        result["PFVFinisTerrae"] = normalize(self.power(time, 20).get("PFVFinisTerrae", 0.0))
+        result["PFVFinisTerrae"] = normalize(
+            self.power(time, 20).get("PFVFinisTerrae", 0.0)
+        )
         return result
 
     def get_power_set_point(self, time: datetime) -> dict[str, str]:
         result = super().get_power_set_point(time)
-        result["PFVFinisTerrae"] = normalize(self.power(time, 16).get("PFVFinisTerrae", 0.0))
+        result["PFVFinisTerrae"] = normalize(
+            self.power(time, 16).get("PFVFinisTerrae", 0.0)
+        )
         return result
 
     def get_state_of_charge(self, time: datetime) -> dict[str, str]:
         result = super().get_state_of_charge(time)
-        result["BESSFinisTerrae"] = normalize(bess_soc(time, [5, 13], [9, 16], 9, 6, 18))
+        result["BESSFinisTerrae"] = normalize(
+            bess_soc(time, [5, 13], [9, 16], 9, 6, 18)
+        )
         return result
