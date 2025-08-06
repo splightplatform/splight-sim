@@ -12,21 +12,10 @@ class FinisTerraeGrid(GridDefinition):
     @property
     def assets(self) -> dict[str, str]:
         return {
-            "SEFinisTerrae": "Bus",
             "BESSFinisTerrae": "Battery",
             "PFVFinisTerrae": "Generator",
+            "SEFinisTerrae": "Bus",
         }
-
-    def get_active_power(self, time: datetime) -> dict[str, str]:
-        result = super().get_active_power(time)
-        result["SEFinisTerrae"] = normalize(
-            self.power(time, 15).get("SEFinisTerrae", 0.0)
-        )
-        result["BESSFinisTerrae"] = normalize(
-            self.power(time, 15).get("BESSFinisTerrae", 0.0)
-        )
-
-        return result
 
     @staticmethod
     def power(
@@ -49,13 +38,29 @@ class FinisTerraeGrid(GridDefinition):
             "PFVFinisTerrae": pfv_fterrae,
         }
 
+    def get_active_power(self, time: datetime) -> dict[str, str]:
+        result = super().get_active_power(time)
+        result["BESSFinisTerrae"] = normalize(
+            self.power(time, 15).get("BESSFinisTerrae", 0.0)
+        )
+        result["PFVFinisTerrae"] = normalize(
+            self.power(time, 15).get("PFVFinisTerrae", 0.0)
+        )
+        result["SEFinisTerrae"] = normalize(
+            self.power(time, 15).get("SEFinisTerrae", 0.0)
+        )
+        return result
+
     def get_reactive_power(self, time: datetime) -> dict[str, str]:
         result = super().get_reactive_power(time)
-        result["SEFinisTerrae"] = normalize(
-            self.power(time, 15, reactive=True).get("SEFinisTerrae", 0.0)
-        )
         result["BESSFinisTerrae"] = normalize(
             self.power(time, 15, reactive=True).get("BESSFinisTerrae", 0.0)
+        )
+        result["PFVFinisTerrae"] = normalize(
+            self.power(time, 15, reactive=True).get("PFVFinisTerrae", 0.0)
+        )
+        result["SEFinisTerrae"] = normalize(
+            self.power(time, 15, reactive=True).get("SEFinisTerrae", 0.0)
         )
         return result
 
