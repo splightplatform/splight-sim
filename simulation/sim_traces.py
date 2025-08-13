@@ -4,6 +4,7 @@ import time
 import json
 import argparse
 from datetime import datetime
+from typing import Dict
 
 import pandas as pd
 
@@ -43,14 +44,14 @@ def process(df_active, df_reactive, active_mapping, reactive_mapping):
 class HypersimSimulator:
     def __init__(self, design_path: str):
         self.design_path: str = design_path
-        self.devices: dict = {}
-        self.metrics_ref: dict[str, pd.DataFrame] = {}
+        self.devices: Dict = {}
+        self.metrics_ref: Dict[str, pd.DataFrame] = {}
 
     def add_metric_reference(self, metric: str, df: pd.DataFrame) -> None:
         self.metrics_ref.update({metric: df})
 
     def add_device(
-        self, device_name: str, device_metric: dict[str, str]
+        self, device_name: str, device_metric: Dict[str, str]
     ) -> None:
         """Add a device to the simulation.
 
@@ -85,6 +86,7 @@ class HypersimSimulator:
 
     def _run_simulation_loop(self) -> None:
         # TODO: Implement while True to send data after each minute
+        print("Running simulation loop ...")
 
     def _start_simulation(self) -> None:
         print("Starting simulation ...")
