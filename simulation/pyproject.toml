@@ -1,14 +1,10 @@
 [project]
-name = "SplightSIM"
-version = "4.0.0"
-description = "A simulated organization"
+name = "HypersimSimulation"
+version = "1.0.0"
+description = ""
 requires-python = ">=3.8"
 
 dependencies = [
-    "numpy==1.26.4",
-    "pandas==2.2.3",
-    "haversine==2.9.0",
-    "tqdm==4.67.1",
 ]
 
 [project.optional-dependencies]
