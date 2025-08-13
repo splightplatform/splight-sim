@@ -1,0 +1,13 @@
+{
+    "desing_path": "../../hypersim/calama_splight_sim.ecf",
+    "devices": {
+        "PECalama": {
+            "active_power": "P1",
+            "reactive_power": "Q1"
+        }
+    },
+    "input_files": {
+        "active_power": "...",
+        "reactive_power": "..."
+    }
+}
