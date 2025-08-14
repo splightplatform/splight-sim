@@ -1,0 +1,14 @@
+{
+    "devices": {
+        "PECalama": {
+            "asset": {
+                "id": "d1420bd5-f8ca-4e46-9d83-c9344ed3de93",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg1.Pmean",
+                "reactive_power": "sg1.Qmean"
+            }
+        }
+    }
+}
