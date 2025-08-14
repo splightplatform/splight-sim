@@ -2,7 +2,7 @@
 name = "HypersimSimulation"
 version = "1.0.0"
 description = ""
-requires-python = ">=3.9,<3.10"
+requires-python = ">=3.10,<3.11"
 
 dependencies = [
     "grpcio==1.46.3",
@@ -11,7 +11,7 @@ dependencies = [
     "pandas>=2.0.3",
     "pythonping>=1.1.4",
     "setuptools>=75.3.2",
-    "splight-lib==5.22.4.dev1",
+    "splight-lib",
 ]
 
 [dependency-groups]
