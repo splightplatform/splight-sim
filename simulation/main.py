@@ -3,9 +3,14 @@ import json
 from datetime import datetime, timezone
 from typing import Protocol, TypedDict
 
+import HyWorksApiGRPC as HyWorksApi
 from splight_lib.execution import ExecutionEngine, Task
 from splight_lib.models import Asset, Number
-import HyWorksApiGRPC as HyWorksApi
+from splight_lib.settings import (
+    api_settings,
+    datalake_settings,
+    workspace_settings,
+)
 
 
 class AssetSummary(TypedDict):
@@ -35,6 +40,10 @@ class HypersimDataReader:
 
     def read(self) -> dict[str, float]:
         values = HyWorksApi.getLastSensorValues(list(self._sensors))
+        if len(values) != len(self._sensors):
+            raise ValueError(
+                "An error occurred while reading sensors. The number of read values does not match the number of sensors."
+            )
         return {key: value for key, value in zip(self._sensors, values)}
 
 
@@ -47,7 +56,7 @@ class DeviceDataSaver:
     def add_attribute(self, attribute: str, sensor: str) -> None:
         if attribute not in self._attributes:
             raise ValueError(f"Attribute {attribute} not found in asset.")
-        if attribute in self._att_sensor_map:
+        if attribute in self._attr_sensor_map:
             print(f"Attribute {attribute} already added.")
         self._attr_sensor_map[sensor] = self._attributes[attribute]
 
@@ -86,6 +95,18 @@ class HypersimConnector:
             saver.process_data(data, now)
 
 
+def configure(file_path: dict) -> None:
+    with open(file_path, "r", encoding="utf-8") as file:
+        config = json.load(file)
+    workspace_settings.SPLIGHT_ACCESS_ID = config["splight_access_id"]
+    workspace_settings.SPLIGHT_SECRET_KEY = config["splight_secret_key"]
+    workspace_settings.SPLIGHT_PLATFORM_API_HOST = config.get(
+        "splight_platform_api_host"
+    )
+    api_settings.API_VERSION = "v4"
+    datalake_settings.DL_BUFFER_TIMEOUT = 10
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Run Hypersim simulation with config"
@@ -95,7 +116,13 @@ def main():
         "-c",
         help="Path to JSON configuration file",
     )
+    parser.add_argument(
+        "--credentials-file",
+        "-cf",
+        help="Path to JSON credentials file",
+    )
     args = parser.parse_args()
+    configure(args.credentials_file)
     with open(args.config_file, "r", encoding="utf-8") as config_file:
         config = json.load(config_file)
 
