@@ -119,10 +119,9 @@ def main():
     )
     simulator.add_metric_reference("active_power", active_power_df)
     simulator.add_metric_reference("reactive_power", reactive_power_df)
-    for device_name, metrics in config["devices"]:
+    for device_name, metrics in config["devices"].items():
         simulator.add_device(device_name, metrics)
 
-    __import__("ipdb").set_trace()
     simulator.start()
 
     try:
