@@ -2,6 +2,7 @@ import argparse
 import json
 from typing import TypedDict
 
+from splight_lib.execution import ExecutionEngine, Task
 from splight_lib.models import Asset
 
 
@@ -32,7 +33,7 @@ class HypersimDataReader:
             )
 
     def process(self) -> None:
-        __import__('ipdb').set_trace()
+        print("Reading data")
 
 
 def main():
@@ -49,12 +50,18 @@ def main():
         config = json.load(config_file)
 
     reader = HypersimDataReader()
-    for device in config["devices"].items():
+    for device, device_info in config["devices"].items():
         reader.add_asset(
-            asset=device["asset"], attributes=device["attributes"]
+            asset=device_info["asset"], attributes=device_info["attributes"]
         )
+    reader_task = Task(
+        target=reader.process,
+        period=60,
+    )
 
-    __import__("ipdb").set_trace()
+    engine = ExecutionEngine()
+    engine.add_task(reader_task, in_background=False, exit_on_fail=True)
+    engine.start()
 
 
 if __name__ == "__main__":
