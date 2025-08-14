@@ -45,7 +45,7 @@ def process(df_active, df_reactive, active_mapping, reactive_mapping):
 
 class HypersimSimulator:
     def __init__(self, config_path: str):
-    
+
         with open(config_path, "r", encoding="utf-8") as f:
             config = json.load(f)
 
@@ -77,8 +77,47 @@ class HypersimSimulator:
         HyWorksApi.stopSim()
         print("Simulation stopped ...")
 
-    def run_simulation_loop(self) -> None:
-        print("Running simulation loop ...")
+    def set_parameter(value, block, column, hour_str):
+    try:
+        value = float(value[column])
+        HyWorksApi.setComponentParameter(block, 'A', str(value))
+        print(f"[{hour_str}] Active: {column} → {block}.A = {value}")
+    except Exception as e:
+        print(f"[{hour_str}] Error active {column} → {block}: {e}")
+
+    def run_simulation_loop(config_path):
+      
+        with open(config_path, "r") as f:
+            config = json.load(f)
+
+        devices = config["devices"]
+
+        active_df = pd.read_csv(config["input_files"]["active_power"])
+        reactive_df = pd.read_csv(config["input_files"]["reactive_power"])
+
+        for i in range(len(active_df)):
+            hour_str = datetime.now().strftime("%H:%M:%S")
+
+            for device_name, mapping in devices.items():
+              
+                set_parameter(
+                    active_df.iloc[i],        
+                    mapping["active_power"],   
+                    mapping["active_power"],   
+                    hour_str
+                )
+
+                set_parameter(
+                    reactive_df.iloc[i],       
+                    mapping["reactive_power"], 
+                    mapping["reactive_power"], 
+                    hour_str
+                )
+
+            time.sleep(1)
+
+        print("Simulación finalizada.")
+        
 
     def _start_simulation(self) -> None:
         print("Starting simulation ...")
