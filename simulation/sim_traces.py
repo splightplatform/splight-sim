@@ -9,13 +9,14 @@ from typing import Dict
 import pandas as pd
 
 # sys.path.append(r"C:\OPAL-RT\HYPERSIM\hypersim_2024.3.0.o30\Windows\HyApi\python")
-# import HyWorksApiGRPC as HyWorksApi
+sys.path.append(r"C:\OPAL-RT\HYPERSIM\hypersim_2025.1.0.o39\Windows\HyApi\python")
+import HyWorksApiGRPC as HyWorksApi
 
 
 def set_parameter(value, block, column, hour_str):
     try:
         value = float(value[column])
-        # HyWorksApi.setComponentParameter(block, "A", str(value))
+        HyWorksApi.setComponentParameter(block, "A", str(value))
         print(f"[{hour_str}] Active: {column} → {block}.A = {value}")
     except Exception as e:
         print(f"[{hour_str}] Error active {column} → {block}: {e}")
@@ -41,11 +42,20 @@ def process(df_active, df_reactive, active_mapping, reactive_mapping):
         print(f"[{hora_str}] Data not found for this hour.")
 
 
+
 class HypersimSimulator:
-    def __init__(self, design_path: str):
-        self.design_path: str = design_path
-        self.devices: Dict = {}
+    def __init__(self, config_path: str):
+    
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = json.load(f)
+
+        self.design_path: str = config["design_path"]
+        self.devices: Dict = config["devices"]
         self.metrics_ref: Dict[str, pd.DataFrame] = {}
+
+        for metric_name, csv_path in config["input_files"].items():
+            df = pd.read_csv(csv_path)
+            self.add_metric_reference(metric_name, df)
 
     def add_metric_reference(self, metric: str, df: pd.DataFrame) -> None:
         self.metrics_ref.update({metric: df})
@@ -53,22 +63,8 @@ class HypersimSimulator:
     def add_device(
         self, device_name: str, device_metric: Dict[str, str]
     ) -> None:
-        """Add a device to the simulation.
-
-        Parameters
-        ----------
-        device_name : str
-            Name of the device to be added.
-        device_metric : Dict[str, str]
-            Metric of the device to be added.
-        """
         if device_name in self.devices:
             raise ValueError(f"Device {device_name} already exists.")
-        # TODO: Check if device_name is in each of the Dataframes of metrics_ref
-        # if device_name not in self.metrics_ref:
-        #     raise ValueError(
-        #         f"Device {device_name} has no metrics table associated."
-        #     )
         self.devices.update({device_name: device_metric})
 
     def start(self) -> None:
@@ -78,19 +74,19 @@ class HypersimSimulator:
 
     def stop(self) -> None:
         print("Stopping simulation ...")
-        # HyWorksApi.stopSim()
+        HyWorksApi.stopSim()
         print("Simulation stopped ...")
 
     def run_simulation_loop(self) -> None:
-        # TODO: Implement while True to send data after each minute
         print("Running simulation loop ...")
 
     def _start_simulation(self) -> None:
         print("Starting simulation ...")
-        # HyWorksApi.startAndConnectHypersim()
-        # HyWorksApi.openDesign(self.design_path)
-        # HyWorksApi.startSim()
+        HyWorksApi.startAndConnectHypersim()
+        HyWorksApi.openDesign(self.design_path)
+        HyWorksApi.startSim()
         print("Simulation started ...")
+
 
 
 def main():
