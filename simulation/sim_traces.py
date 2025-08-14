@@ -59,15 +59,16 @@ class HypersimSimulator:
         ----------
         device_name : str
             Name of the device to be added.
-        device_metric : str
+        device_metric : Dict[str, str]
             Metric of the device to be added.
         """
         if device_name in self.devices:
             raise ValueError(f"Device {device_name} already exists.")
-        if device_name not in self.metrics_ref:
-            raise ValueError(
-                f"Device {device_name} has no metrics table associated."
-            )
+        # TODO: Check if device_name is in each of the Dataframes of metrics_ref
+        # if device_name not in self.metrics_ref:
+        #     raise ValueError(
+        #         f"Device {device_name} has no metrics table associated."
+        #     )
         self.devices.update({device_name: device_metric})
 
     def start(self) -> None:
@@ -75,16 +76,12 @@ class HypersimSimulator:
             raise ValueError("No metrics tables added to the simulation.")
         self._start_simulation()
 
-        self._run_simulation_loop()
-        __import__("ipdb").set_trace()
-
     def stop(self) -> None:
         print("Stopping simulation ...")
         # HyWorksApi.stopSim()
         print("Simulation stopped ...")
-        __import__("ipdb").set_trace()
 
-    def _run_simulation_loop(self) -> None:
+    def run_simulation_loop(self) -> None:
         # TODO: Implement while True to send data after each minute
         print("Running simulation loop ...")
 
@@ -126,9 +123,10 @@ def main():
         simulator.add_device(device_name, metrics)
 
     __import__("ipdb").set_trace()
+    simulator.start()
 
     try:
-        simulator.start()
+        simulator.run_simulation_loop()
     except Exception as exc:
         print(f"Error starting simulation: {exc}")
         simulator.stop()
