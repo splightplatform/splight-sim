@@ -9,6 +9,112 @@
                 "active_power": "sg1.Pmean",
                 "reactive_power": "sg1.Qmean"
             }
+        },
+        "PFVSanPedro": {
+            "asset": {
+                "id": "13980ba9-8e8f-40a3-b219-273f52eba7c5",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg2.Pmean",
+                "reactive_power": "sg2.Qmean"
+            }
+        },
+        "PFVJama1": {
+            "asset": {
+                "id": "59cea76b-564a-4638-990b-b1b69f25d66a",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg3.Pmean",
+                "reactive_power": "sg3.Qmean"
+            }
+        },
+        "PFVJama2": {
+            "asset": {
+                "id": "43d9e1a4-2810-4070-a7a0-9e89c0c85e83",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg4.Pmean",
+                "reactive_power": "sg4.Qmean"
+            }
+        },
+        "PEValleDeLosVientos1": {
+            "asset": {
+                "id": "8d3dc2d8-2396-4458-9103-ea06193fbbc4",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg5.Pmean",
+                "reactive_power": "sg5.Qmean"
+            }
+        },
+        "PEValleDeLosVientos2": {
+            "asset": {
+                "id": "9b45f8ae-70ac-4ed1-8277-187cb74f1d4d",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg6.Pmean",
+                "reactive_power": "sg6.Qmean"
+            }
+        },
+        "PFVAzabache": {
+            "asset": {
+                "id": "4713054d-729c-4362-8a5b-b6f74bd77ee7",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg7.Pmean",
+                "reactive_power": "sg7.Qmean"
+            }
+        },
+        "PFVUsya": {
+            "asset": {
+                "id": "8af5a80b-da2b-443d-a3ee-63d912a804cc",
+                "kind": "Generator"
+            },
+            "attributes": {
+                "active_power": "sg8.Pmean",
+                "reactive_power": "sg8.Qmean"
+            }
+        },
+        "CAL-CHU": {
+            "asset": {
+                "id": "f4904113-64dd-4c42-812f-e8d86151cb6e",
+                "kind": "Line"
+            },
+            "attributes": {
+                "active_power_start": "sl1.Pmean",
+                "reactive_power_start": "sl1.Qmean",
+                "active_power_end": "sl2.Pmean",
+                "reactive_power_end": "sl2.Qmean"
+            }
+        },
+        "CAL-SAL": {
+            "asset": {
+                "id": "93402364-5a00-48e9-ab06-0fccd7079335",
+                "kind": "Line"
+            },
+            "attributes": {
+                "active_power_start": "sl3.Pmean",
+                "reactive_power_start": "sl3.Qmean",
+                "active_power_end": "sl4.Pmean",
+                "reactive_power_end": "sl4.Qmean"
+            }
+        },
+        "SAL-CHU": {}
+            "asset": {
+                "id": "0c9f37e3-b8b3-4deb-b123-a78d6bf86636",
+                "kind": "Line"
+            },
+            "attributes": {
+                "active_power_start": "sl5.Pmean",
+                "reactive_power_start": "sl5.Qmean",
+                "active_power_end": "sl6.Pmean",
+                "reactive_power_end": "sl6.Qmean"
+            }
         }
     }
 }
