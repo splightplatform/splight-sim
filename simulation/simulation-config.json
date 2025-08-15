@@ -4,6 +4,26 @@
         "PECalama": {
             "active_power": "P1",
             "reactive_power": "Q1"
+        },
+        "PFVSanPedro": {
+            "active_power": "P2",
+            "reactive_power": "Q2"
+        },
+        "PFVJama": {
+            "active_power": "P3",
+            "reactive_power": "Q3"
+        },
+        "PEValleDeLosVientos": {
+            "active_power": "P4",
+            "reactive_power": "Q4"
+        },
+        "PFVAzabache": {
+            "active_power": "P5",
+            "reactive_power": "Q5"
+        },
+        "PFVUsya": {
+            "active_power": "P6",
+            "reactive_power": "Q6"
         }
     },
     "input_files": {
