@@ -5,7 +5,8 @@ from typing import Protocol, TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
 from splight_lib.execution import ExecutionEngine, Task
-from splight_lib.models import Asset, Number
+from splight_lib.models import Asset
+from splight_lib.models._v3.native import Number
 from splight_lib.settings import (
     api_settings,
     datalake_settings,
@@ -100,6 +101,7 @@ class HypersimConnector:
 
 
 def configure(file_path: dict) -> None:
+    """Configures the splight lib"""
     with open(file_path, "r", encoding="utf-8") as file:
         config = json.load(file)
     workspace_settings.SPLIGHT_ACCESS_ID = config["splight_access_id"]
