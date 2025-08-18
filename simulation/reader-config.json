@@ -104,7 +104,7 @@
                 "reactive_power_end": "sl4.Qmean"
             }
         },
-        "SAL-CHU": {}
+        "SAL-CHU": {
             "asset": {
                 "id": "0c9f37e3-b8b3-4deb-b123-a78d6bf86636",
                 "kind": "Line"
