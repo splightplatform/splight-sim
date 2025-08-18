@@ -3,7 +3,7 @@ import sys
 import time
 import json
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict
 from pathlib import Path
 import pandas as pd
@@ -133,13 +133,18 @@ def main():
     )
     simulator.add_metric_reference("active_power", active_power_df)
     simulator.add_metric_reference("reactive_power", reactive_power_df)
-    for device_name, metrics in config["devices"].items():
-        simulator.add_device(device_name, metrics)
+    active_mapping = {v["active_power"]: device for device, v in config["devices"].items()}
+    reactive_mapping = {v["reactive_power"]: device for device, v in config["devices"].items()}
+
+
+    print("Active mapping (bloque -> columna):", active_mapping)
+    print("Reactive mapping (bloque -> columna):", reactive_mapping)
 
     simulator.start()
 
     try:
-        simulator.run_simulation_loop()
+        # Ahora sí pasamos los 4 parámetros requeridos
+        simulator.run_simulation_loop(active_power_df, reactive_power_df, active_mapping, reactive_mapping)
     except Exception as exc:
         print(f"Error starting simulation: {exc}")
         simulator.stop()
