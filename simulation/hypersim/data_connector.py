@@ -1,9 +1,10 @@
 from datetime import datetime, timezone
-from hypersim.interfaces import Reader, DataSaver
+
+from hypersim.interfaces import DataReader, DataSaver
 
 
 class HypersimConnector:
-    def __init__(self, reader: Reader):
+    def __init__(self, reader: DataReader):
         self._reader = reader
         self._data_savers: list[DataSaver] = []
 

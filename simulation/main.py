@@ -11,8 +11,8 @@ from splight_lib.settings import (
 )
 
 from hypersim.data_connector import HypersimConnector
-from hypersim.data_reader import HypersimDataReader
 from hypersim.data_saver import DeviceDataSaver
+from hypersim.reader import HypersimDataReader
 
 
 class AssetSummary(TypedDict):
