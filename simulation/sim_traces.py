@@ -143,7 +143,6 @@ def main():
     simulator.start()
 
     try:
-        # Ahora sí pasamos los 4 parámetros requeridos
         simulator.run_simulation_loop(active_power_df, reactive_power_df, active_mapping, reactive_mapping)
     except Exception as exc:
         print(f"Error starting simulation: {exc}")
