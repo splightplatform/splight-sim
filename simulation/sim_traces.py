@@ -92,6 +92,7 @@ class HypersimSimulator:
 
         except KeyboardInterrupt:
             print("Loop detenido por el usuario.")
+            HyWorksApi.stopSim()
         except Exception as e:
             print(f"Error en el loop: {e}")
 
