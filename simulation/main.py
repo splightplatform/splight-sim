@@ -40,6 +40,7 @@ class HypersimDataReader:
         self._sensors.add(sensor)
 
     def read(self) -> dict[str, float]:
+        # TODO: Add somekind of retry here to fetch data again in case of error
         values = HyWorksApi.getLastSensorValues(list(self._sensors))
         if len(values) != len(self._sensors):
             raise ValueError(
