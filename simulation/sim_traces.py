@@ -75,7 +75,7 @@ class HypersimSimulator:
         last_hour = None
         try:
             while True:
-                now_utc = datetime.utc(timezone.utc).replace(second=0, microsecond=0)
+                now_utc = datetime.now(timezone.utc).replace(second=0, microsecond=0)
                 hour_str = now_utc.strftime('%H:%M:%S')
 
                 if hour_str != last_hour:
