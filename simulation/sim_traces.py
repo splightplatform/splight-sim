@@ -34,14 +34,14 @@ def process(df_active, df_reactive, active_mapping, reactive_mapping):
     reactive_row = df_reactive[df_reactive["hour"] == hora_str]
 
     if not active_row.empty and not reactive_row.empty:
-        valores_activa = active_row.iloc[0]
-        valores_reactiva = reactive_row.iloc[0]
+        active_values = active_row.iloc[0]
+        reactive_values = reactive_row.iloc[0]
 
         for bloque, columna in active_mapping.items():
-            set_parameter(valores_activa, bloque, columna, hora_str)
+            set_parameter(active_values, bloque, columna, hora_str)
 
         for bloque, columna in reactive_mapping.items():
-            set_parameter(valores_reactiva, bloque, columna, hora_str)
+            set_parameter(reactive_values, bloque, columna, hora_str)
     else:
         print(f"[{hora_str}] Data not found for this hour.")
 
@@ -55,7 +55,10 @@ class HypersimSimulator:
         self.metrics_ref: Dict[str, pd.DataFrame] = {}
 
     def add_metric_reference(self, metric: str, df: pd.DataFrame) -> None:
+        df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d %H:%M:%S")
+        df["hour"] = df["timestamp"].dt.strftime("%H:%M:%S")
         self.metrics_ref.update({metric: df})
+
 
     def start(self) -> None:
         if not self.metrics_ref:
@@ -68,12 +71,6 @@ class HypersimSimulator:
         print("Simulation stopped ...")
 
     def run_simulation_loop(self, df_active, df_reactive, active_mapping, reactive_mapping):
-        for df in (df_active, df_reactive):
-            if 'hour' not in df.columns:
-                df['timestamp'] = pd.to_datetime(
-                    df['timestamp'], format='%Y-%m-%d %H:%M:%S', errors='coerce'
-                )
-                df['hour'] = df['timestamp'].dt.strftime('%H:%M:%S')
 
         last_hour = None
 
