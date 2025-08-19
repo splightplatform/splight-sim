@@ -12,6 +12,7 @@ from splight_lib.settings import (
 
 from hypersim.data_connector import HypersimConnector
 from hypersim.data_saver import DeviceDataSaver
+from hypersim.operator import DCMHypersimOperator
 from hypersim.reader import HypersimDataReader
 
 
@@ -66,11 +67,24 @@ def main():
         period=60,
     )
 
-    connector.process()
+    operator = DCMHypersimOperator(
+        config["grid"], config["monitored_lines"], config["generators"]
+    )
+    update_task = Task(
+        target=operator.update_operation_vectors,
+        period=300,
+    )
 
     engine = ExecutionEngine()
     engine.add_task(connector_task, in_background=False, exit_on_fail=True)
+    engine.add_task(update_task, in_background=False, exit_on_fail=True)
     engine.start()
+
+    while True:
+        operator.run()
+        from time import sleep
+
+        sleep(1)
 
 
 if __name__ == "__main__":
