@@ -1,5 +1,6 @@
 import argparse
 import json
+import sys
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -74,11 +75,12 @@ def main():
         target=operator.update_operation_vectors,
         period=300,
     )
+    operator.update_operation_vectors()
 
     engine = ExecutionEngine()
     engine.add_task(connector_task, in_background=False, exit_on_fail=True)
     engine.add_task(update_task, in_background=False, exit_on_fail=True)
-    engine.start()
+    # engine.start()
 
     while True:
         operator.run()
@@ -88,4 +90,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)
