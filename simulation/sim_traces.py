@@ -76,16 +76,16 @@ class HypersimSimulator:
 
         try:
             while True:
-                now_utc = datetime.utcnow().replace(second=0, microsecond=0)
+                now_utc = datetime.utc(timezone.utc).replace(second=0, microsecond=0)
                 hour_str = now_utc.strftime('%H:%M:%S')
 
                 if hour_str != last_hour:
                     process(df_active, df_reactive, active_mapping, reactive_mapping)
                     last_hour = hour_str
 
-                now = datetime.utcnow()
-                next_minute = (now + timedelta(minutes=1)).replace(second=0, microsecond=0)
-                time.sleep(max(0.1, (next_minute - now).total_seconds()))
+                
+                next_minute = (now_utc + timedelta(minutes=1)).replace(second=0, microsecond=0)
+                time.sleep(max(0.1, (next_minute - now_utc).total_seconds()))
 
         except KeyboardInterrupt:
             print("Loop detenido por el usuario.")
