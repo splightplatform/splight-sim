@@ -53,6 +53,7 @@ class DCMHypersimOperator:
             if status == 0:
                 print(f"Found contingency on line {line_name}")
                 self._run_operation(line_name)
+                # TODO: update contingency on splight platform
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()
