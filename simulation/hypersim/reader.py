@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from time import sleep
 from typing import TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
@@ -19,7 +20,7 @@ class DataAddress(TypedDict):
 
 class HypersimDataReader:
     def __init__(self, sensors: list[str] | None = None):
-        # HyWorksApi.startAndConnectHypersim()
+        self._connect()
         self._sensors: set[str] = set(sensors) if sensors else set()
 
     def add_sensor(self, sensor: str) -> None:
@@ -28,9 +29,12 @@ class HypersimDataReader:
         self._sensors.add(sensor)
 
     def read(self) -> dict[str, float]:
-        # TODO: Add somekind of retry here to fetch data again in case of error
-        values = HyWorksApi.getLastSensorValues(list(self._sensors))
-        # values = [1.0] * len(self._sensors)
+        try:
+            values = HyWorksApi.getLastSensorValues(list(self._sensors))
+        except Exception as e:
+            print(f"Error reading sensors: {e}")
+            sleep(1)
+            self._connect()
         if len(values) != len(self._sensors):
             raise ValueError(
                 (
@@ -39,6 +43,9 @@ class HypersimDataReader:
                 )
             )
         return {key: value for key, value in zip(self._sensors, values)}
+
+    def _connect(self) -> None:
+        HyWorksApi.startAndConnectHypersim()
 
 
 class AssetAttributeDataReader:
