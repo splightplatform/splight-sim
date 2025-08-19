@@ -1,4 +1,5 @@
 {
+    "grid": "00288c30-b262-4c1c-a938-2ef65922db72",
     "devices": {
         "PECalama": {
             "asset": {
@@ -116,5 +117,59 @@
                 "reactive_power_end": "sl6.Qmean"
             }
         }
-    }
+    },
+    "monitored_lines": [
+        {
+            "name": "CAL-CHU",
+            "asset": "f4904113-64dd-4c42-812f-e8d86151cb6e",
+            "breaker": "CB9.y"
+        },
+        {
+            "name": "CAL-SAL",
+            "asset": "93402364-5a00-48e9-ab06-0fccd7079335",
+            "breaker": "CB10.y"
+        }
+    ],
+    "generators": [
+        {
+            "name": "PECalama",
+            "asset": "d1420bd5-f8ca-4e46-9d83-c9344ed3de93",
+            "breaker": "CB1.p"
+        },
+        {
+            "name": "PFVSanPedro",
+            "asset": "13980ba9-8e8f-40a3-b219-273f52eba7c5",
+            "breaker": "CB2.p"
+        },
+        {
+            "name": "PFVJama1",
+            "asset": "59cea76b-564a-4638-990b-b1b69f25d66a",
+            "breaker": "CB3.p"
+        },
+        {
+            "name": "PFVJama2",
+            "asset": "43d9e1a4-2810-4070-a7a0-9e89c0c85e83",
+            "breaker": "CB4.p"
+        },
+        {
+            "name": "PEValleDeLosVientos1",
+            "asset": "8d3dc2d8-2396-4458-9103-ea06193fbbc4",
+            "breaker": "CB5.p"
+        },
+        {
+            "name": "PEValleDeLosVientos2",
+            "asset": "9b45f8ae-70ac-4ed1-8277-187cb74f1d4d",
+            "breaker": "CB6.p"
+        },
+        {
+            "name": "PFVAzabache",
+            "asset": "4713054d-729c-4362-8a5b-b6f74bd77ee7",
+            "breaker": "CB7.p"
+        },
+        {
+            "name": "PFVUsya",
+            "asset": "8af5a80b-da2b-443d-a3ee-63d912a804cc",
+            "breaker": "CB8.p"
+        }
+    ]
 }
