@@ -18,9 +18,9 @@ class DataAddress(TypedDict):
 
 
 class HypersimDataReader:
-    def __init__(self):
+    def __init__(self, sensors: list[str] | None = None):
         # HyWorksApi.startAndConnectHypersim()
-        self._sensors: set[str] = set()
+        self._sensors: set[str] = set(sensors) if sensors else set()
 
     def add_sensor(self, sensor: str) -> None:
         if sensor in self._sensors:
