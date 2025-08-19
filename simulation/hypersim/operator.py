@@ -1,8 +1,8 @@
+from datetime import datetime, timezone
 from typing import TypedDict
 
-import requests
-
 # import HyWorksApiGRPC as HyWorksApi
+import requests
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
@@ -47,13 +47,30 @@ class DCMHypersimOperator:
             addresses, data_type="String", limit=1
         )
 
+        self._contingency = False
+        self._last_contingency: datetime | None = None
+
     def run(self) -> None:
         breakers_status = self._hy_reader.read()
-        for line_name, status in breakers_status.items():
-            if status == 0:
-                print(f"Found contingency on line {line_name}")
-                self._run_operation(line_name)
-                # TODO: update contingency on splight platform
+
+        in_contingency = next(
+            filter(lambda x: x[1] == 0, breakers_status.items()),
+            None,
+        )
+        if in_contingency is None:
+            print("No contingency found.")
+            self._contingency = False
+        elif in_contingency:
+            if not self._contingency:
+                print(f"Contingency found on line {in_contingency[0]}")
+                self._run_operation(in_contingency[0])
+                self._contingency = True
+                self._last_contingency = datetime.now(timezone.utc)
+            else:
+                print(
+                    f"Contingency already handled on line {in_contingency[0]}"
+                )
+                print("Waiting for system to recover")
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()

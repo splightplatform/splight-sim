@@ -75,12 +75,12 @@ def main():
         target=operator.update_operation_vectors,
         period=300,
     )
-    operator.update_operation_vectors()
+    # operator.update_operation_vectors()
 
     engine = ExecutionEngine()
     engine.add_task(connector_task, in_background=False, exit_on_fail=True)
     engine.add_task(update_task, in_background=False, exit_on_fail=True)
-    # engine.start()
+    engine.start()
 
     while True:
         operator.run()
