@@ -64,7 +64,7 @@ class HypersimSimulator:
 
     def stop(self) -> None:
         print("Stopping simulation ...")
-        HyWorksApi.stopSim()
+        self.stop()
         print("Simulation stopped ...")
 
     def run_simulation_loop(self, df_active, df_reactive, active_mapping, reactive_mapping):
