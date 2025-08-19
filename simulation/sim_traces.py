@@ -3,7 +3,7 @@ import sys
 import time
 import json
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict
 from pathlib import Path
 import pandas as pd
@@ -73,7 +73,6 @@ class HypersimSimulator:
     def run_simulation_loop(self, df_active, df_reactive, active_mapping, reactive_mapping):
 
         last_hour = None
-
         try:
             while True:
                 now_utc = datetime.utc(timezone.utc).replace(second=0, microsecond=0)
