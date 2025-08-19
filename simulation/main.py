@@ -63,11 +63,20 @@ def main():
             reader.add_sensor(sensor)
             saver.add_attribute(attr_name, sensor)
         connector.add_data_saver(saver)
+
+    for line_info in config["monitored_lines"]:
+        breaker = line_info["breaker"]
+        reader.add_sensor(breaker)
+
+    reader_task = Task(
+        target=reader.update_data,
+        period=1
+    )
+
     connector_task = Task(
         target=connector.process,
         period=60,
     )
-
     operator = DCMHypersimOperator(
         config["grid"], config["monitored_lines"], config["generators"]
     )
@@ -75,18 +84,23 @@ def main():
         target=operator.update_operation_vectors,
         period=300,
     )
-    # operator.update_operation_vectors()
+    operation_task = Task(
+        target=operator.run,
+        period=1
+    )
 
     engine = ExecutionEngine()
-    engine.add_task(connector_task, in_background=False, exit_on_fail=True)
+    engine.add_task(reader_task, in_background=True, exit_on_fail=True)
+    engine.add_task(connector_task, in_background=True, exit_on_fail=True)
     engine.add_task(update_task, in_background=False, exit_on_fail=True)
+    engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
 
-    while True:
-        operator.run()
-        from time import sleep
-
-        sleep(1)
+    # while True:
+    #     operator.run()
+    #     from time import sleep
+    #
+    #     sleep(1)
 
 
 if __name__ == "__main__":
