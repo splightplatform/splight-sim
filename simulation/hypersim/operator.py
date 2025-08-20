@@ -64,6 +64,9 @@ class DCMHypersimOperator:
             None,
         )
         if in_contingency is None:
+            if self._contingency:
+                print("Recovering system from contingency")
+                self._recover_system()
             print("No contingency found.")
             self._contingency = False
         elif in_contingency:
@@ -126,6 +129,12 @@ class DCMHypersimOperator:
             for gen, value in zip(sorted_gens, splitted_vector)
         }
         return parsed_vector
+
+    def _recover_system(self) -> None:
+        for generator in self._generators.values():
+            block, variable = generator["breaker"].split(".")
+            HyWorksApi.setComponentParameter(block, variable, "7")
+            print(f"Closing breaker for generator {generator['name']}")
 
     @staticmethod
     def _fetch_gen_ordering(grid_id: str) -> list[str]:
