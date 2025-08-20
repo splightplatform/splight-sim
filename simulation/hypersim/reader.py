@@ -5,6 +5,7 @@ from typing import TypedDict
 import HyWorksApiGRPC as HyWorksApi
 from splight_lib.models._v3.datalake import DataRequest, PipelineStep, Trace
 from splight_lib.models._v3.native import Boolean, Number, String
+from tenacity import retry, stop_after_attempt, wait_fixed
 
 TYPE_MAP = {
     "number": Number,
@@ -31,11 +32,11 @@ class HypersimDataReader:
 
     def update_data(self) -> None:
         try:
-            values = HyWorksApi.getLastSensorValues(list(self._sensors))
+            values = self._read_sensors_values()
         except Exception as e:
             print(f"Error reading sensors: {e}")
-            sleep(1)
             self._connect()
+            raise e
         # values = [0] * len(self._sensors)
         if len(values) != len(self._sensors):
             raise ValueError(
@@ -48,6 +49,11 @@ class HypersimDataReader:
 
     def read(self) -> dict[str, float]:
         return self._data
+
+    @retry(wait=wait_fixed(0.1), stop=stop_after_attempt(5))
+    def _read_sensor_values(self) -> list[float]:
+        values = HyWorksApi.getLastSensorValues(list(self._sensors))
+        return values
 
     def _connect(self) -> None:
         HyWorksApi.startAndConnectHypersim()
