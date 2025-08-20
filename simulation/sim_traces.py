@@ -109,6 +109,11 @@ class HypersimSimulator:
             except Exception as e:
                 print(f"Error setting breaker {breaker}.{variable}: {e}")
 
+    def startMonitoring(self) -> None:
+        print("Starting monitoring ...")
+        HyWorksApi.startMonitoring()
+        print("Monitoring started ...")
+
 
 
 
@@ -151,6 +156,7 @@ def main():
 
     simulator.start()
     simulator.close_all_breakers(7)
+    simulator.startMonitoring()
 
     try:
         simulator.run_simulation_loop(active_power_df, reactive_power_df, active_mapping, reactive_mapping)
