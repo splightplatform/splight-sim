@@ -72,7 +72,9 @@ class DCMHypersimOperator:
         self._run()
         t1 = time()
         if self._contingency:
-            logger.info(f"\n\n\nOperation time: {t1 - t0:.3f} seconds\n\n\n")
+            logger.info(
+                f"\n\n\nOperation time: {(t1 - t0) * 1000:.3f} ms\n\n\n"
+            )
 
     def _run(self) -> None:
         breakers_status = self._hy_reader.read()
