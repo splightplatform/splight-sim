@@ -1,6 +1,6 @@
 from datetime import datetime
+from logging import getLogger
 
-from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 
 # TODO: Update to use v3 models

@@ -1,6 +1,5 @@
 from datetime import datetime, timezone
-
-from splight_lib.logging import getLogger
+from logging import getLogger
 
 from hypersim.interfaces import DataReader, DataSaver
 

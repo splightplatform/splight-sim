@@ -1,10 +1,10 @@
-from time import time
 from datetime import datetime, timezone
+from logging import getLogger
+from time import time
 from typing import TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
 import requests
-from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
@@ -25,6 +25,14 @@ class GeneratorInfo(TypedDict):
     name: str
     asset: str
     breaker: str
+
+
+def set_device_value(
+    device: str, variable: str, value: str | int | float
+) -> None:
+    """Sets the value of a device variable in Hypersim."""
+    HyWorksApi.setComponentParameter(device, variable, str(value))
+    logger.debug(f"Setting {device}.{variable} to {value}")
 
 
 class DCMHypersimOperator:
@@ -85,6 +93,7 @@ class DCMHypersimOperator:
                 self._run_operation(in_contingency[0])
                 self._contingency = True
                 self._last_contingency = datetime.now(timezone.utc)
+                # TODO: Report contingency to splight
             else:
                 logger.info(
                     f"Contingency already handled on line {in_contingency[0]}"
@@ -119,7 +128,7 @@ class DCMHypersimOperator:
             generator = self._generators.get(gen_name, None)
             # TODO: Check if generator is None
             block, variable = generator["breaker"].split(".")
-            HyWorksApi.setComponentParameter(block, variable, str(setpoint))
+            set_device_value(block, variable, setpoint)
             logger.debug(f"Setting generator {gen_name} to {setpoint}")
 
     def _parse_generator_vector(self, vector: str) -> list[int]:
@@ -143,7 +152,7 @@ class DCMHypersimOperator:
     def _recover_system(self) -> None:
         for generator in self._generators.values():
             block, variable = generator["breaker"].split(".")
-            HyWorksApi.setComponentParameter(block, variable, "7")
+            set_device_value(block, variable, 7)
             logger.debug(f"Closing breaker for generator {generator['name']}")
 
     @staticmethod

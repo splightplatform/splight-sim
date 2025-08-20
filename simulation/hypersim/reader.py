@@ -1,9 +1,8 @@
 from datetime import datetime, timedelta, timezone
-from time import sleep
+from logging import getLogger
 from typing import TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
-from splight_lib.logging import getLogger
 from splight_lib.models._v3.datalake import DataRequest, PipelineStep, Trace
 from splight_lib.models._v3.native import Boolean, Number, String
 from tenacity import retry, stop_after_attempt, wait_fixed

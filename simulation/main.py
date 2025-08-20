@@ -1,10 +1,10 @@
 import argparse
 import json
 import sys
+from logging import getLogger
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
-from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 from splight_lib.settings import (
     api_settings,
