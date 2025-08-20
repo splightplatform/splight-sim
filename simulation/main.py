@@ -53,7 +53,15 @@ def main():
         "-cf",
         help="Path to JSON credentials file",
     )
+    parser.add_argument(
+        "--log-level",
+        "-l",
+        help="Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
+        default="INFO",
+    )
     args = parser.parse_args()
+
+    logger.setLevel(args.log_level.upper())
     configure(args.credentials_file)
     with open(args.config_file, "r", encoding="utf-8") as config_file:
         config = json.load(config_file)
