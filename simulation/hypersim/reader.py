@@ -32,7 +32,7 @@ class HypersimDataReader:
 
     def update_data(self) -> None:
         try:
-            values = self._read_sensors_values()
+            values = self._read_sensor_values()
         except Exception as e:
             print(f"Error reading sensors: {e}")
             self._connect()
