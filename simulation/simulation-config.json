@@ -26,6 +26,16 @@
       "reactive_power": "Q6"
     }
   },
+  "breakers": {
+    "CBI1": "A",
+    "CBI2": "A",
+    "CBI3": "A",
+    "CBI4": "A",
+    "CBI5": "A",
+    "CBI6": "A",
+    "CBI7": "A",
+    "CBI8": "A"
+  },
   "input_files": {
     "active_power": "../data/mqtt/traces/Calama/active_power.csv",
     "reactive_power": "../data/mqtt/traces/Calama/reactive_power.csv"

@@ -48,11 +48,13 @@ def process(df_active, df_reactive, active_mapping, reactive_mapping):
 
 
 class HypersimSimulator:
-    def __init__(self, design_path: str, devices: Dict):
+    def __init__(self, design_path: str, devices: Dict, breakers: Dict = None):
 
         self.design_path = Path(design_path).absolute()
         self.devices: Dict = devices
         self.metrics_ref: Dict[str, pd.DataFrame] = {}
+        self.breakers: Dict[str, str] = breakers if breakers else {}
+
 
     def add_metric_reference(self, metric: str, df: pd.DataFrame) -> None:
         df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d %H:%M:%S")
@@ -99,6 +101,15 @@ class HypersimSimulator:
         HyWorksApi.startSim()
         print("Simulation started ...")
 
+    def close_all_breakers(self, value: int = 7):
+        for breaker, variable in self.breakers.items():
+            try:
+                HyWorksApi.setComponentParameter(breaker, variable, str(value))
+                print(f"Breaker {breaker}.{variable} → {value}")
+            except Exception as e:
+                print(f"Error setting breaker {breaker}.{variable}: {e}")
+
+
 
 
 def main():
@@ -126,7 +137,8 @@ def main():
     )
     simulator = HypersimSimulator(
         config["design_path"],
-        config["devices"]
+        config["devices"],
+        config.get("breakers", {})
     )
     simulator.add_metric_reference("active_power", active_power_df)
     simulator.add_metric_reference("reactive_power", reactive_power_df)
@@ -138,6 +150,7 @@ def main():
     print("Reactive mapping (bloque -> columna):", reactive_mapping)
 
     simulator.start()
+    simulator.close_all_breakers(7)
 
     try:
         simulator.run_simulation_loop(active_power_df, reactive_power_df, active_mapping, reactive_mapping)
