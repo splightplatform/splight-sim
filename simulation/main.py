@@ -88,13 +88,13 @@ def main():
 
     engine = ExecutionEngine()
     engine.add_task(
-        reader_task, in_background=True, exit_on_fail=True, max_instnaces=2
+        reader_task, in_background=True, exit_on_fail=True, max_instances=2
     )
     engine.add_task(
-        connector_task, in_background=True, exit_on_fail=True, max_instnaces=2
+        connector_task, in_background=True, exit_on_fail=True, max_instances=2
     )
     engine.add_task(
-        update_task, in_background=False, exit_on_fail=True, max_instnaces=2
+        update_task, in_background=False, exit_on_fail=True, max_instances=2
     )
     engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
