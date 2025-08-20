@@ -68,26 +68,23 @@ def main():
         breaker = line_info["breaker"]
         reader.add_sensor(breaker)
 
-    reader_task = Task(
-        target=reader.update_data,
-        period=1
-    )
+    reader_task = Task(target=reader.update_data, period=1)
 
     connector_task = Task(
         target=connector.process,
         period=60,
     )
     operator = DCMHypersimOperator(
-        config["grid"], config["monitored_lines"], config["generators"]
+        config["grid"],
+        config["monitored_lines"],
+        config["generators"],
+        reader,
     )
     update_task = Task(
         target=operator.update_operation_vectors,
         period=300,
     )
-    operation_task = Task(
-        target=operator.run,
-        period=1
-    )
+    operation_task = Task(target=operator.run, period=1)
 
     engine = ExecutionEngine()
     engine.add_task(reader_task, in_background=True, exit_on_fail=True)

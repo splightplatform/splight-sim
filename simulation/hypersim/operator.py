@@ -1,12 +1,13 @@
 from datetime import datetime, timezone
 from typing import TypedDict
 
-# import HyWorksApiGRPC as HyWorksApi
+import HyWorksApiGRPC as HyWorksApi
 import requests
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
-from hypersim.reader import AssetAttributeDataReader, HypersimDataReader
+from hypersim.interfaces import DataReader
+from hypersim.reader import AssetAttributeDataReader
 
 GENERATOR_VECTOR_NAME = "generators_vector"
 
@@ -25,7 +26,11 @@ class GeneratorInfo(TypedDict):
 
 class DCMHypersimOperator:
     def __init__(
-        self, grid: str, lines: list[LineInfo], generators: list[GeneratorInfo]
+        self,
+        grid: str,
+        lines: list[LineInfo],
+        generators: list[GeneratorInfo],
+        hypersim_reader: DataReader,
     ):
         self._grid = grid
         addresses = []
@@ -42,7 +47,8 @@ class DCMHypersimOperator:
         self._lines = lines
         self._generators = {item["name"]: item for item in generators}
         self._generators_vector: dict[str, list[int]] = {}
-        self._hy_reader = HypersimDataReader(breakers)
+        self._hy_reader = hypersim_reader
+        # self._hy_reader = HypersimDataReader(breakers)
         self._spl_reader = AssetAttributeDataReader(
             addresses, data_type="String", limit=1
         )
@@ -98,7 +104,7 @@ class DCMHypersimOperator:
             generator = self._generators.get(gen_name, None)
             # TODO: Check if generator is None
             block, variable = generator["breaker"].split(".")
-            # HyWorksApi.setComponentParameter(block, variable, str(setpoint))
+            HyWorksApi.setComponentParameter(block, variable, str(setpoint))
             print(f"Setting generator {gen_name} to {setpoint}")
 
     def _parse_generator_vector(self, vector: str) -> list[int]:

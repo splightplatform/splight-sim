@@ -26,8 +26,9 @@ class DeviceDataSaver:
             sensor_value = data.get(sensor, None)
             if sensor_value is None:
                 print(f"Sensor {sensor} not found in data.")
+                # TODO: Review the return
                 return
-            print(f"Saving data for sensor {sensor} with value {sensor_value}")
+            # print(f"Saving data for sensor {sensor} with value {sensor_value}")
             attr_value = Number(
                 timestamp=date,
                 asset=self._asset.id,
