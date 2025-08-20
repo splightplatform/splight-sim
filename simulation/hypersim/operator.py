@@ -100,7 +100,9 @@ class DCMHypersimOperator:
         for gen_name, value in vector.items():
             if value == 0:
                 continue
-            setpoint = 7 if value == 1 else 0
+            # In Hypersim, the setpoint is 0 to open the breaker and 7 to
+            # close it
+            setpoint = 0 if value == 1 else 7
             generator = self._generators.get(gen_name, None)
             # TODO: Check if generator is None
             block, variable = generator["breaker"].split(".")
