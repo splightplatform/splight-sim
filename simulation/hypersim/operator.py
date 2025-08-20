@@ -1,3 +1,4 @@
+from time import time
 from datetime import datetime, timezone
 from typing import TypedDict
 
@@ -59,6 +60,13 @@ class DCMHypersimOperator:
         self._last_contingency: datetime | None = None
 
     def run(self) -> None:
+        t0 = time()
+        self._run()
+        t1 = time()
+        if self._contingency:
+            logger.info(f"\n\n\nOperation time: {t1 - t0:.3f} seconds\n\n\n")
+
+    def _run(self) -> None:
         breakers_status = self._hy_reader.read()
 
         in_contingency = next(
