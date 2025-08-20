@@ -1,7 +1,7 @@
 import argparse
 import json
 import sys
-from logging import getLogger
+from logging import getLogger, StreamHandler, Formatter
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -18,6 +18,11 @@ from hypersim.operator import DCMHypersimOperator
 from hypersim.reader import HypersimDataReader
 
 logger = getLogger("HypersimOperator")
+handler = StreamHandler()
+formatter = Formatter(
+    "%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s"
+)
+handler.setFormatter(formatter)
 
 
 class AssetSummary(TypedDict):
@@ -61,7 +66,11 @@ def main():
     )
     args = parser.parse_args()
 
+    # Set the level for this specific logger
     logger.setLevel(args.log_level.upper())
+    # Add a handler to the logger (e.g., StreamHandler to print to console)
+    logger.addHandler(handler)
+
     configure(args.credentials_file)
     with open(args.config_file, "r", encoding="utf-8") as config_file:
         config = json.load(config_file)
