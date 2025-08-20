@@ -1,9 +1,12 @@
 from datetime import datetime
 
+from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 
 # TODO: Update to use v3 models
 from splight_lib.models._v3.native import Number
+
+logger = getLogger("HypersimOperator")
 
 
 class DeviceDataSaver:
@@ -16,7 +19,7 @@ class DeviceDataSaver:
         if attribute not in self._attributes:
             raise ValueError(f"Attribute {attribute} not found in asset.")
         if attribute in self._attr_sensor_map:
-            print(f"Attribute {attribute} already added.")
+            logger.debug(f"Attribute {attribute} already added.")
         self._attr_sensor_map[sensor] = self._attributes[attribute]
 
     def process_data(
@@ -25,10 +28,11 @@ class DeviceDataSaver:
         for sensor, attribute in self._attr_sensor_map.items():
             sensor_value = data.get(sensor, None)
             if sensor_value is None:
-                print(f"Sensor {sensor} not found in data.")
-                # TODO: Review the return
-                return
-            # print(f"Saving data for sensor {sensor} with value {sensor_value}")
+                logger.debug(f"Sensor {sensor} not found in data.")
+                continue
+            logger.debug(
+                f"Saving data for sensor {sensor} with value {sensor_value}"
+            )
             attr_value = Number(
                 timestamp=date,
                 asset=self._asset.id,

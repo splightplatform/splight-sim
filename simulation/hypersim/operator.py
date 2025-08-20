@@ -3,12 +3,14 @@ from typing import TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
 import requests
+from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
 from hypersim.interfaces import DataReader
 from hypersim.reader import AssetAttributeDataReader
 
+logger = getLogger("HypersimOperator")
 GENERATOR_VECTOR_NAME = "generators_vector"
 
 
@@ -65,21 +67,21 @@ class DCMHypersimOperator:
         )
         if in_contingency is None:
             if self._contingency:
-                print("Recovering system from contingency")
+                logger.info("Recovering system from contingency")
                 self._recover_system()
-            print("No contingency found.")
+            logger.info("No contingency found.")
             self._contingency = False
         elif in_contingency:
             if not self._contingency:
-                print(f"Contingency found on line {in_contingency[0]}")
+                logger.info(f"Contingency found on line {in_contingency[0]}")
                 self._run_operation(in_contingency[0])
                 self._contingency = True
                 self._last_contingency = datetime.now(timezone.utc)
             else:
-                print(
+                logger.info(
                     f"Contingency already handled on line {in_contingency[0]}"
                 )
-                print("Waiting for system to recover")
+                logger.info("Waiting for system to recover")
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()
@@ -90,7 +92,7 @@ class DCMHypersimOperator:
             self._generators_vector.update(
                 {line_name["breaker"]: self._parse_generator_vector(vector)}
             )
-        print(f"Operation vectors updated: {self._generators_vector}")
+        logger.info(f"Operation vectors updated: {self._generators_vector}")
 
     def _run_operation(self, line_name: str) -> None:
         vector = self._generators_vector.get(line_name, None)
@@ -99,7 +101,7 @@ class DCMHypersimOperator:
         self._apply_vector(vector)
 
     def _apply_vector(self, vector: dict[str, int]) -> None:
-        print(f"Applying operation vector: {vector}")
+        logger.info(f"Applying operation vector: {vector}")
         for gen_name, value in vector.items():
             if value == 0:
                 continue
@@ -110,7 +112,7 @@ class DCMHypersimOperator:
             # TODO: Check if generator is None
             block, variable = generator["breaker"].split(".")
             HyWorksApi.setComponentParameter(block, variable, str(setpoint))
-            print(f"Setting generator {gen_name} to {setpoint}")
+            logger.debug(f"Setting generator {gen_name} to {setpoint}")
 
     def _parse_generator_vector(self, vector: str) -> list[int]:
         generator_ordering = self._fetch_gen_ordering(self._grid)
@@ -134,7 +136,7 @@ class DCMHypersimOperator:
         for generator in self._generators.values():
             block, variable = generator["breaker"].split(".")
             HyWorksApi.setComponentParameter(block, variable, "7")
-            print(f"Closing breaker for generator {generator['name']}")
+            logger.debug(f"Closing breaker for generator {generator['name']}")
 
     @staticmethod
     def _fetch_gen_ordering(grid_id: str) -> list[str]:

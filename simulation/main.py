@@ -4,6 +4,7 @@ import sys
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
+from splight_lib.logging import getLogger
 from splight_lib.models import Asset
 from splight_lib.settings import (
     api_settings,
@@ -15,6 +16,8 @@ from hypersim.data_connector import HypersimConnector
 from hypersim.data_saver import DeviceDataSaver
 from hypersim.operator import DCMHypersimOperator
 from hypersim.reader import HypersimDataReader
+
+logger = getLogger("HypersimOperator")
 
 
 class AssetSummary(TypedDict):
@@ -33,6 +36,7 @@ def configure(file_path: dict) -> None:
     )
     api_settings.API_VERSION = "v4"
     datalake_settings.DL_BUFFER_TIMEOUT = 10
+    logger.debug("Configuring splight lib with provided credentials.")
 
 
 def main():
@@ -98,12 +102,6 @@ def main():
     )
     engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
-
-    # while True:
-    #     operator.run()
-    #     from time import sleep
-    #
-    #     sleep(1)
 
 
 if __name__ == "__main__":
