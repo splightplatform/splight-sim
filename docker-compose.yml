@@ -2,6 +2,7 @@ services:
   mqtt:
     image: eclipse-mosquitto
     hostname: mosquitto
+    restart: always
     ports:
       - "1883:1883"
     volumes:
@@ -9,6 +10,7 @@ services:
 
   mqtt-device:
     tty: true
+    restart: always
     build:
       context: ./devices/mqtt
     network_mode: host
