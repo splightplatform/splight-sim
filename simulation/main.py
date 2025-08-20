@@ -87,9 +87,15 @@ def main():
     operation_task = Task(target=operator.run, period=1)
 
     engine = ExecutionEngine()
-    engine.add_task(reader_task, in_background=True, exit_on_fail=True)
-    engine.add_task(connector_task, in_background=True, exit_on_fail=True)
-    engine.add_task(update_task, in_background=False, exit_on_fail=True)
+    engine.add_task(
+        reader_task, in_background=True, exit_on_fail=True, max_instnaces=2
+    )
+    engine.add_task(
+        connector_task, in_background=True, exit_on_fail=True, max_instnaces=2
+    )
+    engine.add_task(
+        update_task, in_background=False, exit_on_fail=True, max_instnaces=2
+    )
     engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
 
