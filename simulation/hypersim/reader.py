@@ -1,10 +1,13 @@
 from datetime import datetime, timedelta, timezone
-from time import sleep
+from logging import getLogger
 from typing import TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
 from splight_lib.models._v3.datalake import DataRequest, PipelineStep, Trace
 from splight_lib.models._v3.native import Boolean, Number, String
+from tenacity import retry, stop_after_attempt, wait_fixed
+
+logger = getLogger("HypersimOperator")
 
 TYPE_MAP = {
     "number": Number,
@@ -22,19 +25,21 @@ class HypersimDataReader:
     def __init__(self, sensors: list[str] | None = None):
         self._connect()
         self._sensors: set[str] = set(sensors) if sensors else set()
+        self._data: dict[str, float] = {}
 
     def add_sensor(self, sensor: str) -> None:
         if sensor in self._sensors:
-            print(f"Sensor {sensor} already added.")
+            logger.debug(f"Sensor {sensor} already added.")
         self._sensors.add(sensor)
 
-    def read(self) -> dict[str, float]:
+    def update_data(self) -> None:
         try:
-            values = HyWorksApi.getLastSensorValues(list(self._sensors))
+            values = self._read_sensor_values()
         except Exception as e:
-            print(f"Error reading sensors: {e}")
-            sleep(1)
+            logger.error(f"Error reading sensors: {e}")
             self._connect()
+            raise e
+        # values = [0] * len(self._sensors)
         if len(values) != len(self._sensors):
             raise ValueError(
                 (
@@ -42,10 +47,19 @@ class HypersimDataReader:
                     "read values does not match the number of sensors."
                 )
             )
-        return {key: value for key, value in zip(self._sensors, values)}
+        self._data = {key: value for key, value in zip(self._sensors, values)}
+
+    def read(self) -> dict[str, float]:
+        return self._data
+
+    @retry(wait=wait_fixed(0.1), stop=stop_after_attempt(5))
+    def _read_sensor_values(self) -> list[float]:
+        values = HyWorksApi.getLastSensorValues(list(self._sensors))
+        return values
 
     def _connect(self) -> None:
         HyWorksApi.startAndConnectHypersim()
+        return None
 
 
 class AssetAttributeDataReader:

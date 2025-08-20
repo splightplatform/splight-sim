@@ -134,42 +134,42 @@
         {
             "name": "PECalama",
             "asset": "d1420bd5-f8ca-4e46-9d83-c9344ed3de93",
-            "breaker": "CB1.p"
+            "breaker": "CBI1.A"
         },
         {
             "name": "PFVSanPedro",
             "asset": "13980ba9-8e8f-40a3-b219-273f52eba7c5",
-            "breaker": "CB2.p"
+            "breaker": "CBI2.A"
         },
         {
             "name": "PFVJama1",
             "asset": "59cea76b-564a-4638-990b-b1b69f25d66a",
-            "breaker": "CB3.p"
+            "breaker": "CBI3.A"
         },
         {
             "name": "PFVJama2",
             "asset": "43d9e1a4-2810-4070-a7a0-9e89c0c85e83",
-            "breaker": "CB4.p"
+            "breaker": "CBI4.A"
         },
         {
             "name": "PEValleDeLosVientos1",
             "asset": "8d3dc2d8-2396-4458-9103-ea06193fbbc4",
-            "breaker": "CB5.p"
+            "breaker": "CBI5.A"
         },
         {
             "name": "PEValleDeLosVientos2",
             "asset": "9b45f8ae-70ac-4ed1-8277-187cb74f1d4d",
-            "breaker": "CB6.p"
+            "breaker": "CBI6.A"
         },
         {
             "name": "PFVAzabache",
             "asset": "4713054d-729c-4362-8a5b-b6f74bd77ee7",
-            "breaker": "CB7.p"
+            "breaker": "CBI7.A"
         },
         {
             "name": "PFVUsya",
             "asset": "8af5a80b-da2b-443d-a3ee-63d912a804cc",
-            "breaker": "CB8.p"
+            "breaker": "CBI8.A"
         }
     ]
 }

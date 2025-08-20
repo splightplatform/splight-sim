@@ -1,13 +1,17 @@
 from datetime import datetime, timezone
+from logging import getLogger
+from time import time
 from typing import TypedDict
 
-# import HyWorksApiGRPC as HyWorksApi
+import HyWorksApiGRPC as HyWorksApi
 import requests
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
-from hypersim.reader import AssetAttributeDataReader, HypersimDataReader
+from hypersim.interfaces import DataReader
+from hypersim.reader import AssetAttributeDataReader
 
+logger = getLogger("HypersimOperator")
 GENERATOR_VECTOR_NAME = "generators_vector"
 
 
@@ -23,9 +27,21 @@ class GeneratorInfo(TypedDict):
     breaker: str
 
 
+def set_device_value(
+    device: str, variable: str, value: str | int | float
+) -> None:
+    """Sets the value of a device variable in Hypersim."""
+    HyWorksApi.setComponentParameter(device, variable, str(value))
+    logger.debug(f"Setting {device}.{variable} to {value}")
+
+
 class DCMHypersimOperator:
     def __init__(
-        self, grid: str, lines: list[LineInfo], generators: list[GeneratorInfo]
+        self,
+        grid: str,
+        lines: list[LineInfo],
+        generators: list[GeneratorInfo],
+        hypersim_reader: DataReader,
     ):
         self._grid = grid
         addresses = []
@@ -42,7 +58,8 @@ class DCMHypersimOperator:
         self._lines = lines
         self._generators = {item["name"]: item for item in generators}
         self._generators_vector: dict[str, list[int]] = {}
-        self._hy_reader = HypersimDataReader(breakers)
+        self._hy_reader = hypersim_reader
+        # self._hy_reader = HypersimDataReader(breakers)
         self._spl_reader = AssetAttributeDataReader(
             addresses, data_type="String", limit=1
         )
@@ -51,6 +68,15 @@ class DCMHypersimOperator:
         self._last_contingency: datetime | None = None
 
     def run(self) -> None:
+        t0 = time()
+        self._run()
+        t1 = time()
+        if self._contingency:
+            logger.info(
+                f"\n\n\nOperation time: {(t1 - t0) * 1000:.3f} ms\n\n\n"
+            )
+
+    def _run(self) -> None:
         breakers_status = self._hy_reader.read()
 
         in_contingency = next(
@@ -58,19 +84,23 @@ class DCMHypersimOperator:
             None,
         )
         if in_contingency is None:
-            print("No contingency found.")
+            if self._contingency:
+                logger.info("Recovering system from contingency")
+                self._recover_system()
+            logger.info("No contingency found.")
             self._contingency = False
         elif in_contingency:
             if not self._contingency:
-                print(f"Contingency found on line {in_contingency[0]}")
+                logger.info(f"Contingency found on line {in_contingency[0]}")
                 self._run_operation(in_contingency[0])
                 self._contingency = True
                 self._last_contingency = datetime.now(timezone.utc)
+                # TODO: Report contingency to splight
             else:
-                print(
+                logger.info(
                     f"Contingency already handled on line {in_contingency[0]}"
                 )
-                print("Waiting for system to recover")
+                logger.info("Waiting for system to recover")
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()
@@ -81,7 +111,7 @@ class DCMHypersimOperator:
             self._generators_vector.update(
                 {line_name["breaker"]: self._parse_generator_vector(vector)}
             )
-        print(f"Operation vectors updated: {self._generators_vector}")
+        logger.info(f"Operation vectors updated: {self._generators_vector}")
 
     def _run_operation(self, line_name: str) -> None:
         vector = self._generators_vector.get(line_name, None)
@@ -90,16 +120,18 @@ class DCMHypersimOperator:
         self._apply_vector(vector)
 
     def _apply_vector(self, vector: dict[str, int]) -> None:
-        print(f"Applying operation vector: {vector}")
+        logger.info(f"Applying operation vector: {vector}")
         for gen_name, value in vector.items():
             if value == 0:
                 continue
-            setpoint = 7 if value == 1 else 0
+            # In Hypersim, the setpoint is 0 to open the breaker and 7 to
+            # close it
+            setpoint = 0 if value == 1 else 7
             generator = self._generators.get(gen_name, None)
             # TODO: Check if generator is None
             block, variable = generator["breaker"].split(".")
-            # HyWorksApi.setComponentParameter(block, variable, str(setpoint))
-            print(f"Setting generator {gen_name} to {setpoint}")
+            set_device_value(block, variable, setpoint)
+            logger.debug(f"Setting generator {gen_name} to {setpoint}")
 
     def _parse_generator_vector(self, vector: str) -> list[int]:
         generator_ordering = self._fetch_gen_ordering(self._grid)
@@ -118,6 +150,12 @@ class DCMHypersimOperator:
             for gen, value in zip(sorted_gens, splitted_vector)
         }
         return parsed_vector
+
+    def _recover_system(self) -> None:
+        for generator in self._generators.values():
+            block, variable = generator["breaker"].split(".")
+            set_device_value(block, variable, 7)
+            logger.debug(f"Closing breaker for generator {generator['name']}")
 
     @staticmethod
     def _fetch_gen_ordering(grid_id: str) -> list[str]:

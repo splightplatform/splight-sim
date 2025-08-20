@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from logging import getLogger, StreamHandler, Formatter
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -15,6 +16,13 @@ from hypersim.data_connector import HypersimConnector
 from hypersim.data_saver import DeviceDataSaver
 from hypersim.operator import DCMHypersimOperator
 from hypersim.reader import HypersimDataReader
+
+logger = getLogger("HypersimOperator")
+handler = StreamHandler()
+formatter = Formatter(
+    "%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s"
+)
+handler.setFormatter(formatter)
 
 
 class AssetSummary(TypedDict):
@@ -33,6 +41,7 @@ def configure(file_path: dict) -> None:
     )
     api_settings.API_VERSION = "v4"
     datalake_settings.DL_BUFFER_TIMEOUT = 10
+    logger.debug("Configuring splight lib with provided credentials.")
 
 
 def main():
@@ -49,7 +58,19 @@ def main():
         "-cf",
         help="Path to JSON credentials file",
     )
+    parser.add_argument(
+        "--log-level",
+        "-l",
+        help="Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
+        default="INFO",
+    )
     args = parser.parse_args()
+
+    # Set the level for this specific logger
+    logger.setLevel(args.log_level.upper())
+    # Add a handler to the logger (e.g., StreamHandler to print to console)
+    logger.addHandler(handler)
+
     configure(args.credentials_file)
     with open(args.config_file, "r", encoding="utf-8") as config_file:
         config = json.load(config_file)
@@ -63,30 +84,41 @@ def main():
             reader.add_sensor(sensor)
             saver.add_attribute(attr_name, sensor)
         connector.add_data_saver(saver)
+
+    for line_info in config["monitored_lines"]:
+        breaker = line_info["breaker"]
+        reader.add_sensor(breaker)
+
+    reader_task = Task(target=reader.update_data, period=1)
+
     connector_task = Task(
         target=connector.process,
         period=60,
     )
-
     operator = DCMHypersimOperator(
-        config["grid"], config["monitored_lines"], config["generators"]
+        config["grid"],
+        config["monitored_lines"],
+        config["generators"],
+        reader,
     )
     update_task = Task(
         target=operator.update_operation_vectors,
         period=300,
     )
-    # operator.update_operation_vectors()
+    operation_task = Task(target=operator.run, period=1)
 
     engine = ExecutionEngine()
-    engine.add_task(connector_task, in_background=False, exit_on_fail=True)
-    engine.add_task(update_task, in_background=False, exit_on_fail=True)
+    engine.add_task(
+        reader_task, in_background=True, exit_on_fail=True, max_instances=2
+    )
+    engine.add_task(
+        connector_task, in_background=True, exit_on_fail=True, max_instances=2
+    )
+    engine.add_task(
+        update_task, in_background=False, exit_on_fail=True, max_instances=2
+    )
+    engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
-
-    while True:
-        operator.run()
-        from time import sleep
-
-        sleep(1)
 
 
 if __name__ == "__main__":
