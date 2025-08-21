@@ -21,29 +21,35 @@ def set_parameter(value, block, column, hour_str):
         print(f"[{hour_str}] Error active {column} → {block}: {e}")
 
 
-def process(df_active, df_reactive, active_mapping, reactive_mapping):
+def process(df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping):
 
-    for df in [df_active, df_reactive]:
+    for df in [df_active, df_reactive, df_pmax]:
         df['timestamp'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d %H:%M:%S')
         df['hour'] = df['timestamp'].dt.strftime('%H:%M:%S')
 
     now = datetime.utcnow().replace(second=0, microsecond=0)
-    hora_str = now.strftime("%H:%M:%S")
+    hour = now.strftime("%H:%M:%S")
 
-    active_row = df_active[df_active["hour"] == hora_str]
-    reactive_row = df_reactive[df_reactive["hour"] == hora_str]
+    active_row = df_active[df_active["hour"] == hour]
+    reactive_row = df_reactive[df_reactive["hour"] == hour]
+    pmax_row = df_pmax[df_pmax["hour"] == hour]
 
-    if not active_row.empty and not reactive_row.empty:
+    if not active_row.empty and not reactive_row.empty and not pmax_row.empty:
         active_values = active_row.iloc[0]
         reactive_values = reactive_row.iloc[0]
+        pmax_values = pmax_row.iloc[0]
 
-        for bloque, columna in active_mapping.items():
-            set_parameter(active_values, bloque, columna, hora_str)
+        for block, column in active_mapping.items():
+            set_parameter(active_values, block, column, hour)
 
-        for bloque, columna in reactive_mapping.items():
-            set_parameter(reactive_values, bloque, columna, hora_str)
+        for block, column in reactive_mapping.items():
+            set_parameter(reactive_values, block, column, hour)
+
+        for block, column in pmax_mapping.items():
+            set_parameter(pmax_values, block, column, hour)
+
     else:
-        print(f"[{hora_str}] Data not found for this hour.")
+        print(f"[{hour}] Data not found for this hour.")
 
 
 
@@ -69,10 +75,10 @@ class HypersimSimulator:
 
     def stop(self) -> None:
         print("Stopping simulation ...")
-        self.stop()
+        HyWorksApi.stopSim()
         print("Simulation stopped ...")
 
-    def run_simulation_loop(self, df_active, df_reactive, active_mapping, reactive_mapping):
+    def run_simulation_loop(self, df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping):
 
         last_hour = None
         try:
@@ -81,7 +87,7 @@ class HypersimSimulator:
                 hour_str = now_utc.strftime('%H:%M:%S')
 
                 if hour_str != last_hour:
-                    process(df_active, df_reactive, active_mapping, reactive_mapping)
+                    process(df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping)
                     last_hour = hour_str
 
                 
@@ -140,6 +146,9 @@ def main():
     reactive_power_df = pd.read_csv(
         config["input_files"]["reactive_power"], sep=",", encoding="utf-8"
     )
+    pmax_df = pd.read_csv(
+        config["input_files"]["available_active_power"], sep=",", encoding="utf-8"
+    )
     simulator = HypersimSimulator(
         config["design_path"],
         config["devices"],
@@ -147,19 +156,22 @@ def main():
     )
     simulator.add_metric_reference("active_power", active_power_df)
     simulator.add_metric_reference("reactive_power", reactive_power_df)
+    simulator.add_metric_reference("pmax", pmax_df)
     active_mapping = {v["active_power"]: device for device, v in config["devices"].items()}
     reactive_mapping = {v["reactive_power"]: device for device, v in config["devices"].items()}
+    pmax_mapping = {v["pmax"]: device for device, v in config["devices"].items()}
 
 
-    print("Active mapping (bloque -> columna):", active_mapping)
-    print("Reactive mapping (bloque -> columna):", reactive_mapping)
+    print("Active mapping (block -> column):", active_mapping)
+    print("Reactive mapping (block -> column):", reactive_mapping)
+    print("Pmax mapping (block -> column):", pmax_mapping)
 
     simulator.start()
     simulator.close_all_breakers(7)
     simulator.startMonitoring()
 
     try:
-        simulator.run_simulation_loop(active_power_df, reactive_power_df, active_mapping, reactive_mapping)
+        simulator.run_simulation_loop(active_power_df, reactive_power_df, pmax_df, active_mapping, reactive_mapping, pmax_mapping)
     except Exception as exc:
         print(f"Error starting simulation: {exc}")
         simulator.stop()
