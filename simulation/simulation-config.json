@@ -1,0 +1,50 @@
+{
+  "design_path": "../../hypersim/calama_splight_sim.ecf",
+  "devices": {
+    "PECalama": {
+      "active_power": "P1",
+      "reactive_power": "Q1",
+      "pmax": "pmax_g1_w"
+    },
+    "PFVSanPedro": {
+      "active_power": "P2",
+      "reactive_power": "Q2",
+      "pmax":"pmax_g2_w"
+    },
+    "PFVJama": {
+      "active_power": "P3",
+      "reactive_power": "Q3",
+      "pmax":"pmax_g3_w"
+    },
+    "PEValleDeLosVientos": {
+      "active_power": "P4",
+      "reactive_power": "Q4",
+      "pmax":"pmax_g4_w"
+    },
+    "PFVAzabache": {
+      "active_power": "P5",
+      "reactive_power": "Q5",
+      "pmax":"pmax_g5_w"
+    },
+    "PFVUsya": {
+      "active_power": "P6",
+      "reactive_power": "Q6",
+      "pmax":"pmax_g6_w"
+    }
+  },
+  "breakers": {
+    "CBI1": "A",
+    "CBI2": "A",
+    "CBI3": "A",
+    "CBI4": "A",
+    "CBI5": "A",
+    "CBI6": "A",
+    "CBI7": "A",
+    "CBI8": "A"
+  },
+  "input_files": {
+    "active_power": "../data/mqtt/traces/Calama/active_power.csv",
+    "reactive_power": "../data/mqtt/traces/Calama/reactive_power.csv",
+    "available_active_power": "../data/mqtt/traces/Calama/available_active_power.csv"
+  }
+}
