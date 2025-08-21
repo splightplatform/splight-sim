@@ -162,9 +162,9 @@ def main():
     pmax_mapping = {v["pmax"]: device for device, v in config["devices"].items()}
 
 
-    print("Active mapping (block -> column):", active_mapping)
-    print("Reactive mapping (block -> column):", reactive_mapping)
-    print("Pmax mapping (block -> column):", pmax_mapping)
+    # print("Active mapping (block -> column):", active_mapping)
+    # print("Reactive mapping (block -> column):", reactive_mapping)
+    # print("Pmax mapping (block -> column):", pmax_mapping)
 
     simulator.start()
     simulator.close_all_breakers(7)
