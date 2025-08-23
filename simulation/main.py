@@ -109,7 +109,7 @@ def main():
         breaker = line_info["breaker"]
         reader.add_sensor(breaker)
 
-    reader_task = Task(target=reader.update_data, period=1)
+    # reader_task = Task(target=reader.update_data, period=1)
 
     connector_task = Task(
         target=connector.process,
