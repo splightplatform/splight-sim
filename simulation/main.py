@@ -62,6 +62,7 @@ def run_operation(operator: DCMHypersimOperator) -> None:
             operator.run()
         except Exception as e:
             logger.error(f"Error running operation: {e}")
+        sleep(0.01)
 
 
 def main():
