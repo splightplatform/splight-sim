@@ -100,11 +100,15 @@ class HypersimDCMOrchestrator:
 
     def start(self) -> None:
         self._event.set()
+        self._reader_task.start()
+        self._operation_task.start()
         self._engine.start()
 
     def stop(self) -> None:
         self._event.stop()
         self._engine.stop()
+        self._operation_task.join()
+        self._reader_task.join()
 
     def _update_data_continuously(self, reader: HypersimDataReader) -> None:
         while self._event.is_set():
