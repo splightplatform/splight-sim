@@ -1,7 +1,7 @@
 import argparse
 import json
 import sys
-from logging import getLogger, StreamHandler, Formatter
+from logging import Formatter, StreamHandler, getLogger
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -112,7 +112,7 @@ def main():
         reader_task, in_background=True, exit_on_fail=True, max_instances=2
     )
     engine.add_task(
-        connector_task, in_background=True, exit_on_fail=True, max_instances=2
+        connector_task, in_background=True, exit_on_fail=False, max_instances=2
     )
     engine.add_task(
         update_task, in_background=False, exit_on_fail=True, max_instances=2
