@@ -1,15 +1,13 @@
-import os
+import argparse
+import json
 import sys
 import time
-import json
-import argparse
 from datetime import datetime, timedelta, timezone
-from typing import Dict
 from pathlib import Path
-import pandas as pd
+from typing import Dict
 
-sys.path.append(r"C:\OPAL-RT\HYPERSIM\hypersim_2025.1.0.o39\Windows\HyApi\python")
 import HyWorksApiGRPC as HyWorksApi
+import pandas as pd
 
 
 def set_parameter(value, block, column, hour_str):
@@ -21,11 +19,19 @@ def set_parameter(value, block, column, hour_str):
         print(f"[{hour_str}] Error active {column} → {block}: {e}")
 
 
-def process(df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping):
-
+def process(
+    df_active,
+    df_reactive,
+    df_pmax,
+    active_mapping,
+    reactive_mapping,
+    pmax_mapping,
+):
     for df in [df_active, df_reactive, df_pmax]:
-        df['timestamp'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d %H:%M:%S')
-        df['hour'] = df['timestamp'].dt.strftime('%H:%M:%S')
+        df["timestamp"] = pd.to_datetime(
+            df["timestamp"], format="%Y-%m-%d %H:%M:%S"
+        )
+        df["hour"] = df["timestamp"].dt.strftime("%H:%M:%S")
 
     now = datetime.utcnow().replace(second=0, microsecond=0)
     hour = now.strftime("%H:%M:%S")
@@ -52,21 +58,19 @@ def process(df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, p
         print(f"[{hour}] Data not found for this hour.")
 
 
-
 class HypersimSimulator:
     def __init__(self, design_path: str, devices: Dict, breakers: Dict = None):
-
         self.design_path = Path(design_path).absolute()
         self.devices: Dict = devices
         self.metrics_ref: Dict[str, pd.DataFrame] = {}
         self.breakers: Dict[str, str] = breakers if breakers else {}
 
-
     def add_metric_reference(self, metric: str, df: pd.DataFrame) -> None:
-        df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d %H:%M:%S")
+        df["timestamp"] = pd.to_datetime(
+            df["timestamp"], format="%Y-%m-%d %H:%M:%S"
+        )
         df["hour"] = df["timestamp"].dt.strftime("%H:%M:%S")
         self.metrics_ref.update({metric: df})
-
 
     def start(self) -> None:
         if not self.metrics_ref:
@@ -78,20 +82,37 @@ class HypersimSimulator:
         HyWorksApi.stopSim()
         print("Simulation stopped ...")
 
-    def run_simulation_loop(self, df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping):
-
+    def run_simulation_loop(
+        self,
+        df_active,
+        df_reactive,
+        df_pmax,
+        active_mapping,
+        reactive_mapping,
+        pmax_mapping,
+    ):
         last_hour = None
         try:
             while True:
-                now_utc = datetime.now(timezone.utc).replace(second=0, microsecond=0)
-                hour_str = now_utc.strftime('%H:%M:%S')
+                now_utc = datetime.now(timezone.utc).replace(
+                    second=0, microsecond=0
+                )
+                hour_str = now_utc.strftime("%H:%M:%S")
 
                 if hour_str != last_hour:
-                    process(df_active, df_reactive, df_pmax, active_mapping, reactive_mapping, pmax_mapping)
+                    process(
+                        df_active,
+                        df_reactive,
+                        df_pmax,
+                        active_mapping,
+                        reactive_mapping,
+                        pmax_mapping,
+                    )
                     last_hour = hour_str
 
-                
-                next_minute = (now_utc + timedelta(minutes=1)).replace(second=0, microsecond=0)
+                next_minute = (now_utc + timedelta(minutes=1)).replace(
+                    second=0, microsecond=0
+                )
                 time.sleep(max(0.1, (next_minute - now_utc).total_seconds()))
 
         except KeyboardInterrupt:
@@ -121,8 +142,6 @@ class HypersimSimulator:
         print("Monitoring started ...")
 
 
-
-
 def main():
     # argparse loader: single positional JSON config file
     parser = argparse.ArgumentParser(
@@ -139,7 +158,6 @@ def main():
     with open(args.config_file, "r") as config_file:
         config = json.load(config_file)
 
-
     active_power_df = pd.read_csv(
         config["input_files"]["active_power"], sep=",", encoding="utf-8"
     )
@@ -147,20 +165,25 @@ def main():
         config["input_files"]["reactive_power"], sep=",", encoding="utf-8"
     )
     pmax_df = pd.read_csv(
-        config["input_files"]["available_active_power"], sep=",", encoding="utf-8"
+        config["input_files"]["available_active_power"],
+        sep=",",
+        encoding="utf-8",
     )
     simulator = HypersimSimulator(
-        config["design_path"],
-        config["devices"],
-        config.get("breakers", {})
+        config["design_path"], config["devices"], config.get("breakers", {})
     )
     simulator.add_metric_reference("active_power", active_power_df)
     simulator.add_metric_reference("reactive_power", reactive_power_df)
     simulator.add_metric_reference("pmax", pmax_df)
-    active_mapping = {v["active_power"]: device for device, v in config["devices"].items()}
-    reactive_mapping = {v["reactive_power"]: device for device, v in config["devices"].items()}
-    pmax_mapping = {v["pmax"]: device for device, v in config["devices"].items()}
-
+    active_mapping = {
+        v["active_power"]: device for device, v in config["devices"].items()
+    }
+    reactive_mapping = {
+        v["reactive_power"]: device for device, v in config["devices"].items()
+    }
+    pmax_mapping = {
+        v["pmax"]: device for device, v in config["devices"].items()
+    }
 
     # print("Active mapping (block -> column):", active_mapping)
     # print("Reactive mapping (block -> column):", reactive_mapping)
@@ -171,11 +194,19 @@ def main():
     simulator.startMonitoring()
 
     try:
-        simulator.run_simulation_loop(active_power_df, reactive_power_df, pmax_df, active_mapping, reactive_mapping, pmax_mapping)
+        simulator.run_simulation_loop(
+            active_power_df,
+            reactive_power_df,
+            pmax_df,
+            active_mapping,
+            reactive_mapping,
+            pmax_mapping,
+        )
     except Exception as exc:
         print(f"Error starting simulation: {exc}")
         simulator.stop()
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
