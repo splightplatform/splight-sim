@@ -1,10 +1,10 @@
 import argparse
 import json
 import sys
-from time import sleep
 from logging import Formatter, StreamHandler, getLogger
 from threading import Event, Thread
-from typing import TypedDict
+from time import sleep
+from typing import Dict, TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
 from splight_lib.models import Asset
@@ -25,7 +25,6 @@ formatter = Formatter(
     "%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s"
 )
 handler.setFormatter(formatter)
-event = Event()
 
 
 class AssetSummary(TypedDict):
@@ -47,22 +46,81 @@ def configure(file_path: dict) -> None:
     logger.debug("Configuring splight lib with provided credentials.")
 
 
-def update_data_continuously(reader: HypersimDataReader) -> None:
-    while event.is_set():
-        try:
-            reader.update_data()
-        except Exception as e:
-            logger.error(f"Error updating data: {e}")
-        sleep(0.5)
+class HypersimDCMOrchestrator:
+    def __init__(self, config: Dict):
+        self._engine = ExecutionEngine()
+        self._event = Event()
 
+        reader = HypersimDataReader()
+        connector = HypersimConnector(reader)
+        for device, device_info in config["devices"].items():
+            asset = Asset.retrieve(device_info["asset"]["id"])
+            saver = DeviceDataSaver(asset)
+            for attr_name, sensor in device_info["attributes"].items():
+                reader.add_sensor(sensor)
+                saver.add_attribute(attr_name, sensor)
+            connector.add_data_saver(saver)
 
-def run_operation(operator: DCMHypersimOperator) -> None:
-    while event.is_set():
-        try:
-            operator.run()
-        except Exception as e:
-            logger.error(f"Error running operation: {e}")
-        sleep(0.01)
+        for line_info in config["monitored_lines"]:
+            breaker = line_info["breaker"]
+            reader.add_sensor(breaker)
+
+        connector_task = Task(
+            target=connector.process,
+            period=60,
+        )
+        operator = DCMHypersimOperator(
+            config["grid"],
+            config["monitored_lines"],
+            config["generators"],
+            reader,
+        )
+        update_task = Task(
+            target=operator.update_operation_vectors,
+            period=300,
+        )
+        self._reader_task = Thread(
+            target=self._update_data_continuously, args=(reader,), daemon=True
+        )
+        self._operation_task = Thread(
+            target=self._run_operation, args=(operator,), daemon=True
+        )
+        self._engine.add_task(
+            connector_task,
+            in_background=False,
+            exit_on_fail=False,
+            max_instances=2,
+        )
+        self._engine.add_task(
+            update_task,
+            in_background=False,
+            exit_on_fail=False,
+            max_instances=2,
+        )
+
+    def start(self) -> None:
+        self._event.set()
+        self._engine.start()
+
+    def stop(self) -> None:
+        self._event.stop()
+        self._engine.stop()
+
+    def _update_data_continuously(self, reader: HypersimDataReader) -> None:
+        while self._event.is_set():
+            try:
+                reader.update_data()
+            except Exception as e:
+                logger.error(f"Error updating data: {e}")
+            sleep(0.5)
+
+    def _run_operation(self, operator: DCMHypersimOperator) -> None:
+        while self._event.is_set():
+            try:
+                operator.run()
+            except Exception as e:
+                logger.error(f"Error running operation: {e}")
+            sleep(0.01)
 
 
 def main():
@@ -96,67 +154,14 @@ def main():
     with open(args.config_file, "r", encoding="utf-8") as config_file:
         config = json.load(config_file)
 
-    reader = HypersimDataReader()
-    connector = HypersimConnector(reader)
-    for device, device_info in config["devices"].items():
-        asset = Asset.retrieve(device_info["asset"]["id"])
-        saver = DeviceDataSaver(asset)
-        for attr_name, sensor in device_info["attributes"].items():
-            reader.add_sensor(sensor)
-            saver.add_attribute(attr_name, sensor)
-        connector.add_data_saver(saver)
+    orchestrator = HypersimDCMOrchestrator(config)
 
-    for line_info in config["monitored_lines"]:
-        breaker = line_info["breaker"]
-        reader.add_sensor(breaker)
-
-    # reader_task = Task(target=reader.update_data, period=1)
-
-    connector_task = Task(
-        target=connector.process,
-        period=60,
-    )
-    operator = DCMHypersimOperator(
-        config["grid"],
-        config["monitored_lines"],
-        config["generators"],
-        reader,
-    )
-    update_task = Task(
-        target=operator.update_operation_vectors,
-        period=300,
-    )
-    # operation_task = Task(target=operator.run, period=1)
-    reader_task = Thread(
-        target=update_data_continuously, args=(reader,), daemon=True
-    )
-    operation_task = Thread(
-        target=run_operation, args=(operator,), daemon=True
-    )
-    event.set()
-    reader_task.start()
-    operation_task.start()
-
-    engine = ExecutionEngine()
-    # engine.add_task(
-    #     reader_task, in_background=True, exit_on_fail=True, max_instances=2
-    # )
-    engine.add_task(
-        connector_task,
-        in_background=False,
-        exit_on_fail=False,
-        max_instances=2,
-    )
-    engine.add_task(
-        update_task, in_background=False, exit_on_fail=False, max_instances=2
-    )
-    # engine.add_task(operation_task, in_background=False, exit_on_fail=True)
-    engine.start()
+    try:
+        orchestrator.start()
+    except KeyboardInterrupt:
+        orchestrator.stop()
+        sys.exit(0)
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        event.clear()
-        sys.exit(1)
+    main()
