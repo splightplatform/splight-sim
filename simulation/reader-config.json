@@ -8,7 +8,8 @@
             },
             "attributes": {
                 "active_power": "sg1.Pmean",
-                "reactive_power": "sg1.Qmean"
+                "reactive_power": "sg1.Qmean",
+                "available_active_power": "pmax_g1_r.y"
             }
         },
         "PFVSanPedro": {
@@ -18,7 +19,8 @@
             },
             "attributes": {
                 "active_power": "sg2.Pmean",
-                "reactive_power": "sg2.Qmean"
+                "reactive_power": "sg2.Qmean",
+                "available_active_power": "pmax_g2_r.y"
             }
         },
         "PFVJama1": {
@@ -28,7 +30,8 @@
             },
             "attributes": {
                 "active_power": "sg3.Pmean",
-                "reactive_power": "sg3.Qmean"
+                "reactive_power": "sg3.Qmean",
+                "available_active_power": "pmax_g3_r.y"
             }
         },
         "PFVJama2": {
@@ -38,7 +41,8 @@
             },
             "attributes": {
                 "active_power": "sg4.Pmean",
-                "reactive_power": "sg4.Qmean"
+                "reactive_power": "sg4.Qmean",
+                "available_active_power": "pmax_g4_r.y"
             }
         },
         "PEValleDeLosVientos1": {
@@ -48,7 +52,8 @@
             },
             "attributes": {
                 "active_power": "sg5.Pmean",
-                "reactive_power": "sg5.Qmean"
+                "reactive_power": "sg5.Qmean",
+                "available_active_power": "pmax_g5_r.y"
             }
         },
         "PEValleDeLosVientos2": {
@@ -58,7 +63,8 @@
             },
             "attributes": {
                 "active_power": "sg6.Pmean",
-                "reactive_power": "sg6.Qmean"
+                "reactive_power": "sg6.Qmean",
+                "available_active_power": "pmax_g6_r.y"
             }
         },
         "PFVAzabache": {
@@ -68,7 +74,8 @@
             },
             "attributes": {
                 "active_power": "sg7.Pmean",
-                "reactive_power": "sg7.Qmean"
+                "reactive_power": "sg7.Qmean",
+                "available_active_power": "pmax_g7_r.y"
             }
         },
         "PFVUsya": {
@@ -78,7 +85,8 @@
             },
             "attributes": {
                 "active_power": "sg8.Pmean",
-                "reactive_power": "sg8.Qmean"
+                "reactive_power": "sg8.Qmean",
+                "available_active_power": "pmax_g8_r.y"
             }
         },
         "CAL-CHU": {
