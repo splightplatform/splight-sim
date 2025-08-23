@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from logging import getLogger
 from time import time
-from typing import TypedDict
+from typing import Optional, Tuple, TypedDict
 
 import HyWorksApiGRPC as HyWorksApi
 import requests
@@ -56,51 +56,96 @@ class DCMHypersimOperator:
             addresses.append(address)
             breakers.append(line_info["breaker"])
         self._lines = lines
+        self._lines_breakers = breakers
         self._generators = {item["name"]: item for item in generators}
         self._generators_vector: dict[str, list[int]] = {}
         self._hy_reader = hypersim_reader
-        # self._hy_reader = HypersimDataReader(breakers)
         self._spl_reader = AssetAttributeDataReader(
             addresses, data_type="String", limit=1
         )
 
-        self._contingency = False
+        self._in_contingency = False
         self._last_contingency: datetime | None = None
+
+    # def run(self) -> None:
+    #     t0 = time()
+    #     self._run()
+    #     t1 = time()
+    #     if self._contingency:
+    #         logger.info(
+    #             f"\n\n\nOperation time: {(t1 - t0) * 1000:.3f} ms\n\n\n"
+    #         )
 
     def run(self) -> None:
         t0 = time()
-        self._run()
+        contingency = self._check_for_contingency()
+        new_contingency = self._process_contingency(contingency)
         t1 = time()
-        if self._contingency:
+        if new_contingency:
             logger.info(
                 f"\n\n\nOperation time: {(t1 - t0) * 1000:.3f} ms\n\n\n"
             )
 
-    def _run(self) -> None:
-        breakers_status = self._hy_reader.read()
-
-        in_contingency = next(
-            filter(lambda x: x[1] == 0, breakers_status.items()),
-            None,
-        )
-        if in_contingency is None:
-            if self._contingency:
+    def _process_contingency(
+        self, contingency: Optional[Tuple[str, int]]
+    ) -> bool:
+        new_contingency = False
+        if self._in_contingency:
+            if contingency is None:
                 logger.info("Recovering system from contingency")
                 self._recover_system()
-            logger.info("No contingency found.")
-            self._contingency = False
-        elif in_contingency:
-            if not self._contingency:
-                logger.info(f"Contingency found on line {in_contingency[0]}")
-                self._run_operation(in_contingency[0])
-                self._contingency = True
-                self._last_contingency = datetime.now(timezone.utc)
-                # TODO: Report contingency to splight
+                self._in_contingency = False
             else:
                 logger.info(
-                    f"Contingency already handled on line {in_contingency[0]}"
+                    "System still in contingency. Waiting for recovery"
                 )
-                logger.info("Waiting for system to recover")
+        else:
+            if contingency is not None:
+                logger.info(f"Contingency found on line {contingency[0]}")
+                self._run_operation(contingency[0])
+                new_contingency = True
+                self._in_contingency = True
+                self._last_contingency = datetime.now(timezone.utc)
+            else:
+                logger.info("No contingency found.")
+        return new_contingency
+
+    def _check_for_contingency(self) -> Optional[Tuple[str, int]]:
+        breakers_status = self._hy_reader.read()
+        line_in_contingency = next(
+            filter(
+                lambda x: x[1] == 0 and x[0] in self._lines_breakers,
+                breakers_status.items(),
+            ),
+            None,
+        )
+        return line_in_contingency
+
+    # def _run(self) -> None:
+    #     breakers_status = self._hy_reader.read()
+    #
+    #     in_contingency = next(
+    #         filter(lambda x: x[1] == 0, breakers_status.items()),
+    #         None,
+    #     )
+    #     if in_contingency is None:
+    #         if self._contingency:
+    #             logger.info("Recovering system from contingency")
+    #             self._recover_system()
+    #         logger.info("No contingency found.")
+    #         self._contingency = False
+    #     elif in_contingency:
+    #         if not self._contingency:
+    #             logger.info(f"Contingency found on line {in_contingency[0]}")
+    #             self._run_operation(in_contingency[0])
+    #             self._contingency = True
+    #             self._last_contingency = datetime.now(timezone.utc)
+    #             # TODO: Report contingency to splight
+    #         else:
+    #             logger.info(
+    #                 f"Contingency already handled on line {in_contingency[0]}"
+    #             )
+    #             logger.info("Waiting for system to recover")
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()
@@ -113,9 +158,12 @@ class DCMHypersimOperator:
             )
         logger.info(f"Operation vectors updated: {self._generators_vector}")
 
-    def _run_operation(self, line_name: str) -> None:
-        vector = self._generators_vector.get(line_name, None)
+    def _run_operation(self, line_breaker: str) -> None:
+        vector = self._generators_vector.get(line_breaker, None)
         if vector is None:
+            line_name = next(
+                filter(lambda x: x["breaker"] == line_breaker, self._lines)
+            )["name"]
             raise ValueError(f"No operation vector found for line {line_name}")
         self._apply_vector(vector)
 
