@@ -107,7 +107,7 @@ class DCMHypersimOperator:
                 self._in_contingency = True
                 self._last_contingency = datetime.now(timezone.utc)
             else:
-                logger.info("No contingency found.")
+                logger.debug("No contingency found.")
         return new_contingency
 
     def _check_for_contingency(self) -> Optional[Tuple[str, int]]:

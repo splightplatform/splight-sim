@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from time import sleep
 from logging import Formatter, StreamHandler, getLogger
 from threading import Event, Thread
 from typing import TypedDict
@@ -52,6 +53,7 @@ def update_data_continuously(reader: HypersimDataReader) -> None:
             reader.update_data()
         except Exception as e:
             logger.error(f"Error updating data: {e}")
+        sleep(0.5)
 
 
 def run_operation(operator: DCMHypersimOperator) -> None:
@@ -139,10 +141,13 @@ def main():
     #     reader_task, in_background=True, exit_on_fail=True, max_instances=2
     # )
     engine.add_task(
-        connector_task, in_background=True, exit_on_fail=False, max_instances=2
+        connector_task,
+        in_background=False,
+        exit_on_fail=False,
+        max_instances=2,
     )
     engine.add_task(
-        update_task, in_background=True, exit_on_fail=True, max_instances=2
+        update_task, in_background=False, exit_on_fail=False, max_instances=2
     )
     # engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
