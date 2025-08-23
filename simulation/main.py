@@ -2,6 +2,7 @@ import argparse
 import json
 import sys
 from logging import Formatter, StreamHandler, getLogger
+from threading import Thread
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -42,6 +43,22 @@ def configure(file_path: dict) -> None:
     api_settings.API_VERSION = "v4"
     datalake_settings.DL_BUFFER_TIMEOUT = 10
     logger.debug("Configuring splight lib with provided credentials.")
+
+
+def update_data_continuously(reader: HypersimDataReader) -> None:
+    while True:
+        try:
+            reader.update_data()
+        except Exception as e:
+            logger.error(f"Error updating data: {e}")
+
+
+def run_operation(operator: DCMHypersimOperator) -> None:
+    while True:
+        try:
+            operator.run()
+        except Exception as e:
+            logger.error(f"Error running operation: {e}")
 
 
 def main():
@@ -101,11 +118,15 @@ def main():
         config["generators"],
         reader,
     )
-    update_task = Task(
-        target=operator.update_operation_vectors,
-        period=300,
-    )
-    operation_task = Task(target=operator.run, period=1)
+    # update_task = Task(
+    #     target=operator.update_operation_vectors,
+    #     period=300,
+    # )
+    # operation_task = Task(target=operator.run, period=1)
+    update_task = Thread(target=update_data_continuously, args=(reader,))
+    operation_task = Thread(target=run_operation, args=(operator,))
+    update_task.start()
+    operation_task.start()
 
     engine = ExecutionEngine()
     engine.add_task(
@@ -114,10 +135,10 @@ def main():
     engine.add_task(
         connector_task, in_background=True, exit_on_fail=False, max_instances=2
     )
-    engine.add_task(
-        update_task, in_background=False, exit_on_fail=True, max_instances=2
-    )
-    engine.add_task(operation_task, in_background=False, exit_on_fail=True)
+    # engine.add_task(
+    #     update_task, in_background=False, exit_on_fail=True, max_instances=2
+    # )
+    # engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
 
 
