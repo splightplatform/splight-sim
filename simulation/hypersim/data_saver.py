@@ -3,7 +3,7 @@ from logging import getLogger
 
 from splight_lib.models import Asset
 
-# TODO: Update to use v3 models
+# TODO: Update to use v4 models
 from splight_lib.models._v3.native import Number
 
 logger = getLogger("HypersimOperator")
