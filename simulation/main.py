@@ -2,7 +2,7 @@ import argparse
 import json
 import sys
 from logging import Formatter, StreamHandler, getLogger
-from threading import Thread
+from threading import Event, Thread
 from typing import TypedDict
 
 from splight_lib.execution import ExecutionEngine, Task
@@ -24,6 +24,7 @@ formatter = Formatter(
     "%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s"
 )
 handler.setFormatter(formatter)
+event = Event()
 
 
 class AssetSummary(TypedDict):
@@ -46,7 +47,7 @@ def configure(file_path: dict) -> None:
 
 
 def update_data_continuously(reader: HypersimDataReader) -> None:
-    while True:
+    while event.is_set():
         try:
             reader.update_data()
         except Exception as e:
@@ -54,7 +55,7 @@ def update_data_continuously(reader: HypersimDataReader) -> None:
 
 
 def run_operation(operator: DCMHypersimOperator) -> None:
-    while True:
+    while event.is_set():
         try:
             operator.run()
         except Exception as e:
@@ -118,26 +119,31 @@ def main():
         config["generators"],
         reader,
     )
-    # update_task = Task(
-    #     target=operator.update_operation_vectors,
-    #     period=300,
-    # )
+    update_task = Task(
+        target=operator.update_operation_vectors,
+        period=300,
+    )
     # operation_task = Task(target=operator.run, period=1)
-    update_task = Thread(target=update_data_continuously, args=(reader,))
-    operation_task = Thread(target=run_operation, args=(operator,))
-    update_task.start()
+    reader_task = Thread(
+        target=update_data_continuously, args=(reader,), daemon=True
+    )
+    operation_task = Thread(
+        target=run_operation, args=(operator,), daemon=True
+    )
+    event.set()
+    reader_task.start()
     operation_task.start()
 
     engine = ExecutionEngine()
-    engine.add_task(
-        reader_task, in_background=True, exit_on_fail=True, max_instances=2
-    )
+    # engine.add_task(
+    #     reader_task, in_background=True, exit_on_fail=True, max_instances=2
+    # )
     engine.add_task(
         connector_task, in_background=True, exit_on_fail=False, max_instances=2
     )
-    # engine.add_task(
-    #     update_task, in_background=False, exit_on_fail=True, max_instances=2
-    # )
+    engine.add_task(
+        update_task, in_background=True, exit_on_fail=True, max_instances=2
+    )
     # engine.add_task(operation_task, in_background=False, exit_on_fail=True)
     engine.start()
 
@@ -146,4 +152,5 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        event.clear()
         sys.exit(1)
