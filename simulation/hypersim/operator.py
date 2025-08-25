@@ -8,11 +8,13 @@ import requests
 from splight_lib.models import Asset
 from splight_lib.settings import workspace_settings
 
+from hypersim.data_saver import DeviceDataSaver
 from hypersim.interfaces import DataReader
 from hypersim.reader import AssetAttributeDataReader
 
 logger = getLogger("HypersimOperator")
 GENERATOR_VECTOR_NAME = "generators_vector"
+LINE_CONTINGENCY = "contingency"
 
 
 class LineInfo(TypedDict):
@@ -46,6 +48,7 @@ class DCMHypersimOperator:
         self._grid = grid
         addresses = []
         breakers = []
+        self._savers = []
         for line_info in lines:
             line = Asset.retrieve(line_info["asset"])
             attrs = {attr.name: attr for attr in line.attributes}
@@ -55,6 +58,11 @@ class DCMHypersimOperator:
             }
             addresses.append(address)
             breakers.append(line_info["breaker"])
+            data_saver = DeviceDataSaver(line)
+            data_saver.add_attribute(
+                LINE_CONTINGENCY, line_info["breaker"]
+            )
+            self._savers.append(data_saver)
         self._lines = lines
         self._lines_breakers = breakers
         self._generators = {item["name"]: item for item in generators}
@@ -66,15 +74,6 @@ class DCMHypersimOperator:
 
         self._in_contingency = False
         self._last_contingency: datetime | None = None
-
-    # def run(self) -> None:
-    #     t0 = time()
-    #     self._run()
-    #     t1 = time()
-    #     if self._contingency:
-    #         logger.info(
-    #             f"\n\n\nOperation time: {(t1 - t0) * 1000:.3f} ms\n\n\n"
-    #         )
 
     def run(self) -> None:
         t0 = time()
@@ -103,12 +102,18 @@ class DCMHypersimOperator:
             if contingency is not None:
                 logger.info(f"Contingency found on line {contingency[0]}")
                 self._run_operation(contingency[0])
+                self._set_contingency(contingency[0])
                 new_contingency = True
                 self._in_contingency = True
                 self._last_contingency = datetime.now(timezone.utc)
             else:
                 logger.debug("No contingency found.")
         return new_contingency
+
+    def _set_contingency(self, line_breaker: str) -> None:
+        date = datetime.now(timezone.utc)
+        for saver in self._savers:
+            saver.process_data({line_breaker: True}, date)
 
     def _check_for_contingency(self) -> Optional[Tuple[str, int]]:
         breakers_status = self._hy_reader.read()
@@ -120,32 +125,6 @@ class DCMHypersimOperator:
             None,
         )
         return line_in_contingency
-
-    # def _run(self) -> None:
-    #     breakers_status = self._hy_reader.read()
-    #
-    #     in_contingency = next(
-    #         filter(lambda x: x[1] == 0, breakers_status.items()),
-    #         None,
-    #     )
-    #     if in_contingency is None:
-    #         if self._contingency:
-    #             logger.info("Recovering system from contingency")
-    #             self._recover_system()
-    #         logger.info("No contingency found.")
-    #         self._contingency = False
-    #     elif in_contingency:
-    #         if not self._contingency:
-    #             logger.info(f"Contingency found on line {in_contingency[0]}")
-    #             self._run_operation(in_contingency[0])
-    #             self._contingency = True
-    #             self._last_contingency = datetime.now(timezone.utc)
-    #             # TODO: Report contingency to splight
-    #         else:
-    #             logger.info(
-    #                 f"Contingency already handled on line {in_contingency[0]}"
-    #             )
-    #             logger.info("Waiting for system to recover")
 
     def update_operation_vectors(self) -> None:
         data = self._spl_reader.read()
@@ -200,10 +179,16 @@ class DCMHypersimOperator:
         return parsed_vector
 
     def _recover_system(self) -> None:
+        date = datetime.now(timezone.utc)
         for generator in self._generators.values():
             block, variable = generator["breaker"].split(".")
             set_device_value(block, variable, 7)
             logger.debug(f"Closing breaker for generator {generator['name']}")
+
+        for saver in self._savers:
+            saver.process_data(
+                {breaker: False for breaker in self._lines_breakers}, date
+            )
 
     @staticmethod
     def _fetch_gen_ordering(grid_id: str) -> list[str]:
