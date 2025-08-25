@@ -105,7 +105,7 @@ class HypersimDCMOrchestrator:
         self._engine.start()
 
     def stop(self) -> None:
-        self._event.stop()
+        self._event.clear()
         self._engine.stop()
         self._operation_task.join()
         self._reader_task.join()
